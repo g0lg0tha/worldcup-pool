@@ -132,11 +132,11 @@ text-align: center;
 gap: 4px;
 }
 
+/* Balanced column distribution for mobile leaderboard */
 .leaderboard-cols {
-grid-template-columns: 45px 1fr 50px 55px 55px 55px;
+grid-template-columns: 35px 1.5fr 40px 45px 45px 50px;
 }
 
-/* Adjusted layout allocation to accommodate long names and flags */
 .team-cols {
 grid-template-columns: 35px 1.4fr 0.8fr 35px 35px 35px 35px;
 }
@@ -176,15 +176,15 @@ box-shadow: inset 0 4px 10px rgba(0,0,0,0.9), 0 1px 1px rgba(255,255,255,0.05);
 
 /* Graphic Hanging Medals Layout */
 .medal-circle {
-width: clamp(26px, 4vw, 32px);
-height: clamp(26px, 4vw, 32px);
+width: clamp(24px, 4vw, 32px);
+height: clamp(24px, 4vw, 32px);
 border-radius: 50%;
 display: inline-flex;
 align-items: center;
 justify-content: center;
 font-family: 'Cinzel', serif;
 font-weight: 800;
-font-size: clamp(0.75rem, 2.5vw, 0.9rem);
+font-size: clamp(0.7rem, 2.5vw, 0.9rem);
 color: #110501;
 box-shadow: 0 3px 6px rgba(0,0,0,0.6), inset 0 -2px 4px rgba(0,0,0,0.6);
 border: 1px solid rgba(255,255,255,0.2);
@@ -216,10 +216,20 @@ text-overflow: ellipsis;
 white-space: nowrap;
 }
 
-/* Specific sizing rule for the 48 teams list to ensure full name text fits cleanly */
+/* Dynamic typography styling for responsive player names */
+.player-contender-name {
+font-size: clamp(0.75rem, 3vw, 1.25rem) !important;
+}
+
+/* Target score cells specifically within the leaderboard row */
+.leaderboard-cols .score-cell-digits {
+font-size: clamp(0.8rem, 3.2vw, 1.35rem);
+}
+
+/* Team view specific configurations */
 .team-contender-name {
 font-size: clamp(0.7rem, 2.2vw, 1.05rem) !important;
-white-space: normal; /* Let long names break into two lines on mobile if needed */
+white-space: normal;
 line-height: 1.2;
 display: flex;
 align-items: center;
@@ -227,8 +237,11 @@ gap: 6px;
 }
 
 .flag-icon {
-font-size: 1.1em;
+font-family: 'Twemoji Country Flags', 'Oswald', sans-serif;
+font-size: 1.2em;
 font-style: normal;
+display: inline-block;
+vertical-align: middle;
 }
 
 .score-cell-digits {
@@ -237,7 +250,6 @@ color: var(--text-value);
 font-weight: 500;
 }
 
-/* Scale down team digits slightly to save horizontal room */
 .team-cols .score-cell-digits {
 font-size: clamp(0.8rem, 2.8vw, 1.15rem);
 }
@@ -262,6 +274,12 @@ font-style: italic;
 font-size: 0.8rem;
 }
 </style>
+
+<script type="module" defer>
+import { polyfillCountryFlagEmojis } from "https://cdn.skypack.dev/country-flag-emoji-polyfill";
+polyfillCountryFlagEmojis();
+</script>
+
 </head>
 <body>
 
@@ -333,7 +351,6 @@ const SEEDS={
 'Haiti':47,'New Zealand':48
 };
 
-// Map dictionary to assign flags directly based on keys
 const FLAGS={
 'France':'🇫🇷','Spain':'🇪🇸','Argentina':'🇦🇷','England':'🏴󠁧󠁢󠁥󠁮󠁧󠁿','Portugal':'🇵🇹','Brazil':'🇧🇷','Netherlands':'🇳🇱','Morocco':'🇲🇦',
 'Belgium':'🇧🇪','Germany':'🇩🇪','Croatia':'🇭🇷','Colombia':'🇨🇴','Senegal':'🇸🇳','Mexico':'🇲🇽','USA':'🇺🇸','Uruguay':'🇺🇾',
@@ -445,11 +462,11 @@ if (rankNum === 3) rankMarkup = `<div class="medal-circle med-3">${rankNum}</div
 return `
 <div class="capsule-row leaderboard-cols">
 <div>${rankMarkup}</div>
-<span class="contender-name left-align">${p.name.toUpperCase()}</span>
+<span class="contender-name player-contender-name left-align">${p.name.toUpperCase()}</span>
 <div class="score-cell-digits">${p.seed}</div>
 <div class="score-cell-digits">${p.match}</div>
 <div class="score-cell-digits">${p.bonus}</div>
-<div class="score-cell-digits" style="font-weight:700; color:#ffcc80; font-size: clamp(1rem, 3.8vw, 1.5rem);">${p.total}</div>
+<div class="score-cell-digits" style="font-weight:700; color:#ffcc80; font-size: clamp(0.9rem, 3.8vw, 1.5rem);">${p.total}</div>
 </div>`;
 }).join('');
 }
