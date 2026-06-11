@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>World Cup 2026 Pool Leaderboard</title>
+<style>
+body{font-family:Arial,sans-serif;background:#f4f6f8;margin:0;padding:20px}
+.container{max-width:1200px;margin:auto}
+.card{background:white;border-radius:10px;padding:16px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,.1)}
+button{padding:10px 16px;cursor:pointer}
+table{width:100%;border-collapse:collapse}
+th,td{padding:8px;border-bottom:1px solid #ddd;text-align:left}
+.rank1{background:#fff7d6}.rank2{background:#f0f0f0}.rank3{background:#f7e3d6}
+</style>
+</head>
+<body>
+<div class="container">
+<div class="card">
+<h1>World Cup 2026 Pool</h1>
+<p id="status">Loading...</p>
+<button onclick="refreshData()">Refresh Now</button>
+</div>
+
+<div class="card">
+<h2>Player Leaderboard</h2>
+<table>
+<thead><tr><th>Rank</th><th>Player</th><th>Seed</th><th>Match</th><th>Bonus</th><th>Total</th></tr></thead>
+<tbody id="leaderboard"></tbody>
+</table>
+</div>
+
+<div class="card">
+<h2>All 48 Teams</h2>
+<table>
+<thead><tr><th>Seed</th><th>Team</th><th>Owner</th><th>Seed Pts</th><th>Match</th><th>Bonus</th><th>Total</th></tr></thead>
+<tbody id="teams"></tbody>
+</table>
+</div>
+</div>
+
+<script>
+const PLAYERS={
+Gordon:['Brazil','Japan','Scotland'],
+David:['France','Norway','Bosnia & Herzegovina'],
+Stephen:['Germany','Paraguay','Czechia'],
+Bren:['Spain','Türkiye','Saudi Arabia'],
+Patrick:['England','Switzerland','Ghana'],
+Mick:['Netherlands','Austria','Haiti']
+};
+
+const SEEDS={
+'France':1,'Spain':2,'Argentina':3,'England':4,'Portugal':5,'Brazil':6,'Netherlands':7,'Morocco':8,'Belgium':9,'Germany':10,
+'Croatia':11,'Colombia':12,'Senegal':13,'Mexico':14,'USA':15,'Uruguay':16,'Japan':17,'Switzerland':18,'Iran':19,'Türkiye':20,
+'Ecuador':21,'Austria':22,'South Korea':23,'Australia':24,'Algeria':25,'Egypt':26,'Canada':27,'Norway':28,'Panama':29,
+'Ivory Coast':30,'Sweden':31,'Paraguay':32,'Czechia':33,'Scotland':34,'Tunisia':35,'DR Congo':36,'Uzbekistan':37,'Qatar':38,
+'Iraq':39,'South Africa':40,'Saudi Arabia':41,'Jordan':42,'Bosnia & Herzegovina':43,'Cape Verde':44,'Ghana':45,'Curaçao':46,
+'Haiti':47,'New Zealand':48
+};
+
+let teamScores={};
+
+function owner(team){
+ for(const [p,t] of Object.entries(PLAYERS)) if(t.includes(team)) return p;
+ return '';
+}
+
+function calculate(games){
+ const scores={};
+ Object.keys(SEEDS).forEach(t=>scores[t]={match:0,bonus:0});
+ for(const g of games){
+   const home=g.home_team||g.homeTeam||g.home;
+   const away=g.away_team||g.awayTeam||g.away;
+   const hs=parseInt(g.home_score??g.homeScore??-1);
+   const as=parseInt(g.away_score??g.awayScore??-1);
+   if(!SEEDS[home]||!SEEDS[away]||hs<0||as<0) continue;
+
+   if(hs>as) scores[home].match+=8;
+   else if(as>hs) scores[away].match+=8;
+   else {scores[home].match+=4;scores[away].match+=4;}
+
+   const diff=Math.abs(SEEDS[home]-SEEDS[away]);
+   if(diff>=5){
+      const underdog=SEEDS[home]>SEEDS[away]?home:away;
+      const hth=parseInt(g.ht_home_score??-1);
+      const hta=parseInt(g.ht_away_score??-1);
+      if(hth>=0&&hta>=0){
+        const ug=underdog===home?hth:hta;
+        const fav=underdog===home?hta:hth;
+        if(ug>fav) scores[underdog].bonus+=4;
+        else if(ug===fav) scores[underdog].bonus+=2;
+      }
+   }
+ }
+ return scores;
+}
+
+async function refreshData(){
+ document.getElementById('status').innerText='Refreshing...';
+ try{
+   const r=await fetch('https://worldcup26.ir/get/games');
+   const d=await r.json();
+   const games=Array.isArray(d)?d:(d.games||d.data||[]);
+   teamScores=calculate(games);
+   localStorage.setItem('wc26scores',JSON.stringify(teamScores));
+   document.getElementById('status').innerText='Live update: '+new Date().toLocaleString();
+ }catch(e){
+   const cache=localStorage.getItem('wc26scores');
+   if(cache) teamScores=JSON.parse(cache);
+   document.getElementById('status').innerText='Live feed unavailable - using cached data';
+ }
+ render();
+}
+
+function render(){
+ let teams=Object.keys(SEEDS).map(t=>({
+   team:t,seed:SEEDS[t],
+   match:(teamScores[t]?.match||0),
+   bonus:(teamScores[t]?.bonus||0),
+   total:SEEDS[t]+(teamScores[t]?.match||0)+(teamScores[t]?.bonus||0)
+ }));
+
+ document.getElementById('teams').innerHTML=teams.sort((a,b)=>a.seed-b.seed).map(t=>
+ `<tr><td>${t.seed}</td><td>${t.team}</td><td>${owner(t.team)}</td><td>${t.seed}</td><td>${t.match}</td><td>${t.bonus}</td><td>${t.total}</td></tr>`).join('');
+
+ let players=[];
+ for(const [name,list] of Object.entries(PLAYERS)){
+   let seed=0,match=0,bonus=0;
+   list.forEach(t=>{
+      seed+=SEEDS[t];
+      match+=(teamScores[t]?.match||0);
+      bonus+=(teamScores[t]?.bonus||0);
+   });
+   players.push({name,seed,match,bonus,total:seed+match+bonus});
+ }
+ players.sort((a,b)=>b.total-a.total);
+
+ document.getElementById('leaderboard').innerHTML=players.map((p,i)=>
+ `<tr class="rank${i+1}"><td>${i+1}</td><td>${p.name}</td><td>${p.seed}</td><td>${p.match}</td><td>${p.bonus}</td><td><b>${p.total}</b></td></tr>`).join('');
+}
+
+refreshData();
+setInterval(refreshData,7200000);
+</script>
+</body>
+</html>
