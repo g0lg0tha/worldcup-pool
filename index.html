@@ -2,294 +2,315 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1"> 
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>World Cup 2026 Pool Leaderboard</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Oswald:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght=600;700;800&family=Oswald:wght=400;500;600&display=swap');
 
-  :root {
-    --metallic-chassis: linear-gradient(145deg, #a47657 0%, #613b23 25%, #361f11 50%, #7d4f32 75%, #221209 100%);
-    --inner-wood-plate: #492817;
-    --capsule-bg: linear-gradient(180deg, #241309 0%, #170b04 100%);
-    --gold-trim: #ffd294;
-    --text-value: #ffd9a3;
-  }
+:root {
+--metallic-chassis: linear-gradient(145deg, #a47657 0%, #613b23 25%, #361f11 50%, #7d4f32 75%, #221209 100%);
+--inner-wood-plate: #492817;
+--capsule-bg: linear-gradient(180deg, #241309 0%, #170b04 100%);
+--gold-trim: #ffd294;
+--text-value: #ffd9a3;
+}
 
-  body {
-    font-family: 'Oswald', sans-serif;
-    background: radial-gradient(circle at 50% 30%, rgba(20, 10, 5, 0.3) 0%, rgba(10, 4, 1, 0.95) 85%), 
-                url('https://images.unsplash.com/photo-1507842217343-583bb7270b66?q=80&w=2136&auto=format&fit=crop') no-repeat center center fixed;
-    background-size: cover;
-    color: #fff;
-    margin: 0;
-    padding: clamp(10px, 4vw, 30px) clamp(4px, 2vw, 16px);
-    display: flex;
-    justify-content: center;
-  }
+body {
+font-family: 'Oswald', sans-serif;
+background: radial-gradient(circle at 50% 30%, rgba(20, 10, 5, 0.3) 0%, rgba(10, 4, 1, 0.95) 85%),
+url('https://images.unsplash.com/photo-1507842217343-583bb7270b66?q=80&w=2136&auto=format&fit=crop') no-repeat center center fixed;
+background-size: cover;
+color: #fff;
+margin: 0;
+padding: clamp(10px, 4vw, 30px) clamp(4px, 2vw, 16px);
+display: flex;
+justify-content: center;
+}
 
-  .container {
-    width: 100%;
-    max-width: 1050px;
-    display: flex;
-    flex-direction: column;
-    gap: clamp(12px, 3vw, 24px);
-  }
+.container {
+width: 100%;
+max-width: 1050px;
+display: flex;
+flex-direction: column;
+gap: clamp(12px, 3vw, 24px);
+}
 
-  /* Ornate Outer Panel Frame */
-  .luxury-panel {
-    background: var(--metallic-chassis);
-    border: 2px solid #1a0c05;
-    border-radius: 12px;
-    padding: clamp(4px, 1.5vw, 8px);
-    box-shadow: 0 30px 60px rgba(0,0,0,0.9), inset 0 1px 3px rgba(255,255,255,0.25);
-    box-sizing: border-box;
-    width: 100%;
-  }
+/* Ornate Outer Panel Frame */
+.luxury-panel {
+background: var(--metallic-chassis);
+border: 2px solid #1a0c05;
+border-radius: 12px;
+padding: clamp(4px, 1.5vw, 8px);
+box-shadow: 0 30px 60px rgba(0,0,0,0.9), inset 0 1px 3px rgba(255,255,255,0.25);
+box-sizing: border-box;
+width: 100%;
+}
 
-  .inner-wood-board {
-    background: var(--inner-wood-plate);
-    border: 2px solid #28140a;
-    border-radius: 6px;
-    padding: clamp(10px, 3vw, 24px);
-    box-shadow: inset 0 10px 30px rgba(0,0,0,0.85);
-    box-sizing: border-box;
-  }
+.inner-wood-board {
+background: var(--inner-wood-plate);
+border: 2px solid #28140a;
+border-radius: 6px;
+padding: clamp(10px, 3vw, 24px);
+box-shadow: inset 0 10px 30px rgba(0,0,0,0.85);
+box-sizing: border-box;
+}
 
-  /* Core Interactive System Header */
-  .header-widget {
-    text-align: center;
-    background: #140904;
-    border: 2px solid #54311c;
-    border-radius: 4px;
-    padding: 14px clamp(15px, 5vw, 45px);
-    box-shadow: inset 0 0 15px #000, 0 4px 15px rgba(0,0,0,0.6);
-    margin: 0 auto;
-    display: table;
-    box-sizing: border-box;
-    width: 100%;
-    max-width: 500px;
-  }
+/* Core Interactive System Header */
+.header-widget {
+text-align: center;
+background: #140904;
+border: 2px solid #54311c;
+border-radius: 4px;
+padding: 14px clamp(15px, 5vw, 45px);
+box-shadow: inset 0 0 15px #000, 0 4px 15px rgba(0,0,0,0.6);
+margin: 0 auto;
+display: table;
+box-sizing: border-box;
+width: 100%;
+max-width: 500px;
+}
 
-  .header-widget h1 {
-    font-family: 'Cinzel', serif;
-    margin: 0 0 6px 0;
-    font-size: clamp(1.4rem, 4vw, 2.1rem);
-    font-weight: 700;
-    letter-spacing: 2px;
-    color: var(--gold-trim);
-    text-shadow: 0 2px 4px rgba(0,0,0,0.9);
-  }
+.header-widget h1 {
+font-family: 'Cinzel', serif;
+margin: 0 0 6px 0;
+font-size: clamp(1.4rem, 4vw, 2.1rem);
+font-weight: 700;
+letter-spacing: 2px;
+color: var(--gold-trim);
+text-shadow: 0 2px 4px rgba(0,0,0,0.9);
+}
 
-  .status-ribbon {
-    font-family: 'Cinzel', serif;
-    font-size: clamp(0.65rem, 2vw, 0.85rem);
-    color: #bca08d;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    border-top: 1px solid #331b0e;
-    padding-top: 6px;
-    margin-top: 6px;
-    display: block;
-  }
+.status-ribbon {
+font-family: 'Cinzel', serif;
+font-size: clamp(0.65rem, 2vw, 0.85rem);
+color: #bca08d;
+letter-spacing: 1.5px;
+text-transform: uppercase;
+border-top: 1px solid #331b0e;
+padding-top: 6px;
+margin-top: 6px;
+display: block;
+}
 
-  /* Core Layout Buttons */
-  button {
-    background: linear-gradient(180deg, #8c5d43 0%, #462a1a 100%);
-    border: 1px solid #1a0c05;
-    color: #f7dfc1;
-    font-family: 'Cinzel', serif;
-    font-size: 0.75rem;
-    font-weight: bold;
-    letter-spacing: 1px;
-    padding: 6px 14px;
-    border-radius: 4px;
-    cursor: pointer;
-    margin-top: 10px;
-    text-shadow: 0 1px 2px #000;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.5);
-    transition: filter 0.2s;
-  }
-  button:hover {
-    filter: brightness(1.2);
-  }
+/* Core Layout Buttons */
+button {
+background: linear-gradient(180deg, #8c5d43 0%, #462a1a 100%);
+border: 1px solid #1a0c05;
+color: #f7dfc1;
+font-family: 'Cinzel', serif;
+font-size: 0.75rem;
+font-weight: bold;
+letter-spacing: 1px;
+padding: 6px 14px;
+border-radius: 4px;
+cursor: pointer;
+margin-top: 10px;
+text-shadow: 0 1px 2px #000;
+box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+transition: filter 0.2s;
+}
+button:hover {
+filter: brightness(1.2);
+}
 
-  .section-title {
-    font-family: 'Cinzel', serif;
-    text-align: center;
-    font-size: clamp(1.1rem, 3.5vw, 1.35rem);
-    color: var(--gold-trim);
-    letter-spacing: 2px;
-    margin: 0 0 20px 0;
-    text-transform: uppercase;
-    text-shadow: 0 2px 4px #000;
-  }
+.section-title {
+font-family: 'Cinzel', serif;
+text-align: center;
+font-size: clamp(1.1rem, 3.5vw, 1.35rem);
+color: var(--gold-trim);
+letter-spacing: 2px;
+margin: 0 0 20px 0;
+text-transform: uppercase;
+text-shadow: 0 2px 4px #000;
+}
 
-  /* Responsive Grid Implementations with auto scaling grid columns */
-  .grid-headers, .capsule-row {
-    display: grid;
-    align-items: center;
-    text-align: center;
-    gap: 4px;
-  }
+/* Responsive Grid Implementations with auto scaling grid columns */
+.grid-headers, .capsule-row {
+display: grid;
+align-items: center;
+text-align: center;
+gap: 4px;
+}
 
-  .leaderboard-cols {
-    grid-template-columns: 45px 1fr 50px 55px 55px 55px;
-  }
+.leaderboard-cols {
+grid-template-columns: 45px 1fr 50px 55px 55px 55px;
+}
 
-  .team-cols {
-    grid-template-columns: 40px 1fr 75px 45px 45px 45px 45px;
-  }
+/* Adjusted layout allocation to accommodate long names and flags */
+.team-cols {
+grid-template-columns: 35px 1.4fr 0.8fr 35px 35px 35px 35px;
+}
 
-  @media (min-width: 650px) {
-    .leaderboard-cols {
-      grid-template-columns: 80px 1fr 120px 120px 120px 120px;
-    }
-    .team-cols {
-      grid-template-columns: 70px 1fr 140px 100px 100px 100px 100px;
-    }
-  }
+@media (min-width: 650px) {
+.leaderboard-cols {
+grid-template-columns: 80px 1fr 120px 120px 120px 120px;
+}
+.team-cols {
+grid-template-columns: 70px 1.5fr 1.2fr 100px 100px 100px 100px;
+}
+}
 
-  .grid-headers span {
-    font-family: 'Cinzel', serif;
-    font-size: clamp(0.55rem, 1.8vw, 0.75rem);
-    color: #bca08d;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-    font-weight: bold;
-  }
-  
-  .left-align { text-align: left !important; }
+.grid-headers span {
+font-family: 'Cinzel', serif;
+font-size: clamp(0.55rem, 1.8vw, 0.75rem);
+color: #bca08d;
+letter-spacing: 0.5px;
+text-transform: uppercase;
+font-weight: bold;
+}
 
-  /* Sunk-In Display Slots */
-  .capsule-row {
-    background: var(--capsule-bg);
-    border-top: 1px solid #472615;
-    border-bottom: 1px solid #0d0502;
-    border-left: 1px solid #28140a;
-    border-right: 1px solid #28140a;
-    border-radius: 20px;
-    padding: 8px clamp(6px, 2vw, 14px);
-    margin-bottom: 8px;
-    box-shadow: inset 0 4px 10px rgba(0,0,0,0.9), 0 1px 1px rgba(255,255,255,0.05);
-  }
+.left-align { text-align: left !important; }
 
-  /* Graphic Hanging Medals Layout */
-  .medal-circle {
-    width: clamp(26px, 4vw, 32px);
-    height: clamp(26px, 4vw, 32px);
-    border-radius: 50%;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Cinzel', serif;
-    font-weight: 800;
-    font-size: clamp(0.75rem, 2.5vw, 0.9rem);
-    color: #110501;
-    box-shadow: 0 3px 6px rgba(0,0,0,0.6), inset 0 -2px 4px rgba(0,0,0,0.6);
-    border: 1px solid rgba(255,255,255,0.2);
-    margin: 0 auto;
-  }
-  
-  .rank-pill-value {
-    font-family: 'Cinzel', serif;
-    color: #bca08d;
-    font-size: clamp(0.85rem, 3vw, 1.1rem);
-    font-weight: 700;
-  }
+/* Sunk-In Display Slots */
+.capsule-row {
+background: var(--capsule-bg);
+border-top: 1px solid #472615;
+border-bottom: 1px solid #0d0502;
+border-left: 1px solid #28140a;
+border-right: 1px solid #28140a;
+border-radius: 20px;
+padding: 8px clamp(6px, 2vw, 14px);
+margin-bottom: 8px;
+box-shadow: inset 0 4px 10px rgba(0,0,0,0.9), 0 1px 1px rgba(255,255,255,0.05);
+}
 
-  /* Adaptive Medal Gradients */
-  .med-1 { background: linear-gradient(135deg, #ffe066 0%, #f5b041 50%, #9a6e1a 100%); }
-  .med-2 { background: linear-gradient(135deg, #ffffff 0%, #b0bec5 50%, #546e7a 100%); }
-  .med-3 { background: linear-gradient(135deg, #ffb74d 0%, #a1887f 50%, #4e342e 100%); }
+/* Graphic Hanging Medals Layout */
+.medal-circle {
+width: clamp(26px, 4vw, 32px);
+height: clamp(26px, 4vw, 32px);
+border-radius: 50%;
+display: inline-flex;
+align-items: center;
+justify-content: center;
+font-family: 'Cinzel', serif;
+font-weight: 800;
+font-size: clamp(0.75rem, 2.5vw, 0.9rem);
+color: #110501;
+box-shadow: 0 3px 6px rgba(0,0,0,0.6), inset 0 -2px 4px rgba(0,0,0,0.6);
+border: 1px solid rgba(255,255,255,0.2);
+margin: 0 auto;
+}
 
-  .contender-name {
-    font-family: 'Cinzel', serif;
-    font-size: clamp(0.85rem, 3.2vw, 1.25rem);
-    font-weight: 700;
-    letter-spacing: 0.5px;
-    color: #fff;
-    text-shadow: 0 2px 3px #000;
-    padding-left: 4px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
+.rank-pill-value {
+font-family: 'Cinzel', serif;
+color: #bca08d;
+font-size: clamp(0.85rem, 3vw, 1.1rem);
+font-weight: 700;
+}
 
-  .score-cell-digits {
-    font-size: clamp(0.95rem, 3.5vw, 1.35rem);
-    color: var(--text-value);
-    font-weight: 500;
-  }
+/* Adaptive Medal Gradients */
+.med-1 { background: linear-gradient(135deg, #ffe066 0%, #f5b041 50%, #9a6e1a 100%); }
+.med-2 { background: linear-gradient(135deg, #ffffff 0%, #b0bec5 50%, #546e7a 100%); }
+.med-3 { background: linear-gradient(135deg, #ffb74d 0%, #a1887f 50%, #4e342e 100%); }
 
-  .owner-capsule-badge {
-    font-size: clamp(0.65rem, 2vw, 0.85rem);
-    color: #ebd1be;
-    background: rgba(0, 0, 0, 0.4);
-    border: 1px solid #5a3c2a;
-    padding: 2px clamp(4px, 1.5vw, 12px);
-    border-radius: 10px;
-    display: inline-block;
-    max-width: 90%;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-  
-  .vacant-badge {
-    color: #523423;
-    font-style: italic;
-    font-size: 0.85rem;
-  }
+.contender-name {
+font-family: 'Cinzel', serif;
+font-size: clamp(0.85rem, 3.2vw, 1.25rem);
+font-weight: 700;
+letter-spacing: 0.5px;
+color: #fff;
+text-shadow: 0 2px 3px #000;
+padding-left: 4px;
+overflow: hidden;
+text-overflow: ellipsis;
+white-space: nowrap;
+}
+
+/* Specific sizing rule for the 48 teams list to ensure full name text fits cleanly */
+.team-contender-name {
+font-size: clamp(0.7rem, 2.2vw, 1.05rem) !important;
+white-space: normal; /* Let long names break into two lines on mobile if needed */
+line-height: 1.2;
+display: flex;
+align-items: center;
+gap: 6px;
+}
+
+.flag-icon {
+font-size: 1.1em;
+font-style: normal;
+}
+
+.score-cell-digits {
+font-size: clamp(0.95rem, 3.5vw, 1.35rem);
+color: var(--text-value);
+font-weight: 500;
+}
+
+/* Scale down team digits slightly to save horizontal room */
+.team-cols .score-cell-digits {
+font-size: clamp(0.8rem, 2.8vw, 1.15rem);
+}
+
+.owner-capsule-badge {
+font-size: clamp(0.6rem, 1.8vw, 0.8rem);
+color: #ebd1be;
+background: rgba(0, 0, 0, 0.4);
+border: 1px solid #5a3c2a;
+padding: 2px clamp(4px, 1.2vw, 10px);
+border-radius: 10px;
+display: inline-block;
+max-width: 95%;
+overflow: hidden;
+text-overflow: ellipsis;
+white-space: nowrap;
+}
+
+.vacant-badge {
+color: #523423;
+font-style: italic;
+font-size: 0.8rem;
+}
 </style>
 </head>
 <body>
 
 <div class="container">
 
-  <div class="luxury-panel" style="align-self: center; width: auto;">
-    <div class="inner-wood-board" style="padding: 10px;">
-      <div class="header-widget">
-        <h1>World Cup 2026 Pool</h1>
-        <span class="status-ribbon" id="status">Loading...</span>
-        <button onclick="refreshData()">Refresh Now</button>
-      </div>
-    </div>
-  </div>
+<div class="luxury-panel" style="align-self: center; width: auto;">
+<div class="inner-wood-board" style="padding: 10px;">
+<div class="header-widget">
+<h1>World Cup 2026 Pool</h1>
+<span class="status-ribbon" id="status">Loading...</span>
+<button onclick="refreshData()">Refresh Now</button>
+</div>
+</div>
+</div>
 
-  <div class="luxury-panel">
-    <div class="inner-wood-board">
-      <div class="section-title">Player Leaderboard</div>
-      
-      <div class="grid-headers leaderboard-cols">
-        <span>Rank</span>
-        <span class="left-align">Player</span>
-        <span>Seed</span>
-        <span>Match</span>
-        <span>Bonus</span>
-        <span>Total</span>
-      </div>
-      
-      <div id="leaderboard"></div>
-    </div>
-  </div>
+<div class="luxury-panel">
+<div class="inner-wood-board">
+<div class="section-title">Player Leaderboard</div>
 
-  <div class="luxury-panel">
-    <div class="inner-wood-board">
-      <div class="section-title">All 48 Teams</div>
-      
-      <div class="grid-headers team-cols">
-        <span>Seed</span>
-        <span class="left-align">Team</span>
-        <span>Owner</span>
-        <span>Seed</span>
-        <span>Match</span>
-        <span>Bonus</span>
-        <span>Total</span>
-      </div>
-      
-      <div id="teams"></div>
-    </div>
-  </div>
+<div class="grid-headers leaderboard-cols">
+<span>Rank</span>
+<span class="left-align">Player</span>
+<span>Seed</span>
+<span>Match</span>
+<span>Bonus</span>
+<span>Total</span>
+</div>
+
+<div id="leaderboard"></div>
+</div>
+</div>
+
+<div class="luxury-panel">
+<div class="inner-wood-board">
+<div class="section-title">All 48 Teams</div>
+
+<div class="grid-headers team-cols">
+<span>Seed</span>
+<span class="left-align">Team</span>
+<span>Owner</span>
+<span>Seed</span>
+<span>Match</span>
+<span>Bonus</span>
+<span>Total</span>
+</div>
+
+<div id="teams"></div>
+</div>
+</div>
 
 </div>
 
@@ -312,112 +333,125 @@ const SEEDS={
 'Haiti':47,'New Zealand':48
 };
 
+// Map dictionary to assign flags directly based on keys
+const FLAGS={
+'France':'🇫🇷','Spain':'🇪🇸','Argentina':'🇦🇷','England':'🏴󠁧󠁢󠁥󠁮󠁧󠁿','Portugal':'🇵🇹','Brazil':'🇧🇷','Netherlands':'🇳🇱','Morocco':'🇲🇦',
+'Belgium':'🇧🇪','Germany':'🇩🇪','Croatia':'🇭🇷','Colombia':'🇨🇴','Senegal':'🇸🇳','Mexico':'🇲🇽','USA':'🇺🇸','Uruguay':'🇺🇾',
+'Japan':'🇯🇵','Switzerland':'🇨🇭','Iran':'🇮🇷','Türkiye':'🇹🇷','Ecuador':'🇪🇨','Austria':'🇦🇹','South Korea':'🇰🇷','Australia':'🇦🇺',
+'Algeria':'🇩🇿','Egypt':'🇪🇬','Canada':'🇨🇦','Norway':'🇳🇴','Panama':'🇵🇦','Ivory Coast':'🇨🇮','Sweden':'🇸🇪','Paraguay':'🇵🇾',
+'Czechia':'🇨🇿','Scotland':'🏴󠁧󠁢󠁳󠁣󠁴󠁿','Tunisia':'🇹🇳','DR Congo':'🇨🇩','Uzbekistan':'🇺🇿','Qatar':'🇶🇦','Iraq':'🇮🇶','South Africa':'🇿🇦',
+'Saudi Arabia':'🇸🇦','Jordan':'🇯🇴','Bosnia & Herzegovina':'🇧🇦','Cape Verde':'🇨🇻','Ghana':'🇬🇭','Curaçao':'🇨🇼','Haiti':'🇭🇹','New Zealand':'🇳🇿'
+};
+
 let teamScores={};
 
 function owner(team){
- for(const [p,t] of Object.entries(PLAYERS)) if(t.includes(team)) return p;
- return '';
+for(const [p,t] of Object.entries(PLAYERS)) if(t.includes(team)) return p;
+return '';
 }
 
 function calculate(games){
- const scores={};
- Object.keys(SEEDS).forEach(t=>scores[t]={match:0,bonus:0});
- for(const g of games){
-   const home=g.home_team||g.homeTeam||g.home;
-   const away=g.away_team||g.awayTeam||g.away;
-   const hs=parseInt(g.home_score??g.homeScore??-1);
-   const as=parseInt(g.away_score??g.awayScore??-1);
-   if(!SEEDS[home]||!SEEDS[away]||hs<0||as<0) continue;
+const scores={};
+Object.keys(SEEDS).forEach(t=>scores[t]={match:0,bonus:0});
+for(const g of games){
+const home=g.home_team||g.homeTeam||g.home;
+const away=g.away_team||g.awayTeam||g.away;
+const hs=parseInt(g.home_score??g.homeScore??-1);
+const as=parseInt(g.away_score??g.awayScore??-1);
+if(!SEEDS[home]||!SEEDS[away]||hs<0||as<0) continue;
 
-   if(hs>as) scores[home].match+=8;
-   else if(as>hs) scores[away].match+=8;
-   else {scores[home].match+=4;scores[away].match+=4;}
+if(hs>as) scores[home].match+=8;
+else if(as>hs) scores[away].match+=8;
+else {scores[home].match+=4;scores[away].match+=4;}
 
-   const diff=Math.abs(SEEDS[home]-SEEDS[away]);
-   if(diff>=5){
-      const underdog=SEEDS[home]>SEEDS[away]?home:away;
-      const hth=parseInt(g.ht_home_score??-1);
-      const hta=parseInt(g.ht_away_score??-1);
-      if(hth>=0&&hta>=0){
-        const ug=underdog===home?hth:hta;
-        const fav=underdog===home?hta:hth;
-        if(ug>fav) scores[underdog].bonus+=4;
-        else if(ug===fav) scores[underdog].bonus+=2;
-      }
-   }
- }
- return scores;
+const diff=Math.abs(SEEDS[home]-SEEDS[away]);
+if(diff>=5){
+const underdog=SEEDS[home]>SEEDS[away]?home:away;
+const hth=parseInt(g.ht_home_score??-1);
+const hta=parseInt(g.ht_away_score??-1);
+if(hth>=0&&hta>=0){
+const ug=underdog===home?hth:hta;
+const fav=underdog===home?hta:hth;
+if(ug>fav) scores[underdog].bonus+=4;
+else if(ug===fav) scores[underdog].bonus+=2;
+}
+}
+}
+return scores;
 }
 
 async function refreshData(){
- document.getElementById('status').innerText='Refreshing...';
- try{
-   const r=await fetch('https://worldcup26.ir/get/games');
-   const d=await r.json();
-   const games=Array.isArray(d)?d:(d.games||d.data||[]);
-   teamScores=calculate(games);
-   localStorage.setItem('wc26scores',JSON.stringify(teamScores));
-   document.getElementById('status').innerText='Live update: '+new Date().toLocaleString();
- }catch(e){
-   const cache=localStorage.getItem('wc26scores');
-   if(cache) teamScores=JSON.parse(cache);
-   document.getElementById('status').innerText='Live feed unavailable - using cached data';
- }
- render();
+document.getElementById('status').innerText='Refreshing...';
+try{
+const r=await fetch('https://worldcup26.ir/get/games');
+const d=await r.json();
+const games=Array.isArray(d)?d:(d.games||d.data||[]);
+teamScores=calculate(games);
+localStorage.setItem('wc26scores',JSON.stringify(teamScores));
+document.getElementById('status').innerText='Live update: '+new Date().toLocaleString();
+}catch(e){
+const cache=localStorage.getItem('wc26scores');
+if(cache) teamScores=JSON.parse(cache);
+document.getElementById('status').innerText='Live feed unavailable - using cached data';
+}
+render();
 }
 
 function render(){
- let teams=Object.keys(SEEDS).map(t=>({
-   team:t,seed:SEEDS[t],
-   match:(teamScores[t]?.match||0),
-   bonus:(teamScores[t]?.bonus||0),
-   total:SEEDS[t]+(teamScores[t]?.match||0)+(teamScores[t]?.bonus||0)
- }));
+let teams=Object.keys(SEEDS).map(t=>({
+team:t,seed:SEEDS[t],
+match:(teamScores[t]?.match||0),
+bonus:(teamScores[t]?.bonus||0),
+total:SEEDS[t]+(teamScores[t]?.match||0)+(teamScores[t]?.bonus||0)
+}));
 
- document.getElementById('teams').innerHTML=teams.sort((a,b)=>a.seed-b.seed).map(t=>{
-   const teamOwner = owner(t.team);
-   const ownerMarkup = teamOwner ? `<span class="owner-capsule-badge">${teamOwner}</span>` : `<span class="vacant-badge">—</span>`;
-   return `
-    <div class="capsule-row team-cols">
-      <span class="rank-pill-value">${t.seed}</span>
-      <span class="contender-name left-align">${t.team.toUpperCase()}</span>
-      <div>${ownerMarkup}</div>
-      <div class="score-cell-digits">${t.seed}</div>
-      <div class="score-cell-digits">${t.match}</div>
-      <div class="score-cell-digits">${t.bonus}</div>
-      <div class="score-cell-digits" style="font-weight:700; color:#ffcc80;">${t.total}</div>
-    </div>`;
- }).join('');
+document.getElementById('teams').innerHTML=teams.sort((a,b)=>a.seed-b.seed).map(t=>{
+const teamOwner = owner(t.team);
+const ownerMarkup = teamOwner ? `<span class="owner-capsule-badge">${teamOwner}</span>` : `<span class="vacant-badge">—</span>`;
+const flag = FLAGS[t.team] || '';
+return `
+<div class="capsule-row team-cols">
+<span class="rank-pill-value">${t.seed}</span>
+<span class="contender-name team-contender-name left-align">
+<i class="flag-icon">${flag}</i> ${t.team.toUpperCase()}
+</span>
+<div>${ownerMarkup}</div>
+<div class="score-cell-digits">${t.seed}</div>
+<div class="score-cell-digits">${t.match}</div>
+<div class="score-cell-digits">${t.bonus}</div>
+<div class="score-cell-digits" style="font-weight:700; color:#ffcc80;">${t.total}</div>
+</div>`;
+}).join('');
 
- let players=[];
- for(const [name,list] of Object.entries(PLAYERS)){
-   let seed=0,match=0,bonus=0;
-   list.forEach(t=>{
-      seed+=SEEDS[t];
-      match+=(teamScores[t]?.match||0);
-      bonus+=(teamScores[t]?.bonus||0);
-   });
-   players.push({name,seed,match,bonus,total:seed+match+bonus});
- }
- players.sort((a,b)=>b.total-a.total);
+let players=[];
+for(const [name,list] of Object.entries(PLAYERS)){
+let seed=0,match=0,bonus=0;
+list.forEach(t=>{
+seed+=SEEDS[t];
+match+=(teamScores[t]?.match||0);
+bonus+=(teamScores[t]?.bonus||0);
+});
+players.push({name,seed,match,bonus,total:seed+match+bonus});
+}
+players.sort((a,b)=>b.total-a.total);
 
- document.getElementById('leaderboard').innerHTML=players.map((p,i)=>{
-   const rankNum = i + 1;
-   let rankMarkup = `<span class="rank-pill-value">${rankNum}</span>`;
-   if (rankNum === 1) rankMarkup = `<div class="medal-circle med-1">${rankNum}</div>`;
-   if (rankNum === 2) rankMarkup = `<div class="medal-circle med-2">${rankNum}</div>`;
-   if (rankNum === 3) rankMarkup = `<div class="medal-circle med-3">${rankNum}</div>`;
+document.getElementById('leaderboard').innerHTML=players.map((p,i)=>{
+const rankNum = i + 1;
+let rankMarkup = `<span class="rank-pill-value">${rankNum}</span>`;
+if (rankNum === 1) rankMarkup = `<div class="medal-circle med-1">${rankNum}</div>`;
+if (rankNum === 2) rankMarkup = `<div class="medal-circle med-2">${rankNum}</div>`;
+if (rankNum === 3) rankMarkup = `<div class="medal-circle med-3">${rankNum}</div>`;
 
-   return `
-    <div class="capsule-row leaderboard-cols">
-      <div>${rankMarkup}</div>
-      <span class="contender-name left-align">${p.name.toUpperCase()}</span>
-      <div class="score-cell-digits">${p.seed}</div>
-      <div class="score-cell-digits">${p.match}</div>
-      <div class="score-cell-digits">${p.bonus}</div>
-      <div class="score-cell-digits" style="font-weight:700; color:#ffcc80; font-size: clamp(1rem, 3.8vw, 1.5rem);">${p.total}</div>
-    </div>`;
- }).join('');
+return `
+<div class="capsule-row leaderboard-cols">
+<div>${rankMarkup}</div>
+<span class="contender-name left-align">${p.name.toUpperCase()}</span>
+<div class="score-cell-digits">${p.seed}</div>
+<div class="score-cell-digits">${p.match}</div>
+<div class="score-cell-digits">${p.bonus}</div>
+<div class="score-cell-digits" style="font-weight:700; color:#ffcc80; font-size: clamp(1rem, 3.8vw, 1.5rem);">${p.total}</div>
+</div>`;
+}).join('');
 }
 
 refreshData();
