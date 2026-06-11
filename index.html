@@ -400,9 +400,14 @@ return scores;
 async function refreshData(){
 document.getElementById('status').innerText='Refreshing...';
 try{
-const r=await fetch('https://worldcup26.ir/get/games');
-const d=await r.json();
+// Wrapped the endpoint inside the free open-source AllOrigins CORS proxy string
+const r=await fetch('https://api.allorigins.win/get?url=' + encodeURIComponent('https://worldcup26.ir/get/games'));
+const res=await r.json();
+
+// Extracting the true API payload out of the container contents returned by the proxy
+const d=JSON.parse(res.contents);
 const games=Array.isArray(d)?d:(d.games||d.data||[]);
+
 teamScores=calculate(games);
 localStorage.setItem('wc26scores',JSON.stringify(teamScores));
 document.getElementById('status').innerText='Live update: '+new Date().toLocaleString();
