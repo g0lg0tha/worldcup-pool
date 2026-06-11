@@ -5,38 +5,264 @@
 <meta name="viewport" content="width=device-width,initial-scale=1"> 
 <title>World Cup 2026 Pool Leaderboard</title>
 <style>
-body{font-family:Arial,sans-serif;background:#f4f6f8;margin:0;padding:20px}
-.container{max-width:1200px;margin:auto}
-.card{background:white;border-radius:10px;padding:16px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,.1)}
-button{padding:10px 16px;cursor:pointer}
-table{width:100%;border-collapse:collapse}
-th,td{padding:8px;border-bottom:1px solid #ddd;text-align:left}
-.rank1{background:#fff7d6}.rank2{background:#f0f0f0}.rank3{background:#f7e3d6}
+  @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Oswald:wght@400;500;600&display=swap');
+
+  :root {
+    --metallic-chassis: linear-gradient(145deg, #a47657 0%, #613b23 25%, #361f11 50%, #7d4f32 75%, #221209 100%);
+    --inner-wood-plate: #492817;
+    --capsule-bg: linear-gradient(180deg, #241309 0%, #170b04 100%);
+    --gold-trim: #ffd294;
+    --text-value: #ffd9a3;
+  }
+
+  body {
+    font-family: 'Oswald', sans-serif;
+    background: radial-gradient(circle at 50% 30%, rgba(20, 10, 5, 0.3) 0%, rgba(10, 4, 1, 0.95) 85%), 
+                url('https://images.unsplash.com/photo-1507842217343-583bb7270b66?q=80&w=2136&auto=format&fit=crop') no-repeat center center fixed;
+    background-size: cover;
+    color: #fff;
+    margin: 0;
+    padding: 30px 16px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .container {
+    width: 100%;
+    max-width: 1050px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  /* Ornate Outer Panel Frame */
+  .luxury-panel {
+    background: var(--metallic-chassis);
+    border: 2px solid #1a0c05;
+    border-radius: 12px;
+    padding: 8px;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.9), inset 0 1px 3px rgba(255,255,255,0.25);
+  }
+
+  .inner-wood-board {
+    background: var(--inner-wood-plate);
+    border: 2px solid #28140a;
+    border-radius: 6px;
+    padding: 24px;
+    box-shadow: inset 0 10px 30px rgba(0,0,0,0.85);
+  }
+
+  /* Core Interactive System Header */
+  .header-widget {
+    text-align: center;
+    background: #140904;
+    border: 2px solid #54311c;
+    border-radius: 4px;
+    padding: 16px 45px;
+    box-shadow: inset 0 0 15px #000, 0 4px 15px rgba(0,0,0,0.6);
+    margin: 0 auto;
+    display: table;
+  }
+
+  .header-widget h1 {
+    font-family: 'Cinzel', serif;
+    margin: 0 0 6px 0;
+    font-size: 2.1rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: var(--gold-trim);
+    text-shadow: 0 2px 4px rgba(0,0,0,0.9);
+  }
+
+  .status-ribbon {
+    font-family: 'Cinzel', serif;
+    font-size: 0.85rem;
+    color: #bca08d;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    border-top: 1px solid #331b0e;
+    padding-top: 6px;
+    margin-top: 6px;
+    display: block;
+  }
+
+  /* Core Layout Buttons */
+  button {
+    background: linear-gradient(180deg, #8c5d43 0%, #462a1a 100%);
+    border: 1px solid #1a0c05;
+    color: #f7dfc1;
+    font-family: 'Cinzel', serif;
+    font-size: 0.8rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    padding: 8px 18px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+    text-shadow: 0 1px 2px #000;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+    transition: filter 0.2s;
+  }
+  button:hover {
+    filter: brightness(1.2);
+  }
+
+  .section-title {
+    font-family: 'Cinzel', serif;
+    text-align: center;
+    font-size: 1.35rem;
+    color: var(--gold-trim);
+    letter-spacing: 2px;
+    margin: 0 0 20px 0;
+    text-transform: uppercase;
+  }
+
+  /* Row Module Parameter Splits */
+  .grid-headers, .capsule-row {
+    display: grid;
+    align-items: center;
+    text-align: center;
+  }
+
+  .leaderboard-cols {
+    grid-template-columns: 80px 1fr 120px 120px 120px 120px;
+  }
+
+  .team-cols {
+    grid-template-columns: 70px 1fr 140px 100px 100px 100px 100px;
+  }
+
+  .grid-headers span {
+    font-family: 'Cinzel', serif;
+    font-size: 0.75rem;
+    color: #bca08d;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 0 6px;
+  }
+  .left-align { text-align: left !important; }
+
+  /* Sunk-In Display Slots */
+  .capsule-row {
+    background: var(--capsule-bg);
+    border-top: 1px solid #472615;
+    border-bottom: 1px solid #0d0502;
+    border-left: 1px solid #28140a;
+    border-right: 1px solid #28140a;
+    border-radius: 20px;
+    padding: 10px 14px;
+    margin-bottom: 8px;
+    box-shadow: inset 0 4px 10px rgba(0,0,0,0.9), 0 1px 1px rgba(255,255,255,0.05);
+  }
+
+  /* Graphic Hanging Medals Layout */
+  .medal-circle {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cinzel', serif;
+    font-weight: 800;
+    font-size: 0.9rem;
+    color: #110501;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.6), inset 0 -2px 4px rgba(0,0,0,0.6);
+    border: 1px solid rgba(255,255,255,0.2);
+  }
+  .rank-pill-value {
+    font-family: 'Cinzel', serif;
+    color: #bca08d;
+    font-size: 1.1rem;
+    font-weight: 700;
+  }
+
+  /* Adaptive Medal Gradients */
+  .med-1 { background: linear-gradient(135deg, #ffe066 0%, #f5b041 50%, #9a6e1a 100%); }
+  .med-2 { background: linear-gradient(135deg, #ffffff 0%, #b0bec5 50%, #546e7a 100%); }
+  .med-3 { background: linear-gradient(135deg, #ffb74d 0%, #a1887f 50%, #4e342e 100%); }
+
+  .contender-name {
+    font-family: 'Cinzel', serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    color: #fff;
+    text-shadow: 0 2px 3px #000;
+    padding-left: 6px;
+  }
+
+  .score-cell-digits {
+    font-size: 1.35rem;
+    color: var(--text-value);
+    font-weight: 500;
+  }
+
+  .owner-capsule-badge {
+    font-size: 0.85rem;
+    color: #ebd1be;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid #5a3c2a;
+    padding: 2px 12px;
+    border-radius: 10px;
+    display: inline-block;
+  }
+  .vacant-badge {
+    color: #492e1f;
+    font-style: italic;
+    font-size: 0.85rem;
+  }
 </style>
 </head>
 <body>
+
 <div class="container">
-<div class="card">
-<h1>World Cup 2026 Pool</h1>
-<p id="status">Loading...</p>
-<button onclick="refreshData()">Refresh Now</button>
-</div>
 
-<div class="card">
-<h2>Player Leaderboard</h2>
-<table>
-<thead><tr><th>Rank</th><th>Player</th><th>Seed</th><th>Match</th><th>Bonus</th><th>Total</th></tr></thead>
-<tbody id="leaderboard"></tbody>
-</table>
-</div>
+  <div class="luxury-panel" style="align-self: center;">
+    <div class="inner-wood-board" style="padding: 10px;">
+      <div class="header-widget">
+        <h1>World Cup 2026 Pool</h1>
+        <span class="status-ribbon" id="status">Loading...</span>
+        <button onclick="refreshData()">Refresh Now</button>
+      </div>
+    </div>
+  </div>
 
-<div class="card">
-<h2>All 48 Teams</h2>
-<table>
-<thead><tr><th>Seed</th><th>Team</th><th>Owner</th><th>Seed Pts</th><th>Match</th><th>Bonus</th><th>Total</th></tr></thead>
-<tbody id="teams"></tbody>
-</table>
-</div>
+  <div class="luxury-panel">
+    <div class="inner-wood-board">
+      <div class="section-title">Player Leaderboard</div>
+      
+      <div class="grid-headers leaderboard-cols">
+        <span>Rank</span>
+        <span class="left-align">Player</span>
+        <span>Seed</span>
+        <span>Match</span>
+        <span>Bonus</span>
+        <span>Total</span>
+      </div>
+      
+      <div id="leaderboard"></div>
+    </div>
+  </div>
+
+  <div class="luxury-panel">
+    <div class="inner-wood-board">
+      <div class="section-title">All 48 Teams</div>
+      
+      <div class="grid-headers team-cols">
+        <span>Seed</span>
+        <span class="left-align">Team</span>
+        <span>Owner</span>
+        <span>Seed Pts</span>
+        <span>Match</span>
+        <span>Bonus</span>
+        <span>Total</span>
+      </div>
+      
+      <div id="teams"></div>
+    </div>
+  </div>
+
 </div>
 
 <script>
@@ -120,8 +346,20 @@ function render(){
    total:SEEDS[t]+(teamScores[t]?.match||0)+(teamScores[t]?.bonus||0)
  }));
 
- document.getElementById('teams').innerHTML=teams.sort((a,b)=>a.seed-b.seed).map(t=>
- `<tr><td>${t.seed}</td><td>${t.team}</td><td>${owner(t.team)}</td><td>${t.seed}</td><td>${t.match}</td><td>${t.bonus}</td><td>${t.total}</td></tr>`).join('');
+ document.getElementById('teams').innerHTML=teams.sort((a,b)=>a.seed-b.seed).map(t=>{
+   const teamOwner = owner(t.team);
+   const ownerMarkup = teamOwner ? `<span class="owner-capsule-badge">${teamOwner}</span>` : `<span class="vacant-badge">—</span>`;
+   return `
+    <div class="capsule-row team-cols">
+      <span class="rank-pill-value">${t.seed}</span>
+      <span class="contender-name left-align">${t.team.toUpperCase()}</span>
+      <div>${ownerMarkup}</div>
+      <div class="score-cell-digits">${t.seed}</div>
+      <div class="score-cell-digits">${t.match}</div>
+      <div class="score-cell-digits">${t.bonus}</div>
+      <div class="score-cell-digits" style="font-weight:700; color:#ffcc80;">${t.total}</div>
+    </div>`;
+ }).join('');
 
  let players=[];
  for(const [name,list] of Object.entries(PLAYERS)){
@@ -135,8 +373,23 @@ function render(){
  }
  players.sort((a,b)=>b.total-a.total);
 
- document.getElementById('leaderboard').innerHTML=players.map((p,i)=>
- `<tr class="rank${i+1}"><td>${i+1}</td><td>${p.name}</td><td>${p.seed}</td><td>${p.match}</td><td>${p.bonus}</td><td><b>${p.total}</b></td></tr>`).join('');
+ document.getElementById('leaderboard').innerHTML=players.map((p,i)=>{
+   const rankNum = i + 1;
+   let rankMarkup = `<span class="rank-pill-value">${rankNum}</span>`;
+   if (rankNum === 1) rankMarkup = `<div class="medal-circle med-1">${rankNum}</div>`;
+   if (rankNum === 2) rankMarkup = `<div class="medal-circle med-2">${rankNum}</div>`;
+   if (rankNum === 3) rankMarkup = `<div class="medal-circle med-3">${rankNum}</div>`;
+
+   return `
+    <div class="capsule-row leaderboard-cols">
+      <div>${rankMarkup}</div>
+      <span class="contender-name left-align">${p.name.toUpperCase()}</span>
+      <div class="score-cell-digits">${p.seed}</div>
+      <div class="score-cell-digits">${p.match}</div>
+      <div class="score-cell-digits">${p.bonus}</div>
+      <div class="score-cell-digits" style="font-weight:700; color:#ffcc80; font-size:1.5rem;">${p.total}</div>
+    </div>`;
+ }).join('');
 }
 
 refreshData();
