@@ -341,11 +341,11 @@ const SEEDS={
 };
 
 const FLAGS={
-'France':'🇫🇷','Spain':'🇪🇸','Argentina':'🇦🇷','England':'🏴%F0%9F%8F%B4%F0%9F%8F%A7%F0%9F%8F%A5%F0%9F%8F%AE%F0%9F%8F%A7%F0%9F%8F%B7','Portugal':'🇵🇹','Brazil':'🇧🇷','Netherlands':'🇳🇱','Morocco':'🇲🇦',
+'France':'🇫🇷','Spain':'🇪🇸','Argentina':'🇦🇷','England':'🏴󠁧󠁢󠁥󠁮󠁧󠁿','Portugal':'🇵🇹','Brazil':'🇧🇷','Netherlands':'🇳🇱','Morocco':'🇲🇦',
 'Belgium':'🇧🇪','Germany':'🇩🇪','Croatia':'🇭🇷','Colombia':'🇨🇴','Senegal':'🇸🇳','Mexico':'🇲🇽','USA':'🇺🇸','Uruguay':'🇺🇾',
 'Japan':'🇯🇵','Switzerland':'🇨🇭','Iran':'🇮🇷','Türkiye':'🇹🇷','Ecuador':'🇪🇨','Austria':'🇦🇹','South Korea':'🇰🇷','Australia':'🇦🇺',
 'Algeria':'🇩🇿','Egypt':'🇪🇬','Canada':'🇨🇦','Norway':'🇳🇴','Panama':'🇵🇦','Ivory Coast':'🇨🇮','Sweden':'🇸🇪','Paraguay':'🇵🇾',
-'Czechia':'🇨🇿','Scotland':'🏴%F0%9F%8F%B4%F0%9F%8F%A7%F0%9F%8F%B3%F0%9F%8F%A3%F0%9F%8F%B4%F0%9F%8F%B7','Tunisia':'🇹🇳','DR Congo':'🇨🇩','Uzbekistan':'🇺🇿','Qatar':'🇶🇦','Iraq':'🇮🇶','South Africa':'🇿🇦',
+'Czechia':'🇨🇿','Scotland':'🏴󠁧󠁢󠁳󠁣󠁴󠁿','Tunisia':'🇹🇳','DR Congo':'🇨🇩','Uzbekistan':'🇺🇿','Qatar':'🇶🇦','Iraq':'🇮🇶','South Africa':'🇿🇦',
 'Saudi Arabia':'🇸🇦','Jordan':'🇯🇴','Bosnia & Herzegovina':'🇧🇦','Cape Verde':'🇨🇻','Ghana':'🇬🇭','Curaçao':'🇨🇼','Haiti':'🇭🇹','New Zealand':'🇳🇿'
 };
 
@@ -353,7 +353,11 @@ let teamScores={};
 
 function normalizeName(str) {
   if (!str) return "";
-  return str.normalize("NFD")
+  // Drill dynamically into properties if string parameter passed is a structural nested object
+  if (typeof str === 'object') {
+    str = str.name_en || str.name || str.team || "";
+  }
+  return String(str).normalize("NFD")
             .replace(/[\u0300-\u036f]/g, "")
             .toLowerCase()
             .trim();
@@ -391,12 +395,13 @@ const rawAway = g.away_team_en || g.away_team || g.awayTeam || g.away || "";
 const home = findInternalTeamKey(rawHome);
 const away = findInternalTeamKey(rawAway);
 
-// Protect parsing loop against unplayed or empty string elements completely
-const homeRawScore = g.home_score ?? g.homeScore ?? g.home_team_score ?? null;
-const awayRawScore = g.away_score ?? g.awayScore ?? g.away_team_score ?? null;
+const homeRawScore = g.home_score ?? g.homeScore ?? g.home_team_score ?? g.score?.full_time?.home ?? g.score?.home ?? null;
+const awayRawScore = g.away_score ?? g.awayScore ?? g.away_team_score ?? g.score?.full_time?.away ?? g.score?.away ?? null;
 
-const hs = (homeRawScore === "" || homeRawScore === null) ? -1 : parseInt(homeRawScore);
-const as = (awayRawScore === "" || awayRawScore === null) ? -1 : parseInt(awayRawScore);
+if (homeRawScore === null || awayRawScore === null || homeRawScore === "" || awayRawScore === "") return;
+
+const hs = parseInt(homeRawScore);
+const as = parseInt(awayRawScore);
 
 if(!home || !away || isNaN(hs) || isNaN(as) || hs<0 || as<0) return;
 
@@ -408,18 +413,19 @@ const diff=Math.abs(SEEDS[home]-SEEDS[away]);
 if(diff>=5){
 const underdog=SEEDS[home]>SEEDS[away]?home:away;
 
-// Cascade through every possible API half-time object naming pattern
-const hthRaw = g.ht_home_score ?? g.half_time_home_score ?? g.halfTimeHomeScore ?? (g.score?.halftime?.home) ?? null;
-const htaRaw = g.ht_away_score ?? g.half_time_away_score ?? g.halfTimeAwayScore ?? (g.score?.halftime?.away) ?? null;
+const hthRaw = g.ht_home_score ?? g.half_time_home_score ?? g.halfTimeHomeScore ?? g.score?.halftime?.home ?? g.score?.half_time?.home ?? null;
+const htaRaw = g.ht_away_score ?? g.half_time_away_score ?? g.halfTimeAwayScore ?? g.score?.halftime?.away ?? g.score?.half_time?.away ?? null;
 
-const hth = (hthRaw === "" || hthRaw === null) ? -1 : parseInt(hthRaw);
-const hta = (htaRaw === "" || htaRaw === null) ? -1 : parseInt(htaRaw);
-
-if(!isNaN(hth) && !isNaN(hta) && hth>=0 && hta>=0){
-const ug=underdog===home?hth:hta;
-const fav=underdog===home?hta:hth;
-if(ug>fav) scores[underdog].bonus+=4;
-else if(ug===fav) scores[underdog].bonus+=2;
+if (hthRaw !== null && htaRaw !== null && hthRaw !== "" && htaRaw !== "") {
+  const hth = parseInt(hthRaw);
+  const hta = parseInt(htaRaw);
+  
+  if(!isNaN(hth) && !isNaN(hta) && hth>=0 && hta>=0){
+    const ug=underdog===home?hth:hta;
+    const fav=underdog===home?hta:hth;
+    if(ug>fav) scores[underdog].bonus+=4;
+    else if(ug===fav) scores[underdog].bonus+=2;
+  }
 }
 }
 });
@@ -429,7 +435,10 @@ return scores;
 async function refreshData(){
 document.getElementById('status').innerText='Refreshing...';
 try{
-const r=await fetch('https://api.allorigins.win/get?url=' + encodeURIComponent('https://worldcup26.ir/get/games'));
+// Cache-bust step ensures proxy retrieves fresh live data changes instantly
+const cacheBuster = `&cb=${Date.now()}`;
+const targetUrl = encodeURIComponent('https://worldcup26.ir/get/games');
+const r=await fetch(`https://api.allorigins.win/get?url=${targetUrl}${cacheBuster}`);
 const res=await r.json();
 
 const d=JSON.parse(res.contents);
@@ -486,7 +495,7 @@ let players=[];
 for(const [name,list] of Object.entries(PLAYERS)){
 let seed=0,match=0,bonus=0;
 list.forEach(t=>{
-seed+=SEEDS[t];
+seed+=SEEDS[t] || 0;
 match+=(teamScores[t]?.match||0);
 bonus+=(teamScores[t]?.bonus||0);
 });
@@ -514,7 +523,7 @@ return `
 }
 
 refreshData();
-setInterval(refreshData,7200000);
+setInterval(refreshData,300000); // Check for new game values every 5 minutes
 </script>
 </body>
 </html>
