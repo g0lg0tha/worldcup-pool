@@ -323,7 +323,6 @@ const FLAGS={
 // ==========================================
 // MASTER EMBEDDED TOURNAMENT DATA MATRIX
 // ==========================================
-// When actual tournament matchday updates happen, you can simply edit this structural array directly!
 const EMBEDDED_FALLBACK_FIXTURES = [
   { "home": "Mexico", "away": "South Africa", "score1": 2, "score2": 0, "ht_score1": 1, "ht_score2": 0 },
   { "home": "South Korea", "away": "Czechia", "score1": 2, "score2": 1, "ht_score1": 0, "ht_score2": 0 },
@@ -362,7 +361,6 @@ function calculate(games){
     if (!Array.isArray(games)) return scores;
 
     games.forEach(g => {
-        // Parse variations across openfootball formats and our embedded data seamlessly
         const rawHome = g.team1 || g.home_team || g.home || "";
         const rawAway = g.team2 || g.away_team || g.away || "";
         
@@ -405,15 +403,13 @@ function calculate(games){
 
 async function refreshData(){
     const statusBox = document.getElementById('status');
-    statusBox.innerText = 'Syncing Matrix...';
+    statusBox.innerText = 'Connecting...';
     
-    // Master open source repository endpoints
     const targetUrl = 'https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json';
     const proxyUrl = 'https://api.allorigins.win/get?url=' + encodeURIComponent(targetUrl) + '&cb=' + Date.now();
 
-    // Setup an explicit AbortController to break free if the web engine acts sluggishly 
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 2500); // 2.5 second hard ceiling threshold
+    const timeoutId = setTimeout(() => controller.abort(), 1500); // Strict 1.5s gateway processing limit
 
     let games = null;
 
@@ -426,22 +422,21 @@ async function refreshData(){
             const rawPayload = JSON.parse(wrapper.contents);
             games = rawPayload.matches || [];
             if (Array.isArray(games) && games.length > 0) {
-                statusBox.innerText = 'Live Cloud Sync Complete: ' + new Date().toLocaleTimeString();
+                statusBox.innerText = 'Live Stream Connected: ' + new Date().toLocaleTimeString();
             }
         }
     } catch(e) {
         clearTimeout(timeoutId);
-        console.warn("Web API handshaking sequence delayed. Initializing hard failover protocol...");
+        console.warn("Proxy gateway timing warning. Invoking instant failover engine.");
     }
 
-    // Process our results safely 
     if (games && Array.isArray(games) && games.length > 0) {
         teamScores = calculate(games);
         localStorage.setItem('wc26_failsafe_matrix', JSON.stringify(teamScores));
     } else {
-        // If internet times out or freezes, switch instantly to our high-speed embedded dataset
+        // Instant load fallback: renders from your local code data instantly with zero freeze
         teamScores = calculate(EMBEDDED_FALLBACK_FIXTURES);
-        statusBox.innerText = 'Local Sandbox Engine Active (Offline Failsafe Mode)';
+        statusBox.innerText = 'Offline Standby Engine Active';
     }
     render();
 }
