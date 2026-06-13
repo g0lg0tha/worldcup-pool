@@ -423,12 +423,13 @@ async function refreshData(){
     statusBox.innerText = 'Connecting...';
     
     const targetUrl = 'https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json';
-    const primaryProxy = 'https://api.allorigins.win/get?url=' + encodeURIComponent(targetUrl) + '&cb=' + Date.now();
-    // Fixed with 'url=' and added cache buster compatibility
-    const secondaryProxy = 'https://corsproxy.io/?url=' + encodeURIComponent(targetUrl) + '&cb=' + Date.now();
     
+    const primaryProxy = 'https://api.allorigins.win/get?url=' + encodeURIComponent(targetUrl) + '&cb=' + Date.now();
+    const secondaryProxy = 'https://corsproxy.io/?url=' + encodeURIComponent(targetUrl) + '&cb=' + Date.now();
+
     let games = null;
 
+    // PIPELINE STAGE 1: Primary Proxy (AllOrigins)
     try {
         const controller = new AbortController();
         const timeoutId = setTimeout(() => controller.abort(), 4000);
@@ -438,7 +439,8 @@ async function refreshData(){
         
         if (response.ok) {
             const wrapper = await response.json();
-            const rawPayload = JSON.parse(wrapper.contents);
+            // AllOrigins wraps data in a stringified .contents property
+            const rawPayload = typeof wrapper.contents === 'string' ? JSON.parse(wrapper.contents) : wrapper.contents;
             games = rawPayload.matches || [];
         } else {
             throw new Error("Primary stream down");
@@ -446,6 +448,7 @@ async function refreshData(){
     } catch(e) {
         console.warn("Primary proxy dropped or timed out. Redirecting to secondary pipeline...");
         
+        // PIPELINE STAGE 2: Secondary Proxy (CorsProxy.io)
         try {
             const controller2 = new AbortController();
             const timeoutId2 = setTimeout(() => controller2.abort(), 4000);
@@ -455,20 +458,33 @@ async function refreshData(){
 
             if (response.ok) {
                 const rawPayload = await response.json();
-                games = rawPayload.matches || [];
+                // CorsProxy.io returns the clean raw JSON directly without a .contents wrapper
+                if (rawPayload) {
+                    games = rawPayload.matches || rawPayload;
+                }
             }
         } catch(err) {
             console.error("Secondary proxy error. Invoking offline failsafe module.");
         }
     }
 
-    if (games && Array.isArray(games) && games.length > 0) {
-        teamScores = calculate(games);
+    // RESOLUTION ENGINE
+    if (games && (Array.isArray(games) || typeof games === 'object') && Object.keys(games).length > 0) {
+        // If the data is nested inside a 'matches' key or raw array, normalize it
+        const finalMatches = Array.isArray(games) ? games : (games.matches || []);
+        
+        teamScores = calculate(finalMatches);
         localStorage.setItem('wc26_failsafe_matrix', JSON.stringify(teamScores));
         statusBox.innerText = 'Live Stream Connected: ' + new Date().toLocaleTimeString();
     } else {
-        teamScores = calculate(EMBEDDED_FALLBACK_FIXTURES);
-        statusBox.innerText = 'Offline Standby Engine Active';
+        const cachedScores = localStorage.getItem('wc26_failsafe_matrix');
+        if (cachedScores) {
+            teamScores = JSON.parse(cachedScores);
+            statusBox.innerText = 'Loaded From Cache';
+        } else {
+            teamScores = calculate(EMBEDDED_FALLBACK_FIXTURES);
+            statusBox.innerText = 'Offline Standby Engine Active';
+        }
     }
     render();
 }
