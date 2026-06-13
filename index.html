@@ -4,9 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>World Cup 2026 Pool Leaderboard</title>
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght=600;700;800&family=Oswald:wght=400;500;600&display=swap');
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght=600;700;800&family=Oswald:wght=400;500;600&display=swap" rel="stylesheet">
+
+<style>
 :root {
 --metallic-chassis: linear-gradient(145deg, #a47657 0%, #613b23 25%, #361f11 50%, #7d4f32 75%, #221209 100%);
 --inner-wood-plate: #492817;
@@ -320,14 +323,11 @@ const FLAGS={
     'Saudi Arabia':'🇸🇦','Jordan':'🇯🇴','Bosnia & Herzegovina':'🇧🇦','Cape Verde':'🇨🇻','Ghana':'🇬🇭','Curaçao':'🇨🇼','Haiti':'🇭🇹','New Zealand':'🇳🇿'
 };
 
-// ==========================================
-// MASTER EMBEDDED TOURNAMENT DATA MATRIX
-// ==========================================
 const EMBEDDED_FALLBACK_FIXTURES = [
   { "home": "Mexico", "away": "South Africa", "score1": 2, "score2": 0, "ht_score1": 1, "ht_score2": 0 },
   { "home": "South Korea", "away": "Czechia", "score1": 2, "score2": 1, "ht_score1": 0, "ht_score2": 0 },
-  { "home": "Canada", "away": "Bosnia & Herzegovina", "score1": null, "score2": null, "ht_score1": null, "ht_score2": null },
-  { "home": "USA", "away": "Paraguay", "score1": null, "score2": null, "ht_score1": null, "ht_score2": null }
+  { "home": "Canada", "away": "Bosnia & Herzegovina", "score1": 1, "score2": 1, "ht_score1": 0, "ht_score2": 0 },
+  { "home": "United States", "away": "Paraguay", "score1": 4, "score2": 1, "ht_score1": 2, "ht_score2": 0 }
 ];
 
 let teamScores={};
@@ -338,8 +338,27 @@ function normalizeName(str) {
 }
 
 function findInternalTeamKey(apiName) {
-    const normApi = normalizeName(apiName);
+    let normApi = normalizeName(apiName);
     if (!normApi) return null;
+
+    // Hard override dictionary maps for openfootball string variations
+    if (normApi === "united states" || normApi.includes("united states") || normApi === "usa") {
+        return "USA";
+    }
+    if (normApi === "czech republic" || normApi.includes("czech republic")) {
+        return "Czechia";
+    }
+    if (normApi === "cote d'ivoire" || normApi.includes("ivoire") || normApi === "ivory coast") {
+        return "Ivory Coast";
+    }
+    if (normApi === "turkey" || normApi === "turkiye") {
+        return "Türkiye";
+    }
+    if (normApi.includes("bosnia")) {
+        return "Bosnia & Herzegovina";
+    }
+
+    // Default structural matching
     for (const teamKey of Object.keys(SEEDS)) {
         if (normalizeName(teamKey) === normApi) return teamKey;
     }
@@ -388,7 +407,7 @@ function calculate(games){
 
             if (hth !== null && hta !== null && hth !== undefined && hta !== undefined && hth !== "" && hta !== "") {
                 hth = parseInt(hth);
-                hta = parseInt(hta);
+                pta = parseInt(hta);
                 if(!isNaN(hth) && !isNaN(hta) && hth >= 0 && hta >= 0){
                     const ug = underdog === home ? hth : hta;
                     const fav = underdog === home ? hta : hth;
@@ -406,35 +425,53 @@ async function refreshData(){
     statusBox.innerText = 'Connecting...';
     
     const targetUrl = 'https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json';
-    const proxyUrl = 'https://api.allorigins.win/get?url=' + encodeURIComponent(targetUrl) + '&cb=' + Date.now();
-
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 1500); // Strict 1.5s gateway processing limit
+    
+    const primaryProxy = 'https://api.allorigins.win/get?url=' + encodeURIComponent(targetUrl) + '&cb=' + Date.now();
+    const secondaryProxy = 'https://corsproxy.io/?' + encodeURIComponent(targetUrl);
 
     let games = null;
 
+    // PIPELINE STAGE 1: Primary connection check (4s Limit)
     try {
-        const response = await fetch(proxyUrl, { signal: controller.signal });
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 4000);
+
+        const response = await fetch(primaryProxy, { signal: controller.signal });
         clearTimeout(timeoutId);
         
         if (response.ok) {
             const wrapper = await response.json();
             const rawPayload = JSON.parse(wrapper.contents);
             games = rawPayload.matches || [];
-            if (Array.isArray(games) && games.length > 0) {
-                statusBox.innerText = 'Live Stream Connected: ' + new Date().toLocaleTimeString();
-            }
+        } else {
+            throw new Error("Primary stream down");
         }
     } catch(e) {
-        clearTimeout(timeoutId);
-        console.warn("Proxy gateway timing warning. Invoking instant failover engine.");
+        console.warn("Primary proxy dropped or timed out. Redirecting to secondary pipeline...");
+        
+        // PIPELINE STAGE 2: Secondary network fallback line (4s Limit)
+        try {
+            const controller2 = new AbortController();
+            const timeoutId2 = setTimeout(() => controller2.abort(), 4000);
+
+            const response = await fetch(secondaryProxy, { signal: controller2.signal });
+            clearTimeout(timeoutId2);
+
+            if (response.ok) {
+                const rawPayload = await response.json();
+                games = rawPayload.matches || [];
+            }
+        } catch(err) {
+            console.error("Secondary proxy error. Invoking offline failsafe module.");
+        }
     }
 
+    // RESOLUTION ENGINE
     if (games && Array.isArray(games) && games.length > 0) {
         teamScores = calculate(games);
         localStorage.setItem('wc26_failsafe_matrix', JSON.stringify(teamScores));
+        statusBox.innerText = 'Live Stream Connected: ' + new Date().toLocaleTimeString();
     } else {
-        // Instant load fallback: renders from your local code data instantly with zero freeze
         teamScores = calculate(EMBEDDED_FALLBACK_FIXTURES);
         statusBox.innerText = 'Offline Standby Engine Active';
     }
@@ -449,7 +486,15 @@ function render(){
         total:SEEDS[t]+(teamScores[t]?.match||0)+(teamScores[t]?.bonus||0)
     }));
 
-    document.getElementById('teams').innerHTML=teams.sort((a,b)=>a.seed-b.seed).map(t=>{
+    // Sorted by Total Score (Descending Layout Matrix)
+    teams.sort((a,b) => {
+        if (b.total !== a.total) {
+            return b.total - a.total;
+        }
+        return a.seed - b.seed;
+    });
+
+    document.getElementById('teams').innerHTML=teams.map(t=>{
         const teamOwner = owner(t.team);
         const ownerMarkup = teamOwner ? `<span class="owner-capsule-badge">${teamOwner}</span>` : `<span class="vacant-badge">—</span>`;
         return `
