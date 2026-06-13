@@ -1,7 +1,6 @@
 import requests
 import json
 
-# Comprehensive 48-Team Matrix Mapping for the 2026 World Cup Tournament Group Stage
 SEEDS = {
     'France': 1, 'Spain': 2, 'Argentina': 3, 'England': 4, 'Portugal': 5, 'Brazil': 6, 
     'Netherlands': 7, 'Morocco': 8, 'Belgium': 9, 'Germany': 10, 'Croatia': 11, 'Colombia': 12, 
@@ -25,17 +24,15 @@ def find_team_key(api_name):
     if "bosnia" in norm: return "Bosnia & Herzegovina"
     if "ivory" in norm or "cote" in norm: return "Ivory Coast"
     if "turkey" in norm or "turkiye" in norm: return "Türkiye"
-    
     for k in SEEDS.keys():
         if normalize(k) in norm or norm in normalize(k): return k
     return None
 
 try:
-    # Pulling from upstream structural raw data repository
     r = requests.get('https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json', timeout=15)
     data = r.json()
 except Exception as e:
-    print(f"Upstream pipeline connection failure: {e}. Preserving current local file values.")
+    print(f"Connection failed: {e}")
     exit(0)
 
 matches = data.get('matches', [])
@@ -43,7 +40,6 @@ if not matches and 'rounds' in data:
     for round_data in data['rounds']:
         matches.extend(round_data.get('matches', []))
 
-# Safely initialize matrix dictionary structures
 scores = {team: {"match": 0, "bonus": 0} for team in SEEDS.keys()}
 
 for m in matches:
@@ -52,25 +48,20 @@ for m in matches:
     if not home or not away: continue
     
     score_obj = m.get('score', {})
-    hs = m.get('score1') or m.get('home_score') or score_obj.get('full', {}).get('home')
-    as = m.get('score2') or m.get('away_score') or score_obj.get('full', {}).get('away')
+    hs_val = m.get('score1') or m.get('home_score') or score_obj.get('full', {}).get('home')
+    as_val = m.get('score2') or m.get('away_score') or score_obj.get('full', {}).get('away')
     
-    if hs is None or as is None or hs == "" or as == "": continue
+    if hs_val is None or as_val is None or hs_val == "" or as_val == "": continue
     try:
-        hs, as = int(hs), int(as)
-    except ValueError:
-        continue
+        hs_val, as_val = int(hs_val), int(as_val)
+    except ValueError: continue
     
-    # Process Win/Draw match metrics points
-    if hs > as: 
-        scores[home]['match'] += 8
-    elif as > hs: 
-        scores[away]['match'] += 8
+    if hs_val > as_val: scores[home]['match'] += 8
+    elif as_val > hs_val: scores[away]['match'] += 8
     else:
         scores[home]['match'] += 4
         scores[away]['match'] += 4
 
-    # Evaluate Underdog Matrix Parameters (Seed Differential threshold >= 5)
     if abs(SEEDS[home] - SEEDS[away]) >= 5:
         underdog = home if SEEDS[home] > SEEDS[away] else away
         hth = m.get('ht_score1') or m.get('ht_home_score') or score_obj.get('half', {}).get('home')
@@ -81,13 +72,9 @@ for m in matches:
                 hth, hta = int(hth), int(hta)
                 ug = hth if underdog == home else hta
                 fav = hta if underdog == home else hth
-                if ug > fav: 
-                    scores[underdog]['bonus'] += 4
-                elif ug == fav: 
-                    scores[underdog]['bonus'] += 2
-            except ValueError:
-                pass
+                if ug > fav: scores[underdog]['bonus'] += 4
+                elif ug == fav: scores[underdog]['bonus'] += 2
+            except ValueError: pass
 
 with open('scores.json', 'w') as f:
     json.dump(scores, f, indent=2)
-print("Data matrix processing execution completed successfully.")
