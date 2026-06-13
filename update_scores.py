@@ -18,7 +18,6 @@ def normalize(name):
 def find_team_key(api_name):
     norm = normalize(api_name)
     if not norm: return None
-    # Hardcoded fixes for common API naming variations
     if "united states" in norm or "usa" in norm: return "USA"
     if "czech" in norm: return "Czechia"
     if "bosnia" in norm: return "Bosnia & Herzegovina"
@@ -51,17 +50,29 @@ for m in matches:
     home = find_team_key(t1)
     away = find_team_key(t2)
     
-    # Extract scores
+    if not home or not away: continue
+
     s1 = m.get('score1') or m.get('home_score')
     s2 = m.get('score2') or m.get('away_score')
     if s1 is None and 'score' in m:
         s1 = m['score'].get('full', {}).get('home')
         s2 = m['score'].get('full', {}).get('away')
 
-    # DIAGNOSTIC PRINT: This will show in your GitHub Actions logs
-    print(f"DEBUG: {t1}({home}) vs {t2}({away}) | Raw Scores: {s1}-{s2}")
-
     if s1 is not None and s2 is not None:
-        # Proceed with your logic...
+        try:
+            v1, v2 = int(s1), int(s2)
+            if v1 > v2: scores[home]['match'] += 8
+            elif v2 > v1: scores[away]['match'] += 8
+            else:
+                scores[home]['match'] += 4
+                scores[away]['match'] += 4
+            
+            if abs(SEEDS[home] - SEEDS[away]) >= 5:
+                underdog = home if SEEDS[home] > SEEDS[away] else away
+                scores[underdog]['bonus'] += 2
+        except (ValueError, TypeError):
+            pass # Skip invalid scores
+
+# Save file after processing all matches
 with open('scores.json', 'w') as f:
     json.dump(scores, f, indent=2)
