@@ -6,7 +6,7 @@
 <title>World Cup 2026 Pool Leaderboard</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Oswald:wght=400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Oswald:wght@400;500;600&display=swap" rel="stylesheet">
 <style>:root {--metallic-chassis: linear-gradient(145deg, #a47657 0%, #613b23 25%, #361f11 50%, #7d4f32 75%, #221209 100%);--inner-wood-plate: #492817;--capsule-bg: linear-gradient(180deg, #241309 0%, #170b04 100%);--gold-trim: #ffd294;--text-value: #ffd9a3;}
 body {font-family: 'Oswald', sans-serif;background: radial-gradient(circle at 50% 30%, rgba(20, 10, 5, 0.3) 0%, rgba(10, 4, 1, 0.95) 85%),url('https://images.unsplash.com/photo-1507842217343-583bb7270b66?q=80&w=2136&auto=format&fit=crop') no-repeat center center fixed;background-size: cover;color: #fff;margin: 0;padding: clamp(10px, 4vw, 30px) clamp(4px, 2vw, 16px);display: flex;justify-content: center;}
 .container {width: 100%;max-width: 1050px;display: flex;flex-direction: column;gap: clamp(12px, 3vw, 24px);}
@@ -68,16 +68,104 @@ button {background: linear-gradient(180deg, #8c5d43 0%, #462a1a 100%);border: 1p
 </div>
 <script>
 const PLAYERS={Gordon:['Brazil','Japan','Scotland'],David:['France','Norway','Bosnia & Herzegovina'],Stephen:['Germany','Paraguay','Czechia'],Bren:['Spain','Türkiye','Saudi Arabia'],Patrick:['England','Switzerland','Ghana'],Mick:['Netherlands','Austria','Haiti']};
-const SEEDS={'France':1,'Spain':2,'Argentina':3,'England':4,'Portugal':5,'Brazil':6,'Netherlands':7,'Morocco':8,'Belgium':9,'Germany':10,'Croatia':11,'Colombia':12,'Senegal':13,'Mexico':14,'USA':15,'Uruguay':16,'Japan':17,'Switzerland':18,'Iran':19,'Türkiye':20,'Ecuador':21,'Austria':22,'South Korea':23,'Australia':24,'Algeria':25,'Egypt':26,'Canada':27,'Norway':28,'Panama':29,'Ivory Coast':30,'Sweden':31,'Paraguay':32,'Czechia':33,'Scotland':34,'Tunisia':35,'DR Congo':36,'Uzbekistan':37,'Qatar':38,'Iraq':39,'South Africa':40,'Saudi Arabia':41,'Jordan':42,'Bosnia & Herzegovina':43,'Cape Verde':44,'Ghana':45,'Curaçao':46,'Haiti':47,'New Zealand':48};
+const SEEDS={'France':1,'Spain':2,'Argentina':3,'England':4,'Portugal':5,'Brazil':6,'Netherlands':7,'Morocco':8,'Belgium':9,'Germany':10,'Croatia':11,'Colombia':12,'Senegal':13,'Mexico':14,'USA':15,'Uruguay':16,'Japan':17,'Switzerland':18,'Iran':19,'Türkiye':20,'Turkey':20,'Ecuador':21,'Austria':22,'South Korea':23,'Australia':24,'Algeria':25,'Egypt':26,'Canada':27,'Norway':28,'Panama':29,'Ivory Coast':30,'Cote d\'Ivoire':30,'Sweden':31,'Paraguay':32,'Czechia':33,'Czech Republic':33,'Scotland':34,'Tunisia':35,'DR Congo':36,'Uzbekistan':37,'Qatar':38,'Iraq':39,'South Africa':40,'Saudi Arabia':41,'Jordan':42,'Bosnia & Herzegovina':43,'Bosnia and Herzegovina':43,'Cape Verde':44,'Ghana':45,'Curaçao':46,'Haiti':47,'New Zealand':48};
 const FLAGS={'France':'🇫🇷','Spain':'🇪🇸','Argentina':'🇦🇷','England':'🏴󠁧󠁢󠁥󠁮󠁧󠁿','Portugal':'🇵🇹','Brazil':'🇧🇷','Netherlands':'🇳🇱','Morocco':'🇲🇦','Belgium':'🇧🇪','Germany':'🇩🇪','Croatia':'🇭🇷','Colombia':'🇨🇴','Senegal':'🇸🇳','Mexico':'🇲🇽','USA':'🇺🇸','Uruguay':'🇺🇾','Japan':'🇯🇵','Switzerland':'🇨🇭','Iran':'🇮🇷','Türkiye':'🇹🇷','Ecuador':'🇪🇨','Austria':'🇦🇹','South Korea':'🇰🇷','Australia':'🇦🇺','Algeria':'🇩🇿','Egypt':'🇪🇬','Canada':'🇨🇦','Norway':'🇳🇴','Panama':'🇵🇦','Ivory Coast':'🇨🇮','Sweden':'🇸🇪','Paraguay':'🇵🇾','Czechia':'🇨🇿','Scotland':'🏴󠁧󠁢󠁳󠁣󠁴󠁿','Tunisia':'🇹🇳','DR Congo':'🇨🇩','Uzbekistan':'🇺🇿','Qatar':'🇶🇦','Iraq':'🇮🇶','South Africa':'🇿🇦','Saudi Arabia':'🇸🇦','Jordan':'🇯🇴','Bosnia & Herzegovina':'🇧🇦','Cape Verde':'🇨🇻','Ghana':'🇬🇭','Curaçao':'🇨🇼','Haiti':'🇭🇹','New Zealand':'🇳🇿'};
 const EMBEDDED_FALLBACK_FIXTURES = [{ "home": "Mexico", "away": "South Africa", "score1": 2, "score2": 0, "ht_score1": 1, "ht_score2": 0 }, { "home": "South Korea", "away": "Czechia", "score1": 2, "score2": 1, "ht_score1": 0, "ht_score2": 0 }, { "home": "Canada", "away": "Bosnia & Herzegovina", "score1": 1, "score2": 1, "ht_score1": 0, "ht_score2": 0 }, { "home": "United States", "away": "Paraguay", "score1": 4, "score2": 1, "ht_score1": 2, "ht_score2": 0 }];
 let teamScores={};
-function normalizeName(str) { if (!str) return ""; return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim(); }
-function findInternalTeamKey(apiName) { let normApi = normalizeName(apiName); if (!normApi) return null; if (normApi === "united states" || normApi.includes("united states") || normApi === "usa") return "USA"; if (normApi === "czech republic" || normApi.includes("czech republic")) return "Czechia"; if (normApi === "cote d'ivoire" || normApi.includes("ivoire") || normApi === "ivory coast") return "Ivory Coast"; if (normApi === "turkey" || normApi === "turkiye") return "Türkiye"; if (normApi.includes("bosnia")) return "Bosnia & Herzegovina"; for (const teamKey of Object.keys(SEEDS)) { if (normalizeName(teamKey) === normApi) return teamKey; } for (const teamKey of Object.keys(SEEDS)) { const normKey = normalizeName(teamKey); if (normApi.includes(normKey) || normKey.includes(normApi)) return teamKey; } return null; }
+
+function findInternalTeamKey(apiName) {
+    if (!apiName) return null;
+    let norm = apiName.toLowerCase().trim().replace(/[\u0300-\u036f]/g, "").replace(/&/g, "and");
+    for (const teamKey in SEEDS) {
+        if (teamKey.toLowerCase().replace(/&/g, "and") === norm) return teamKey;
+    }
+    return null;
+}
+
 function owner(team){ for(const [p,t] of Object.entries(PLAYERS)) if(t.includes(team)) return p; return ''; }
-function calculate(games){ const scores={}; Object.keys(SEEDS).forEach(t=>scores[t]={match:0,bonus:0}); if (!Array.isArray(games)) return scores; games.forEach(g => { const rawHome = g.team1 || g.home_team || g.home || ""; const rawAway = g.team2 || g.away_team || g.away || ""; const home = findInternalTeamKey(rawHome); const away = findInternalTeamKey(rawAway); if(!home || !away) return; let hs = g.score1 ?? g.home_score; let as = g.score2 ?? g.away_score; if (hs === null || hs === undefined || hs === "" || as === null || as === undefined || as === "") return; hs = parseInt(hs); as = parseInt(as); if(isNaN(hs) || isNaN(as) || hs < 0 || as < 0) return; if(hs > as) scores[home].match += 8; else if(as > hs) scores[away].match += 8; else { scores[home].match += 4; scores[away].match += 4; } const diff = Math.abs(SEEDS[home] - SEEDS[away]); if(diff >= 5){ const underdog = SEEDS[home] > SEEDS[away] ? home : away; let hth = g.ht_score1 ?? g.ht_home_score; let hta = g.ht_score2 ?? g.ht_away_score; if (hth !== null && hta !== null && hth !== undefined && hta !== undefined && hth !== "" && hta !== "") { hth = parseInt(hth); hta = parseInt(hta); if(!isNaN(hth) && !isNaN(hta) && hth >= 0 && hta >= 0){ const ug = underdog === home ? hth : hta; const fav = underdog === home ? hta : hth; if(ug > fav) scores[underdog].bonus += 4; else if(ug === fav) scores[underdog].bonus += 2; } } } }); return scores; }
-async function refreshData() { const statusBox = document.getElementById('status'); statusBox.innerText = 'Syncing...'; try { const response = await fetch('matches.json?cb=' + Date.now()); if (!response.ok) throw new Error('Data file not found'); const games = await response.json(); teamScores = calculate(games); statusBox.innerText = 'Updated: ' + new Date().toLocaleTimeString(); } catch(e) { console.error("Local fetch failed, using fallback:", e); teamScores = calculate(EMBEDDED_FALLBACK_FIXTURES); statusBox.innerText = 'Using Local Fallback'; } render(); }
-function render(){ let teams=Object.keys(SEEDS).map(t=>({ team:t,seed:SEEDS[t], match:(teamScores[t]?.match||0), bonus:(teamScores[t]?.bonus||0), total:SEEDS[t]+(teamScores[t]?.match||0)+(teamScores[t]?.bonus||0) })); teams.sort((a,b) => { if (b.total !== a.total) { return b.total - a.total; } return a.seed - b.seed; }); document.getElementById('teams').innerHTML=teams.map(t=>{ const teamOwner = owner(t.team); const ownerMarkup = teamOwner ? `<span class="owner-capsule-badge">${teamOwner}</span>` : `<span class="vacant-badge">—</span>`; return `<div class="capsule-row team-cols"><span class="rank-pill-value">${t.seed}</span><span class="contender-name team-contender-name left-align"><i class="flag-icon">${FLAGS[t.team]||''}</i> ${t.team.toUpperCase()}</span><div>${ownerMarkup}</div><div class="score-cell-digits">${t.seed}</div><div class="score-cell-digits">${t.match}</div><div class="score-cell-digits">${t.bonus}</div><div class="score-cell-digits" style="font-weight:700; color:#ffcc80;">${t.total}</div></div>`; }).join(''); let players=[]; for(const [name,list] of Object.entries(PLAYERS)){ let seed=0,match=0,bonus=0; list.forEach(t=>{ seed+=SEEDS[t]; match+=(teamScores[t]?.match||0); bonus+=(teamScores[t]?.bonus||0); }); players.push({name,seed,match,bonus,total:seed+match+bonus}); } players.sort((a,b)=>b.total-a.total); document.getElementById('leaderboard').innerHTML=players.map((p,i)=>{ const rankNum = i + 1; let rankMarkup = `<span class="rank-pill-value">${rankNum}</span>`; if (rankNum === 1) rankMarkup = `<div class="medal-circle med-1">${rankNum}</div>`; if (rankNum === 2) rankMarkup = `<div class="medal-circle med-2">${rankNum}</div>`; if (rankNum === 3) rankMarkup = `<div class="medal-circle med-3">${rankNum}</div>`; return `<div class="capsule-row leaderboard-cols"><div>${rankMarkup}</div><span class="contender-name player-contender-name left-align">${p.name.toUpperCase()}</span><div class="score-cell-digits">${p.seed}</div><div class="score-cell-digits">${p.match}</div><div class="score-cell-digits">${p.bonus}</div><div class="score-cell-digits" style="font-weight:700; color:#ffcc80; font-size: clamp(0.9rem, 3.8vw, 1.5rem);">${p.total}</div></div>`; }).join(''); }
+
+function calculate(games){ 
+    const scores={}; 
+    Object.keys(SEEDS).forEach(t=>scores[t]={match:0,bonus:0}); 
+    if (!Array.isArray(games)) return scores; 
+    
+    games.forEach(g => { 
+        const rawHome = g.team1 || g.home_team || g.home || ""; 
+        const rawAway = g.team2 || g.away_team || g.away || ""; 
+        const home = findInternalTeamKey(rawHome); 
+        const away = findInternalTeamKey(rawAway); 
+        
+        if(!home || !away) return; 
+        
+        let hs = parseInt(g.score1 ?? g.home_score); 
+        let as = parseInt(g.score2 ?? g.away_score); 
+        
+        if(!isNaN(hs) && !isNaN(as)) {
+            if(hs > as) scores[home].match += 8; 
+            else if(as > hs) scores[away].match += 8; 
+            else { scores[home].match += 4; scores[away].match += 4; }
+        }
+
+        const diff = Math.abs(SEEDS[home] - SEEDS[away]); 
+        if(diff >= 5){ 
+            const underdog = SEEDS[home] > SEEDS[away] ? home : away; 
+            let hth = parseInt(g.ht_score1 ?? g.ht_home_score); 
+            let hta = parseInt(g.ht_score2 ?? g.ht_away_score); 
+            
+            if (!isNaN(hth) && !isNaN(hta)) {
+                const ug = (underdog === home) ? hth : hta; 
+                const fav = (underdog === home) ? hta : hth; 
+                if(ug > fav) scores[underdog].bonus += 4; 
+                else if(ug === fav) scores[underdog].bonus += 2; 
+            }
+        } 
+    }); 
+    return scores; 
+}
+
+async function refreshData() { 
+    const statusBox = document.getElementById('status'); 
+    statusBox.innerText = 'Syncing...'; 
+    try { 
+        const response = await fetch('matches.json?cb=' + Date.now()); 
+        if (!response.ok) throw new Error('Data file not found'); 
+        const games = await response.json(); 
+        teamScores = calculate(games); 
+        statusBox.innerText = 'Updated: ' + new Date().toLocaleTimeString(); 
+    } catch(e) { 
+        teamScores = calculate(EMBEDDED_FALLBACK_FIXTURES); 
+        statusBox.innerText = 'Using Local Fallback'; 
+    } 
+    render(); 
+}
+
+function render(){ 
+    let teams=Object.keys(SEEDS).map(t=>({ team:t,seed:SEEDS[t], match:(teamScores[t]?.match||0), bonus:(teamScores[t]?.bonus||0), total:SEEDS[t]+(teamScores[t]?.match||0)+(teamScores[t]?.bonus||0) })); 
+    teams.sort((a,b) => b.total - a.total || a.seed - b.seed); 
+    document.getElementById('teams').innerHTML=teams.map(t=>{ 
+        const teamOwner = owner(t.team); 
+        const ownerMarkup = teamOwner ? `<span class="owner-capsule-badge">${teamOwner}</span>` : `<span class="vacant-badge">—</span>`; 
+        return `<div class="capsule-row team-cols"><span class="rank-pill-value">${t.seed}</span><span class="contender-name team-contender-name left-align"><i class="flag-icon">${FLAGS[t.team]||''}</i> ${t.team.toUpperCase()}</span><div>${ownerMarkup}</div><div class="score-cell-digits">${t.seed}</div><div class="score-cell-digits">${t.match}</div><div class="score-cell-digits">${t.bonus}</div><div class="score-cell-digits" style="font-weight:700; color:#ffcc80;">${t.total}</div></div>`; 
+    }).join(''); 
+    
+    let players=[]; 
+    for(const [name,list] of Object.entries(PLAYERS)){ 
+        let seed=0,match=0,bonus=0; 
+        list.forEach(t=>{ 
+            seed+=SEEDS[t]; 
+            match+=(teamScores[t]?.match||0); 
+            bonus+=(teamScores[t]?.bonus||0); 
+        }); 
+        players.push({name,seed,match,bonus,total:seed+match+bonus}); 
+    } 
+    players.sort((a,b)=>b.total-a.total); 
+    document.getElementById('leaderboard').innerHTML=players.map((p,i)=>{ 
+        const rankNum = i + 1; 
+        let rankMarkup = `<span class="rank-pill-value">${rankNum}</span>`; 
+        if (rankNum <= 3) rankMarkup = `<div class="medal-circle med-${rankNum}">${rankNum}</div>`; 
+        return `<div class="capsule-row leaderboard-cols"><div>${rankMarkup}</div><span class="contender-name player-contender-name left-align">${p.name.toUpperCase()}</span><div class="score-cell-digits">${p.seed}</div><div class="score-cell-digits">${p.match}</div><div class="score-cell-digits">${p.bonus}</div><div class="score-cell-digits" style="font-weight:700; color:#ffcc80; font-size: clamp(0.9rem, 3.8vw, 1.5rem);">${p.total}</div></div>`; 
+    }).join(''); 
+}
 refreshData();
 </script>
 </body>
