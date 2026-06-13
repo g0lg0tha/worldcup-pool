@@ -341,7 +341,6 @@ function findInternalTeamKey(apiName) {
     let normApi = normalizeName(apiName);
     if (!normApi) return null;
 
-    // Hard override dictionary maps for openfootball string variations
     if (normApi === "united states" || normApi.includes("united states") || normApi === "usa") {
         return "USA";
     }
@@ -358,7 +357,6 @@ function findInternalTeamKey(apiName) {
         return "Bosnia & Herzegovina";
     }
 
-    // Default structural matching
     for (const teamKey of Object.keys(SEEDS)) {
         if (normalizeName(teamKey) === normApi) return teamKey;
     }
@@ -431,7 +429,6 @@ async function refreshData(){
 
     let games = null;
 
-    // PIPELINE STAGE 1: Primary connection check (4s Limit)
     try {
         const controller = new AbortController();
         const timeoutId = setTimeout(() => controller.abort(), 4000);
@@ -449,7 +446,6 @@ async function refreshData(){
     } catch(e) {
         console.warn("Primary proxy dropped or timed out. Redirecting to secondary pipeline...");
         
-        // PIPELINE STAGE 2: Secondary network fallback line (4s Limit)
         try {
             const controller2 = new AbortController();
             const timeoutId2 = setTimeout(() => controller2.abort(), 4000);
@@ -466,7 +462,6 @@ async function refreshData(){
         }
     }
 
-    // RESOLUTION ENGINE
     if (games && Array.isArray(games) && games.length > 0) {
         teamScores = calculate(games);
         localStorage.setItem('wc26_failsafe_matrix', JSON.stringify(teamScores));
@@ -486,7 +481,6 @@ function render(){
         total:SEEDS[t]+(teamScores[t]?.match||0)+(teamScores[t]?.bonus||0)
     }));
 
-    // Sorted by Total Score (Descending Layout Matrix)
     teams.sort((a,b) => {
         if (b.total !== a.total) {
             return b.total - a.total;
