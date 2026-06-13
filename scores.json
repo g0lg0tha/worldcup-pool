@@ -1,50 +1,194 @@
 {
-  "France": {"match": 0, "bonus": 0},
-  "Spain": {"match": 0, "bonus": 0},
-  "Argentina": {"match": 0, "bonus": 0},
-  "England": {"match": 0, "bonus": 0},
-  "Portugal": {"match": 0, "bonus": 0},
-  "Brazil": {"match": 0, "bonus": 0},
-  "Netherlands": {"match": 0, "bonus": 0},
-  "Morocco": {"match": 0, "bonus": 0},
-  "Belgium": {"match": 0, "bonus": 0},
-  "Germany": {"match": 0, "bonus": 0},
-  "Croatia": {"match": 0, "bonus": 0},
-  "Colombia": {"match": 0, "bonus": 0},
-  "Senegal": {"match": 0, "bonus": 0},
-  "Mexico": {"match": 0, "bonus": 0},
-  "USA": {"match": 0, "bonus": 0},
-  "Uruguay": {"match": 0, "bonus": 0},
-  "Japan": {"match": 0, "bonus": 0},
-  "Switzerland": {"match": 0, "bonus": 0},
-  "Iran": {"match": 0, "bonus": 0},
-  "Türkiye": {"match": 0, "bonus": 0},
-  "Ecuador": {"match": 0, "bonus": 0},
-  "Austria": {"match": 0, "bonus": 0},
-  "South Korea": {"match": 0, "bonus": 0},
-  "Australia": {"match": 0, "bonus": 0},
-  "Algeria": {"match": 0, "bonus": 0},
-  "Egypt": {"match": 0, "bonus": 0},
-  "Canada": {"match": 0, "bonus": 0},
-  "Norway": {"match": 0, "bonus": 0},
-  "Panama": {"match": 0, "bonus": 0},
-  "Ivory Coast": {"match": 0, "bonus": 0},
-  "Sweden": {"match": 0, "bonus": 0},
-  "Paraguay": {"match": 0, "bonus": 0},
-  "Czechia": {"match": 0, "bonus": 0},
-  "Scotland": {"match": 0, "bonus": 0},
-  "Tunisia": {"match": 0, "bonus": 0},
-  "DR Congo": {"match": 0, "bonus": 0},
-  "Uzbekistan": {"match": 0, "bonus": 0},
-  "Qatar": {"match": 0, "bonus": 0},
-  "Iraq": {"match": 0, "bonus": 0},
-  "South Africa": {"match": 0, "bonus": 0},
-  "Saudi Arabia": {"match": 0, "bonus": 0},
-  "Jordan": {"match": 0, "bonus": 0},
-  "Bosnia & Herzegovina": {"match": 0, "bonus": 0},
-  "Cape Verde": {"match": 0, "bonus": 0},
-  "Ghana": {"match": 0, "bonus": 0},
-  "Curaçao": {"match": 0, "bonus": 0},
-  "Haiti": {"match": 0, "bonus": 0},
-  "New Zealand": {"match": 0, "bonus": 0}
+  "France": {
+    "match": 0,
+    "bonus": 0
+  },
+  "Spain": {
+    "match": 0,
+    "bonus": 0
+  },
+  "Argentina": {
+    "match": 0,
+    "bonus": 0
+  },
+  "England": {
+    "match": 0,
+    "bonus": 0
+  },
+  "Portugal": {
+    "match": 0,
+    "bonus": 0
+  },
+  "Brazil": {
+    "match": 0,
+    "bonus": 0
+  },
+  "Netherlands": {
+    "match": 0,
+    "bonus": 0
+  },
+  "Morocco": {
+    "match": 0,
+    "bonus": 0
+  },
+  "Belgium": {
+    "match": 0,
+    "bonus": 0
+  },
+  "Germany": {
+    "match": 0,
+    "bonus": 0
+  },
+  "Croatia": {
+    "match": 0,
+    "bonus": 0
+  },
+  "Colombia": {
+    "match": 0,
+    "bonus": 0
+  },
+  "Senegal": {
+    "match": 0,
+    "bonus": 0
+  },
+  "Mexico": {
+    "match": 0,
+    "bonus": 0
+  },
+  "USA": {
+    "match": 0,
+    "bonus": 0
+  },
+  "Uruguay": {
+    "match": 0,
+    "bonus": 0
+  },
+  "Japan": {
+    "match": 0,
+    "bonus": 0
+  },
+  "Switzerland": {
+    "match": 0,
+    "bonus": 0
+  },
+  "Iran": {
+    "match": 0,
+    "bonus": 0
+  },
+  "T\u00fcrkiye": {
+    "match": 0,
+    "bonus": 0
+  },
+  "Ecuador": {
+    "match": 0,
+    "bonus": 0
+  },
+  "Austria": {
+    "match": 0,
+    "bonus": 0
+  },
+  "South Korea": {
+    "match": 0,
+    "bonus": 0
+  },
+  "Australia": {
+    "match": 0,
+    "bonus": 0
+  },
+  "Algeria": {
+    "match": 0,
+    "bonus": 0
+  },
+  "Egypt": {
+    "match": 0,
+    "bonus": 0
+  },
+  "Canada": {
+    "match": 0,
+    "bonus": 0
+  },
+  "Norway": {
+    "match": 0,
+    "bonus": 0
+  },
+  "Panama": {
+    "match": 0,
+    "bonus": 0
+  },
+  "Ivory Coast": {
+    "match": 0,
+    "bonus": 0
+  },
+  "Sweden": {
+    "match": 0,
+    "bonus": 0
+  },
+  "Paraguay": {
+    "match": 0,
+    "bonus": 0
+  },
+  "Czechia": {
+    "match": 0,
+    "bonus": 0
+  },
+  "Scotland": {
+    "match": 0,
+    "bonus": 0
+  },
+  "Tunisia": {
+    "match": 0,
+    "bonus": 0
+  },
+  "DR Congo": {
+    "match": 0,
+    "bonus": 0
+  },
+  "Uzbekistan": {
+    "match": 0,
+    "bonus": 0
+  },
+  "Qatar": {
+    "match": 0,
+    "bonus": 0
+  },
+  "Iraq": {
+    "match": 0,
+    "bonus": 0
+  },
+  "South Africa": {
+    "match": 0,
+    "bonus": 0
+  },
+  "Saudi Arabia": {
+    "match": 0,
+    "bonus": 0
+  },
+  "Jordan": {
+    "match": 0,
+    "bonus": 0
+  },
+  "Bosnia & Herzegovina": {
+    "match": 0,
+    "bonus": 0
+  },
+  "Cape Verde": {
+    "match": 0,
+    "bonus": 0
+  },
+  "Ghana": {
+    "match": 0,
+    "bonus": 0
+  },
+  "Cura\u00e7ao": {
+    "match": 0,
+    "bonus": 0
+  },
+  "Haiti": {
+    "match": 0,
+    "bonus": 0
+  },
+  "New Zealand": {
+    "match": 0,
+    "bonus": 0
+  }
 }
