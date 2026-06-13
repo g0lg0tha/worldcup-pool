@@ -423,10 +423,10 @@ async function refreshData(){
     statusBox.innerText = 'Connecting...';
     
     const targetUrl = 'https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json';
-    
     const primaryProxy = 'https://api.allorigins.win/get?url=' + encodeURIComponent(targetUrl) + '&cb=' + Date.now();
-    const secondaryProxy = 'https://corsproxy.io/?' + encodeURIComponent(targetUrl);
-
+    // Fixed with 'url=' and added cache buster compatibility
+    const secondaryProxy = 'https://corsproxy.io/?url=' + encodeURIComponent(targetUrl) + '&cb=' + Date.now();
+    
     let games = null;
 
     try {
