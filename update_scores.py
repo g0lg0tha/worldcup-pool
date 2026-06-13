@@ -43,44 +43,25 @@ if not matches and 'rounds' in data:
 scores = {team: {"match": 0, "bonus": 0} for team in SEEDS.keys()}
 
 for m in matches:
-    # Safely get team names
     t1 = m.get('team1') or m.get('home_team') or m.get('home') or ""
     t2 = m.get('team2') or m.get('away_team') or m.get('away') or ""
-    
-    # Handle object format if teams are objects
     if isinstance(t1, dict): t1 = t1.get('name', '')
     if isinstance(t2, dict): t2 = t2.get('name', '')
 
     home = find_team_key(t1)
     away = find_team_key(t2)
     
-    if not home or not away: continue
-
-    # Extract scores safely
+    # Extract scores
     s1 = m.get('score1') or m.get('home_score')
     s2 = m.get('score2') or m.get('away_score')
-    
-    # Check nested score object
     if s1 is None and 'score' in m:
         s1 = m['score'].get('full', {}).get('home')
         s2 = m['score'].get('full', {}).get('away')
 
-    if s1 is None or s2 is None: continue
-    
-    try:
-        v1, v2 = int(s1), int(s2)
-        if v1 > v2: scores[home]['match'] += 8
-        elif v2 > v1: scores[away]['match'] += 8
-        else:
-            scores[home]['match'] += 4
-            scores[away]['match'] += 4
-            
-        if abs(SEEDS[home] - SEEDS[away]) >= 5:
-            # Underdog logic
-            underdog = home if SEEDS[home] > SEEDS[away] else away
-            scores[underdog]['bonus'] += 2
-            
-    except (ValueError, TypeError): continue
+    # DIAGNOSTIC PRINT: This will show in your GitHub Actions logs
+    print(f"DEBUG: {t1}({home}) vs {t2}({away}) | Raw Scores: {s1}-{s2}")
 
+    if s1 is not None and s2 is not None:
+        # Proceed with your logic...
 with open('scores.json', 'w') as f:
     json.dump(scores, f, indent=2)
