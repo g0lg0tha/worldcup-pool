@@ -72,10 +72,17 @@
 const PLAYERS = { Gordon:['Brazil','Japan','Scotland'], David:['France','Norway','Bosnia & Herzegovina'], Stephen:['Germany','Paraguay','Czechia'], Bren:['Spain','Türkiye','Saudi Arabia'], Patrick:['England','Switzerland','Ghana'], Mick:['Netherlands','Austria','Haiti'] };
 function owner(team) { for(const [p,t] of Object.entries(PLAYERS)) if(t.includes(team)) return p; return '—'; }
 
-// UPDATE THIS FUNCTION WITH YOUR ACTUAL SCORING RULES
-function getPoints(goalsScored, goalsConceded) {
-    let m = 8; // Default Match Points
-    let b = 0; // Default Bonus
+// CHANGE THESE NUMBERS TO MATCH YOUR SCORING RULES
+function calculateResult(scoreA, scoreB) {
+    let m = 0; // Match points
+    let b = 0; // Bonus points
+    
+    if (scoreA > scoreB) m = 8;        // Winner gets 8
+    else if (scoreA === scoreB) m = 4; // Draw gets 4
+    else m = 0;                        // Loser gets 0
+    
+    if (scoreA >= 3) b = 2;            // Bonus: 2 points for 3+ goals
+    
     return { m, b };
 }
 
@@ -90,17 +97,19 @@ async function fetchLog() {
         document.getElementById('matchLog').innerHTML = games.map(g => {
             const hName = g.home; const aName = g.away;
             const key = `${hName}-${aName}`.toLowerCase().replace(/\s/g, '');
-            const hPoints = getPoints(g.score1, g.score2);
-            const aPoints = getPoints(g.score2, g.score1);
+            
+            // Calculate points independently for home and away
+            const homePoints = calculateResult(g.score1, g.score2);
+            const awayPoints = calculateResult(g.score2, g.score1);
             
             return `
                 <div class="match-cols">
                     <div style="text-align:left;">${hName} vs ${aName}</div>
                     <div class="score-box">${htMap[key] || '-'} / ${g.score1}-${g.score2}</div>
                     <div class="owner-text">${owner(hName)}</div>
-                    <div>${hPoints.m}</div><div>${hPoints.b}</div>
+                    <div>${homePoints.m}</div><div>${homePoints.b}</div>
                     <div class="owner-text">${owner(aName)}</div>
-                    <div>${aPoints.m}</div><div>${aPoints.b}</div>
+                    <div>${awayPoints.m}</div><div>${awayPoints.b}</div>
                 </div>`;
         }).join('');
     } catch(e) { document.getElementById('matchLog').innerHTML = "Error loading data."; }
