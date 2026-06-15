@@ -3,24 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <title>Match Log - World Cup 2026</title>
-    </head>
+    <style>
+        body { font-family: 'Oswald', sans-serif; background: #0a0401; color: #fff; padding: 20px; }
+        .luxury-panel { background: #361f11; border: 2px solid #54311c; border-radius: 12px; padding: 20px; }
+        .match-cols { display: grid; grid-template-columns: 1.5fr 1fr 60px 60px 60px 60px; align-items: center; padding: 10px; background: #170b04; margin-bottom: 5px; border-radius: 8px; font-size: 0.9rem; }
+        .nav-button { background: #8c5d43; color: #f7dfc1; padding: 8px 16px; border-radius: 4px; text-decoration: none; display: inline-block; margin-bottom: 20px; font-family: 'Cinzel', serif; font-weight: bold; }
+    </style>
+</head>
 <body>
-    <div class="container">
-        <div class="luxury-panel">
-            <div class="inner-wood-board">
-                <a href="index.html" class="nav-button">Back to Leaderboard</a>
-                <div class="section-title">Full Match Log</div>
-                <div class="grid-headers match-cols">
-                    <span>Match</span><span>Owners</span><span>HT</span><span>FT</span><span>M</span><span>B</span>
-                </div>
-                <div id="matchLog"></div>
-            </div>
-        </div>
-    </div>
 
-    <script>
-        // Copy the same fetch/render logic from your index.html here
-        // to populate the #matchLog div.
-    </script>
+<div class="luxury-panel">
+    <a href="index.html" class="nav-button">← Back to Leaderboard</a>
+    <h2>Full Match Log</h2>
+    
+    <div class="match-cols" style="color:#bca08d; font-size:0.8rem; font-weight:bold;">
+        <span>MATCH</span><span>OWNERS</span><span>HT</span><span>FT</span><span>M</span><span>B</span>
+    </div>
+    <div id="matchLog">Loading data...</div>
+</div>
+
+<script>
+// Paste your existing PLAYERS object here
+const PLAYERS = { Gordon:['Brazil','Japan','Scotland'], David:['France','Norway','Bosnia & Herzegovina'], Stephen:['Germany','Paraguay','Czechia'], Bren:['Spain','Türkiye','Saudi Arabia'], Patrick:['England','Switzerland','Ghana'], Mick:['Netherlands','Austria','Haiti'] };
+
+function owner(team) { 
+    for(const [p,t] of Object.entries(PLAYERS)) if(t.includes(team)) return p; 
+    return '—'; 
+}
+
+async function fetchLog() {
+    try {
+        const response = await fetch('matches.json?cb=' + Date.now());
+        const games = await response.json();
+        
+        document.getElementById('matchLog').innerHTML = games.map(g => `
+            <div class="match-cols">
+                <div>${g.home || g.team1} v ${g.away || g.team2}</div>
+                <div style="font-size:0.7rem;">${owner(g.home || g.team1)} / ${owner(g.away || g.team2)}</div>
+                <div style="text-align:center;">-</div>
+                <div style="text-align:center;">${g.score1 || 0}-${g.score2 || 0}</div>
+                <div style="text-align:center;">8</div>
+                <div style="text-align:center;">0</div>
+            </div>
+        `).join('');
+    } catch(e) {
+        document.getElementById('matchLog').innerHTML = "Error loading match data.";
+    }
+}
+
+fetchLog();
+</script>
 </body>
 </html>
