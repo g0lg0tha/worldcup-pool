@@ -27,34 +27,10 @@
         }
 
         .container { width: 100%; max-width: 1050px; }
-        
-        .luxury-panel {
-            background: var(--metallic-chassis);
-            border: 2px solid #1a0c05;
-            border-radius: 12px;
-            padding: 8px;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.9);
-        }
+        .luxury-panel { background: var(--metallic-chassis); border: 2px solid #1a0c05; border-radius: 12px; padding: 8px; box-shadow: 0 30px 60px rgba(0,0,0,0.9); }
+        .inner-wood-board { background: var(--inner-wood-plate); border: 2px solid #28140a; border-radius: 6px; padding: 24px; box-shadow: inset 0 10px 30px rgba(0,0,0,0.85); }
+        .section-title { font-family: 'Cinzel', serif; text-align: center; font-size: 1.35rem; color: var(--gold-trim); letter-spacing: 2px; margin-bottom: 20px; text-transform: uppercase; }
 
-        .inner-wood-board {
-            background: var(--inner-wood-plate);
-            border: 2px solid #28140a;
-            border-radius: 6px;
-            padding: 24px;
-            box-shadow: inset 0 10px 30px rgba(0,0,0,0.85);
-        }
-
-        .section-title {
-            font-family: 'Cinzel', serif;
-            text-align: center;
-            font-size: 1.35rem;
-            color: var(--gold-trim);
-            letter-spacing: 2px;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-        }
-
-        /* 8-Column Grid maintaining your logic */
         .match-cols {
             display: grid;
             grid-template-columns: 2fr 1fr 0.8fr 0.4fr 0.4fr 0.8fr 0.4fr 0.4fr;
@@ -69,28 +45,8 @@
             box-shadow: inset 0 4px 10px rgba(0,0,0,0.9);
         }
 
-        .header-row {
-            font-family: 'Cinzel', serif;
-            font-weight: bold;
-            color: #bca08d;
-            font-size: 0.65rem;
-            text-transform: uppercase;
-            background: none !important;
-            border: none !important;
-        }
-
-        .nav-button {
-            background: linear-gradient(180deg, #8c5d43 0%, #462a1a 100%);
-            border: 1px solid #1a0c05;
-            color: #f7dfc1;
-            font-family: 'Cinzel', serif;
-            padding: 6px 14px;
-            border-radius: 4px;
-            text-decoration: none;
-            display: inline-block;
-            margin-bottom: 20px;
-        }
-
+        .header-row { font-family: 'Cinzel', serif; font-weight: bold; color: #bca08d; font-size: 0.65rem; text-transform: uppercase; background: none !important; border: none !important; }
+        .nav-button { background: linear-gradient(180deg, #8c5d43 0%, #462a1a 100%); border: 1px solid #1a0c05; color: #f7dfc1; font-family: 'Cinzel', serif; padding: 6px 14px; border-radius: 4px; text-decoration: none; display: inline-block; margin-bottom: 20px; }
         .score-box { font-family: monospace; color: var(--gold-trim); font-weight: bold; font-size: 0.9rem; }
         .owner-text { font-family: 'Cinzel', serif; font-size: 0.75rem; color: #ebd1be; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
         .pts-text { color: var(--text-value); font-weight: bold; }
@@ -105,7 +61,7 @@
             <div class="section-title">Full Match Log</div>
             
             <div class="match-cols header-row">
-                <span>Match</span><span>HT / FT</span><span>HT OWNER</span><span>M</span><span>B</span><span>AT OWNER</span><span>M</span><span>B</span>
+                <span>Match</span><span>HT / FT</span><span>HT OWNER</span><span>Pts</span><span>B</span><span>AT OWNER</span><span>Pts</span><span>B</span>
             </div>
             
             <div id="matchLog">Loading data...</div>
@@ -119,12 +75,7 @@ const SEEDS = {'France':1,'Spain':2,'Argentina':3,'England':4,'Portugal':5,'Braz
 
 function owner(team) { for(const [p,t] of Object.entries(PLAYERS)) if(t.includes(team)) return p; return '—'; }
 function normalize(str) { return str ? str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/&/g, "and").toLowerCase().trim() : ""; }
-
-function calculateMatchPoints(s1, s2) {
-    if (s1 > s2) return 8;
-    if (s1 === s2) return 4;
-    return 0;
-}
+function calculateMatchPoints(s1, s2) { if (s1 > s2) return 8; if (s1 === s2) return 4; return 0; }
 
 async function fetchLog() {
     try {
@@ -139,7 +90,6 @@ async function fetchLog() {
             const hSeed = SEEDS[hName], aSeed = SEEDS[aName];
             const hMatch = calculateMatchPoints(g.score1, g.score2);
             const aMatch = calculateMatchPoints(g.score2, g.score1);
-            
             let hBonus = 0, aBonus = 0;
             const diff = Math.abs(hSeed - aSeed);
             if (diff >= 5) {
@@ -152,7 +102,6 @@ async function fetchLog() {
                     if (underdog === hName) hBonus = b; else aBonus = b;
                 }
             }
-
             return `
                 <div class="match-cols">
                     <div style="text-align:left; font-size: 0.85rem;">${hName} vs ${aName}</div>
