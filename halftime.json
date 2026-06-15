@@ -5,5 +5,7 @@
   { "home": "USA", "away": "Paraguay", "ht_home": 2, "ht_away": 0 },
   { "home": "Australia", "away": "Türkiye", "ht_home": 1, "ht_away": 0 },
   { "home": "Germany", "away": "Curaçao", "ht_home": 3, "ht_away": 1 },
-  { "home": "Netherlands", "away": "Japan", "ht_home": 0, "ht_away": 0 }
+  { "home": "Netherlands", "away": "Japan", "ht_home": 0, "ht_away": 0 },
+  { "home": "Ivory Coast", "away": "Ecuador", "ht_home": 0, "ht_away": 0 },
+  { "home": "Sweden", "away": "Tunisia", "ht_home": 2, "ht_away": 1 }
 ]
