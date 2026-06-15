@@ -1,72 +1,66 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Match Log - World Cup 2026</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Oswald:wght@400;500;600&display=swap" rel="stylesheet">
-    <style>
-        :root {--metallic-chassis: linear-gradient(145deg, #a47657 0%, #613b23 25%, #361f11 50%, #7d4f32 75%, #221209 100%);--inner-wood-plate: #492817;--capsule-bg: linear-gradient(180deg, #241309 0%, #170b04 100%);--gold-trim: #ffd9a3;}
-        body {font-family: 'Oswald', sans-serif; background: #0a0401; color: #fff; padding: 20px; display: flex; justify-content: center;}
-        .container {width: 100%; max-width: 1000px;}
-        .luxury-panel {background: var(--metallic-chassis); border: 2px solid #1a0c05; border-radius: 12px; padding: 20px; box-shadow: 0 30px 60px rgba(0,0,0,0.9);}
-        .section-title {font-family: 'Cinzel', serif; text-align: center; color: var(--gold-trim); text-transform: uppercase; margin-bottom: 20px;}
-        .nav-button {background: linear-gradient(180deg, #8c5d43 0%, #462a1a 100%); border: 1px solid #1a0c05; color: #f7dfc1; font-family: 'Cinzel', serif; font-size: 0.75rem; padding: 6px 14px; border-radius: 4px; text-decoration: none; display: inline-block; margin-bottom: 15px;}
+<style>
+    /* Trophy Room Background */
+    body {
+        font-family: 'Oswald', sans-serif;
+        background: 
+            linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.8)),
+            url('https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?q=80&w=2000&auto=format&fit=crop');
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        color: #fff;
+        padding: 40px 20px;
+        display: flex;
+        justify-content: center;
+    }
 
-        /* The 8-Column Grid */
-        .match-cols {
-            display: grid; 
-            grid-template-columns: 2fr 1fr 1fr 0.5fr 0.5fr 1fr 0.5fr 0.5fr; 
-            align-items: center; text-align: center; gap: 8px;
-            background: var(--capsule-bg); padding: 12px; border-radius: 8px; margin-bottom: 6px;
-            border: 1px solid #472615;
-        }
-        .header-row { font-family: 'Cinzel', serif; font-weight: bold; color: #bca08d; font-size: 0.65rem; text-transform: uppercase; background: transparent !important; border: none !important;}
-        .score-box { font-weight: bold; color: var(--gold-trim); font-family: monospace; }
-        .owner-text { font-family: 'Cinzel', serif; font-size: 0.75rem; color: #ebd1be; }
-    </style>
-</head>
-<body>
+    /* Trophy Room Glass Panels */
+    .luxury-panel {
+        background: rgba(40, 25, 15, 0.85);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 217, 163, 0.2);
+        border-radius: 16px;
+        padding: 30px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
 
-<div class="container">
-    <div class="luxury-panel">
-        <a href="index.html" class="nav-button">← Back</a>
-        <div class="section-title">Full Match Log</div>
-        
-        <div class="match-cols header-row">
-            <span>Match</span><span>HT / FT</span><span>HT OWNER</span><span>M</span><span>B</span><span>AT OWNER</span><span>M</span><span>B</span>
-        </div>
-        <div id="matchLog">Loading data...</div>
-    </div>
-</div>
-
-<script>
-const PLAYERS = { Gordon:['Brazil','Japan','Scotland'], David:['France','Norway','Bosnia & Herzegovina'], Stephen:['Germany','Paraguay','Czechia'], Bren:['Spain','Türkiye','Saudi Arabia'], Patrick:['England','Switzerland','Ghana'], Mick:['Netherlands','Austria','Haiti'] };
-function owner(team) { for(const [p,t] of Object.entries(PLAYERS)) if(t.includes(team)) return p; return '—'; }
-
-async function fetchLog() {
-    try {
-        const [mRes, hRes] = await Promise.all([fetch('matches.json?cb=' + Date.now()), fetch('halftime.json?cb=' + Date.now())]);
-        const games = await mRes.json();
-        const htScores = await hRes.json();
-        const htMap = {};
-        htScores.forEach(h => htMap[`${h.home}-${h.away}`.toLowerCase().replace(/\s/g, '')] = `${h.ht_home}-${h.ht_away}`);
-
-        document.getElementById('matchLog').innerHTML = games.map(g => {
-            const hName = g.home || g.team1; const aName = g.away || g.team2;
-            const key = `${hName}-${aName}`.toLowerCase().replace(/\s/g, '');
-            return `
-                <div class="match-cols">
-                    <div style="text-align:left; font-family:'Cinzel', serif;">${hName} vs ${aName}</div>
-                    <div class="score-box">${htMap[key] || '-'} / ${g.score1}-${g.score2}</div>
-                    <div class="owner-text">${owner(hName)}</div>
-                    <div>8</div><div>0</div>
-                    <div class="owner-text">${owner(aName)}</div>
-                    <div>8</div><div>0</div>
-                </div>`;
-        }).join('');
-    } catch(e) { document.getElementById('matchLog').innerHTML = "Error loading data."; }
-}
-fetchLog();
-</script>
-</body>
-</html>
+    /* Keep your existing .match-cols, .header-row, etc. */
+    .match-cols {
+        display: grid; 
+        grid-template-columns: 2fr 1fr 1fr 0.5fr 0.5fr 1fr 0.5fr 0.5fr; 
+        align-items: center; 
+        text-align: center; 
+        gap: 8px;
+        background: rgba(0, 0, 0, 0.4); 
+        padding: 12px; 
+        border-radius: 8px; 
+        border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    
+    .header-row { 
+        font-family: 'Cinzel', serif; 
+        font-weight: bold; 
+        color: var(--gold-trim); 
+        font-size: 0.65rem; 
+        text-transform: uppercase; 
+        background: rgba(255, 217, 163, 0.1) !important;
+        margin-bottom: 10px;
+    }
+    
+    .score-box { font-weight: bold; color: var(--gold-trim); font-family: monospace; }
+    .owner-text { font-family: 'Cinzel', serif; font-size: 0.75rem; color: #ebd1be; }
+    .nav-button {
+        background: rgba(140, 93, 67, 0.3);
+        border: 1px solid var(--gold-trim);
+        color: #f7dfc1;
+        font-family: 'Cinzel', serif;
+        font-size: 0.75rem;
+        padding: 8px 16px;
+        border-radius: 4px;
+        text-decoration: none;
+        display: inline-block;
+        margin-bottom: 20px;
+        transition: 0.3s;
+    }
+    .nav-button:hover { background: rgba(140, 93, 67, 0.6); }
+</style>
