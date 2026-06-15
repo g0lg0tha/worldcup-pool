@@ -34,7 +34,15 @@ const PLAYERS = { Gordon:['Brazil','Japan','Scotland'], David:['France','Norway'
 const SEEDS = {'France':1,'Spain':2,'Argentina':3,'England':4,'Portugal':5,'Brazil':6,'Netherlands':7,'Morocco':8,'Belgium':9,'Germany':10,'Croatia':11,'Colombia':12,'Senegal':13,'Mexico':14,'USA':15,'Uruguay':16,'Japan':17,'Switzerland':18,'Iran':19,'Türkiye':20,'Ecuador':21,'Austria':22,'South Korea':23,'Australia':24,'Algeria':25,'Egypt':26,'Canada':27,'Norway':28,'Panama':29,'Ivory Coast':30,'Sweden':31,'Paraguay':32,'Czechia':33,'Scotland':34,'Tunisia':35,'DR Congo':36,'Uzbekistan':37,'Qatar':38,'Iraq':39,'South Africa':40,'Saudi Arabia':41,'Jordan':42,'Bosnia & Herzegovina':43,'Cape Verde':44,'Ghana':45,'Curaçao':46,'Haiti':47,'New Zealand':48};
 
 function owner(team) { for(const [p,t] of Object.entries(PLAYERS)) if(t.includes(team)) return p; return '—'; }
-function normalize(str) { return str ? str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim() : ""; }
+function normalize(str) { 
+    if (!str) return "";
+    return str
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/&/g, "and") // This makes "&" and "and" the same
+        .toLowerCase()
+        .trim(); 
+}
 
 function calculateMatchPoints(s1, s2) {
     if (s1 > s2) return 8;
