@@ -7,7 +7,6 @@
     <style>
         :root {--gold-trim: #ffd9a3; --header-text: #bca08d; --capsule-bg: rgba(0, 0, 0, 0.4);}
         
-        /* Trophy Room Background */
         body {
             font-family: 'Oswald', sans-serif;
             background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.8)),
@@ -21,7 +20,6 @@
 
         .container { max-width: 1000px; margin: auto; }
         
-        /* Glass Panel */
         .luxury-panel {
             background: rgba(40, 25, 15, 0.85);
             backdrop-filter: blur(10px);
@@ -33,17 +31,11 @@
 
         .section-title { font-family: 'Cinzel', serif; text-align: center; color: var(--gold-trim); text-transform: uppercase; margin-bottom: 20px; }
 
-        /* The 8-Column Grid */
         .match-cols {
             display: grid; 
-            grid-template-columns: 2fr 1fr 1fr 0.5fr 0.5fr 1fr 0.5fr 0.5fr; 
-            align-items: center; 
-            text-align: center; 
-            gap: 8px;
-            background: var(--capsule-bg); 
-            padding: 12px; 
-            border-radius: 8px; 
-            margin-bottom: 6px;
+            grid-template-columns: 2fr 1.2fr 1fr 0.5fr 0.5fr 1fr 0.5fr 0.5fr; 
+            align-items: center; text-align: center; gap: 8px;
+            background: var(--capsule-bg); padding: 12px; border-radius: 8px; margin-bottom: 6px;
             border: 1px solid rgba(255, 255, 255, 0.05);
         }
         
@@ -57,6 +49,9 @@
             color: #f7dfc1; font-family: 'Cinzel', serif; font-size: 0.75rem;
             padding: 8px 16px; border-radius: 4px; text-decoration: none; display: inline-block;
         }
+        
+        .owner-text { font-family: 'Cinzel', serif; font-size: 0.75rem; color: #ebd1be; }
+        .score-box { font-family: monospace; color: var(--gold-trim); font-weight: bold; }
     </style>
 </head>
 <body>
@@ -77,6 +72,13 @@
 const PLAYERS = { Gordon:['Brazil','Japan','Scotland'], David:['France','Norway','Bosnia & Herzegovina'], Stephen:['Germany','Paraguay','Czechia'], Bren:['Spain','Türkiye','Saudi Arabia'], Patrick:['England','Switzerland','Ghana'], Mick:['Netherlands','Austria','Haiti'] };
 function owner(team) { for(const [p,t] of Object.entries(PLAYERS)) if(t.includes(team)) return p; return '—'; }
 
+// UPDATE THIS FUNCTION WITH YOUR ACTUAL SCORING RULES
+function getPoints(goalsScored, goalsConceded) {
+    let m = 8; // Default Match Points
+    let b = 0; // Default Bonus
+    return { m, b };
+}
+
 async function fetchLog() {
     try {
         const [mRes, hRes] = await Promise.all([fetch('matches.json?cb=' + Date.now()), fetch('halftime.json?cb=' + Date.now())]);
@@ -86,16 +88,19 @@ async function fetchLog() {
         htScores.forEach(h => htMap[`${h.home}-${h.away}`.toLowerCase().replace(/\s/g, '')] = `${h.ht_home}-${h.ht_away}`);
 
         document.getElementById('matchLog').innerHTML = games.map(g => {
-            const hName = g.home || g.team1; const aName = g.away || g.team2;
+            const hName = g.home; const aName = g.away;
             const key = `${hName}-${aName}`.toLowerCase().replace(/\s/g, '');
+            const hPoints = getPoints(g.score1, g.score2);
+            const aPoints = getPoints(g.score2, g.score1);
+            
             return `
                 <div class="match-cols">
                     <div style="text-align:left;">${hName} vs ${aName}</div>
-                    <div style="font-family:monospace; color:#ffd9a3;">${htMap[key] || '-'} / ${g.score1}-${g.score2}</div>
-                    <div style="font-size:0.8rem;">${owner(hName)}</div>
-                    <div>${g.m1 || 0}</div><div>${g.b1 || 0}</div>
-                    <div style="font-size:0.8rem;">${owner(aName)}</div>
-                    <div>${g.m2 || 0}</div><div>${g.b2 || 0}</div>
+                    <div class="score-box">${htMap[key] || '-'} / ${g.score1}-${g.score2}</div>
+                    <div class="owner-text">${owner(hName)}</div>
+                    <div>${hPoints.m}</div><div>${hPoints.b}</div>
+                    <div class="owner-text">${owner(aName)}</div>
+                    <div>${aPoints.m}</div><div>${aPoints.b}</div>
                 </div>`;
         }).join('');
     } catch(e) { document.getElementById('matchLog').innerHTML = "Error loading data."; }
