@@ -52,6 +52,16 @@
     "away": "Japan",
     "score1": 2,
     "score2": 2
+  },
+  { "home": "Ivory Coast",
+    "away": "Ecuador",
+    "score1": 1,
+    "score2": 0
+  },
+  { "home": "Sweden",
+    "away": "Tunisia",
+    "score1": 5,
+    "score2": 1
   }
 ]
 
