@@ -1,46 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Match Log - World Cup 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Oswald:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {--metallic-chassis: linear-gradient(145deg, #a47657 0%, #613b23 25%, #361f11 50%, #7d4f32 75%, #221209 100%);--inner-wood-plate: #492817;--capsule-bg: linear-gradient(180deg, #241309 0%, #170b04 100%);--gold-trim: #ffd9a3;}
+        body {font-family: 'Oswald', sans-serif; background: radial-gradient(circle at 50% 30%, rgba(20, 10, 5, 0.3) 0%, rgba(10, 4, 1, 0.95) 85%),url('https://images.unsplash.com/photo-1507842217343-583bb7270b66?q=80&w=2136&auto=format&fit=crop') no-repeat center center fixed; background-size: cover; color: #fff; margin: 0; padding: 30px 15px; display: flex; justify-content: center;}
+        .container {width: 100%; max-width: 800px;}
+        .luxury-panel {background: var(--metallic-chassis); border: 2px solid #1a0c05; border-radius: 12px; padding: 8px; box-shadow: 0 30px 60px rgba(0,0,0,0.9); margin-bottom: 20px;}
+        .inner-wood-board {background: var(--inner-wood-plate); border: 2px solid #28140a; border-radius: 6px; padding: 20px;}
+        .section-title {font-family: 'Cinzel', serif; text-align: center; font-size: 1.2rem; color: var(--gold-trim); margin-bottom: 20px; text-transform: uppercase;}
+        .nav-button {background: linear-gradient(180deg, #8c5d43 0%, #462a1a 100%); border: 1px solid #1a0c05; color: #f7dfc1; font-family: 'Cinzel', serif; font-size: 0.75rem; padding: 6px 14px; border-radius: 4px; text-decoration: none; display: inline-block; margin-bottom: 15px;}
+        .match-cols {display: grid; grid-template-columns: 1.5fr 1fr 40px 40px 40px 40px; align-items: center; text-align: center; gap: 8px; background: var(--capsule-bg); border: 1px solid #472615; border-radius: 12px; padding: 10px; margin-bottom: 6px;}
+        .grid-headers { color: #bca08d; font-family: 'Cinzel', serif; font-size: 0.65rem; font-weight: bold; text-transform: uppercase; }
+        .match-team { text-align: left; font-family: 'Cinzel', serif; font-size: clamp(0.7rem, 2.5vw, 1rem); font-weight: 700; }
+        .owner-name { font-family: 'Cinzel', serif; font-size: clamp(0.7rem, 2.5vw, 1rem); color: #ebd1be; }
+        .score-cell-digits { color: var(--gold-trim); font-weight: 600; font-size: 0.95rem; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="luxury-panel">
+        <div class="inner-wood-board">
+            <a href="index.html" class="nav-button">← Back to Leaderboard</a>
+            <div class="section-title">Full Match Log</div>
+            <div class="match-cols grid-headers">
+                <span style="text-align:left;">Match</span><span>Owners</span><span>HT</span><span>FT</span><span>M</span><span>B</span>
+            </div>
+            <div id="matchLog">Loading data...</div>
+        </div>
+    </div>
+</div>
+
+<script>
+const PLAYERS = { Gordon:['Brazil','Japan','Scotland'], David:['France','Norway','Bosnia & Herzegovina'], Stephen:['Germany','Paraguay','Czechia'], Bren:['Spain','Türkiye','Saudi Arabia'], Patrick:['England','Switzerland','Ghana'], Mick:['Netherlands','Austria','Haiti'] };
+function owner(team) { for(const [p,t] of Object.entries(PLAYERS)) if(t.includes(team)) return p; return '—'; }
+
 async function fetchLog() {
     const logDiv = document.getElementById('matchLog');
     try {
-        // Fetch matches
-        const mRes = await fetch('matches.json?cb=' + Date.now());
+        const [mRes, hRes] = await Promise.all([fetch('matches.json?cb=' + Date.now()), fetch('halftime.json?cb=' + Date.now())]);
         const games = await mRes.json();
-        
-        // Fetch halftime (with a silent fail if it doesn't exist)
-        let htScores = [];
-        try {
-            const hRes = await fetch('halftime.json?cb=' + Date.now());
-            if (hRes.ok) htScores = await hRes.json();
-        } catch (e) {
-            console.warn("Halftime data not found, continuing without it.");
-        }
-
-        // Create lookup map
+        const htScores = await hRes.json();
         const htMap = {};
-        htScores.forEach(h => {
-            // Using a simple key for matching
-            const key = `${h.home}-${h.away}`.toLowerCase().replace(/\s/g, '');
-            htMap[key] = `${h.ht_home}-${h.ht_away}`;
-        });
+        htScores.forEach(h => htMap[`${h.home}-${h.away}`.toLowerCase().replace(/\s/g, '')] = `${h.ht_home}-${h.ht_away}`);
 
         logDiv.innerHTML = games.map(g => {
-            const home = g.home || g.team1;
-            const away = g.away || g.team2;
+            const home = g.home || g.team1; const away = g.away || g.team2;
             const key = `${home}-${away}`.toLowerCase().replace(/\s/g, '');
-            const htScore = htMap[key] || '-'; // Shows '-' if no halftime data
-            
             return `
                 <div class="match-cols">
                     <div class="match-team">${home} v ${away}</div>
                     <div class="owner-name">${owner(home)} / ${owner(away)}</div>
-                    <div class="score-cell-digits">${htScore}</div>
+                    <div class="score-cell-digits">${htMap[key] || '-'}</div>
                     <div class="score-cell-digits">${g.score1 || 0}-${g.score2 || 0}</div>
                     <div class="score-cell-digits">8</div>
                     <div class="score-cell-digits">0</div>
-                </div>
-            `;
+                </div>`;
         }).join('');
-    } catch(e) { 
-        logDiv.innerHTML = "Error loading data. Check console (F12) for details.";
-        console.error("Critical Error:", e);
-    }
+    } catch(e) { logDiv.innerHTML = "Error loading data. Check files."; console.error(e); }
 }
+fetchLog();
+</script>
+</body>
+</html>
