@@ -1,40 +1,37 @@
-<script>
-const PLAYERS = { Gordon:['Brazil','Japan','Scotland'], David:['France','Norway','Bosnia & Herzegovina'], Stephen:['Germany','Paraguay','Czechia'], Bren:['Spain','Türkiye','Saudi Arabia'], Patrick:['England','Switzerland','Ghana'], Mick:['Netherlands','Austria','Haiti'] };
-
-function normalizeName(str) { return str ? str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim() : ""; }
-
-function owner(team) { 
-    for(const [p,t] of Object.entries(PLAYERS)) if(t.includes(team)) return p; 
-    return '—'; 
-}
-
 async function fetchLog() {
+    const logDiv = document.getElementById('matchLog');
     try {
-        // Fetch both files at once
-        const [mRes, hRes] = await Promise.all([
-            fetch('matches.json?cb=' + Date.now()), 
-            fetch('halftime.json?cb=' + Date.now())
-        ]);
-        
+        // Fetch matches
+        const mRes = await fetch('matches.json?cb=' + Date.now());
         const games = await mRes.json();
-        const htScores = await hRes.json();
         
-        // Create a lookup map for halftime scores: "home-away" -> "ht_home-ht_away"
+        // Fetch halftime (with a silent fail if it doesn't exist)
+        let htScores = [];
+        try {
+            const hRes = await fetch('halftime.json?cb=' + Date.now());
+            if (hRes.ok) htScores = await hRes.json();
+        } catch (e) {
+            console.warn("Halftime data not found, continuing without it.");
+        }
+
+        // Create lookup map
         const htMap = {};
         htScores.forEach(h => {
-            htMap[`${normalizeName(h.home)}-${normalizeName(h.away)}`] = `${h.ht_home}-${h.ht_away}`;
+            // Using a simple key for matching
+            const key = `${h.home}-${h.away}`.toLowerCase().replace(/\s/g, '');
+            htMap[key] = `${h.ht_home}-${h.ht_away}`;
         });
 
-        document.getElementById('matchLog').innerHTML = games.map(g => {
-            const homeName = g.home || g.team1;
-            const awayName = g.away || g.team2;
-            const htKey = `${normalizeName(homeName)}-${normalizeName(awayName)}`;
-            const htScore = htMap[htKey] || '-';
+        logDiv.innerHTML = games.map(g => {
+            const home = g.home || g.team1;
+            const away = g.away || g.team2;
+            const key = `${home}-${away}`.toLowerCase().replace(/\s/g, '');
+            const htScore = htMap[key] || '-'; // Shows '-' if no halftime data
             
             return `
                 <div class="match-cols">
-                    <div class="match-team">${homeName} v ${awayName}</div>
-                    <div class="owner-name">${owner(homeName)} / ${owner(awayName)}</div>
+                    <div class="match-team">${home} v ${away}</div>
+                    <div class="owner-name">${owner(home)} / ${owner(away)}</div>
                     <div class="score-cell-digits">${htScore}</div>
                     <div class="score-cell-digits">${g.score1 || 0}-${g.score2 || 0}</div>
                     <div class="score-cell-digits">8</div>
@@ -43,9 +40,7 @@ async function fetchLog() {
             `;
         }).join('');
     } catch(e) { 
-        document.getElementById('matchLog').innerHTML = "Error loading match data."; 
-        console.error(e);
+        logDiv.innerHTML = "Error loading data. Check console (F12) for details.";
+        console.error("Critical Error:", e);
     }
 }
-fetchLog();
-</script>
