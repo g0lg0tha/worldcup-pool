@@ -5,62 +5,23 @@
     <title>Match Log - World Cup 2026</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Oswald:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
-        :root {--gold-trim: #ffd9a3; --header-text: #bca08d; --capsule-bg: rgba(0, 0, 0, 0.4);}
-        
-        body {
-            font-family: 'Oswald', sans-serif;
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.8)),
-                        url('https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?q=80&w=2000&auto=format&fit=crop');
-            background-size: cover;
-            background-attachment: fixed;
-            color: #fff;
-            margin: 0;
-            padding: 40px 20px;
-        }
-
+        :root {--gold-trim: #ffd9a3; --capsule-bg: rgba(0, 0, 0, 0.4);}
+        body {font-family: 'Oswald', sans-serif; background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.8)), url('https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?q=80&w=2000&auto=format&fit=crop'); background-size: cover; background-attachment: fixed; color: #fff; margin: 0; padding: 40px 20px;}
         .container { max-width: 1000px; margin: auto; }
-        
-        .luxury-panel {
-            background: rgba(40, 25, 15, 0.85);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 217, 163, 0.3);
-            border-radius: 16px;
-            padding: 30px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
-        }
-
+        .luxury-panel { background: rgba(40, 25, 15, 0.85); backdrop-filter: blur(10px); border: 1px solid rgba(255, 217, 163, 0.3); border-radius: 16px; padding: 30px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8); }
         .section-title { font-family: 'Cinzel', serif; text-align: center; color: var(--gold-trim); text-transform: uppercase; margin-bottom: 20px; }
-
-        .match-cols {
-            display: grid; 
-            grid-template-columns: 2fr 1.2fr 1fr 0.5fr 0.5fr 1fr 0.5fr 0.5fr; 
-            align-items: center; text-align: center; gap: 8px;
-            background: var(--capsule-bg); padding: 12px; border-radius: 8px; margin-bottom: 6px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-        
-        .header-row { 
-            font-family: 'Cinzel', serif; font-weight: bold; color: var(--header-text); 
-            font-size: 0.65rem; text-transform: uppercase; background: rgba(255, 217, 163, 0.1) !important;
-        }
-
-        .nav-button {
-            background: rgba(140, 93, 67, 0.3); border: 1px solid var(--gold-trim);
-            color: #f7dfc1; font-family: 'Cinzel', serif; font-size: 0.75rem;
-            padding: 8px 16px; border-radius: 4px; text-decoration: none; display: inline-block;
-        }
-        
-        .owner-text { font-family: 'Cinzel', serif; font-size: 0.75rem; color: #ebd1be; }
+        .match-cols { display: grid; grid-template-columns: 2fr 1.2fr 1fr 0.5fr 0.5fr 1fr 0.5fr 0.5fr; align-items: center; text-align: center; gap: 8px; background: var(--capsule-bg); padding: 12px; border-radius: 8px; margin-bottom: 6px; border: 1px solid rgba(255, 255, 255, 0.05); }
+        .header-row { font-family: 'Cinzel', serif; font-weight: bold; color: #bca08d; font-size: 0.65rem; text-transform: uppercase; background: rgba(255, 217, 163, 0.1) !important; }
+        .nav-button { background: rgba(140, 93, 67, 0.3); border: 1px solid var(--gold-trim); color: #f7dfc1; font-family: 'Cinzel', serif; font-size: 0.75rem; padding: 8px 16px; border-radius: 4px; text-decoration: none; display: inline-block; }
         .score-box { font-family: monospace; color: var(--gold-trim); font-weight: bold; }
+        .owner-text { font-family: 'Cinzel', serif; font-size: 0.75rem; color: #ebd1be; }
     </style>
 </head>
 <body>
-
 <div class="container">
     <div class="luxury-panel">
         <a href="index.html" class="nav-button">← Back</a>
         <div class="section-title">Full Match Log</div>
-        
         <div class="match-cols header-row">
             <span>Match</span><span>HT / FT</span><span>HT OWNER</span><span>M</span><span>B</span><span>AT OWNER</span><span>M</span><span>B</span>
         </div>
@@ -70,20 +31,15 @@
 
 <script>
 const PLAYERS = { Gordon:['Brazil','Japan','Scotland'], David:['France','Norway','Bosnia & Herzegovina'], Stephen:['Germany','Paraguay','Czechia'], Bren:['Spain','Türkiye','Saudi Arabia'], Patrick:['England','Switzerland','Ghana'], Mick:['Netherlands','Austria','Haiti'] };
-function owner(team) { for(const [p,t] of Object.entries(PLAYERS)) if(t.includes(team)) return p; return '—'; }
+const SEEDS = {'France':1,'Spain':2,'Argentina':3,'England':4,'Portugal':5,'Brazil':6,'Netherlands':7,'Morocco':8,'Belgium':9,'Germany':10,'Croatia':11,'Colombia':12,'Senegal':13,'Mexico':14,'USA':15,'Uruguay':16,'Japan':17,'Switzerland':18,'Iran':19,'Türkiye':20,'Ecuador':21,'Austria':22,'South Korea':23,'Australia':24,'Algeria':25,'Egypt':26,'Canada':27,'Norway':28,'Panama':29,'Ivory Coast':30,'Sweden':31,'Paraguay':32,'Czechia':33,'Scotland':34,'Tunisia':35,'DR Congo':36,'Uzbekistan':37,'Qatar':38,'Iraq':39,'South Africa':40,'Saudi Arabia':41,'Jordan':42,'Bosnia & Herzegovina':43,'Cape Verde':44,'Ghana':45,'Curaçao':46,'Haiti':47,'New Zealand':48};
 
-// CHANGE THESE NUMBERS TO MATCH YOUR SCORING RULES
-function calculateResult(scoreA, scoreB) {
-    let m = 0; // Match points
-    let b = 0; // Bonus points
-    
-    if (scoreA > scoreB) m = 8;        // Winner gets 8
-    else if (scoreA === scoreB) m = 4; // Draw gets 4
-    else m = 0;                        // Loser gets 0
-    
-    if (scoreA >= 3) b = 2;            // Bonus: 2 points for 3+ goals
-    
-    return { m, b };
+function owner(team) { for(const [p,t] of Object.entries(PLAYERS)) if(t.includes(team)) return p; return '—'; }
+function normalize(str) { return str ? str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim() : ""; }
+
+function calculateMatchPoints(s1, s2) {
+    if (s1 > s2) return 8;
+    if (s1 === s2) return 4;
+    return 0;
 }
 
 async function fetchLog() {
@@ -92,24 +48,38 @@ async function fetchLog() {
         const games = await mRes.json();
         const htScores = await hRes.json();
         const htMap = {};
-        htScores.forEach(h => htMap[`${h.home}-${h.away}`.toLowerCase().replace(/\s/g, '')] = `${h.ht_home}-${h.ht_away}`);
+        htScores.forEach(h => htMap[`${normalize(h.home)}-${normalize(h.away)}`] = {ht_home: h.ht_home, ht_away: h.ht_away});
 
         document.getElementById('matchLog').innerHTML = games.map(g => {
-            const hName = g.home; const aName = g.away;
-            const key = `${hName}-${aName}`.toLowerCase().replace(/\s/g, '');
+            const hName = g.home, aName = g.away;
+            const hSeed = SEEDS[hName], aSeed = SEEDS[aName];
             
-            // Calculate points independently for home and away
-            const homePoints = calculateResult(g.score1, g.score2);
-            const awayPoints = calculateResult(g.score2, g.score1);
+            // Match Points
+            const hMatch = calculateMatchPoints(g.score1, g.score2);
+            const aMatch = calculateMatchPoints(g.score2, g.score1);
             
+            // Bonus Logic
+            let hBonus = 0, aBonus = 0;
+            const diff = Math.abs(hSeed - aSeed);
+            if (diff >= 5) {
+                const ht = htMap[`${normalize(hName)}-${normalize(aName)}`];
+                if (ht) {
+                    const underdog = (hSeed > aSeed) ? hName : aName;
+                    const ugHt = (underdog === hName) ? ht.ht_home : ht.ht_away;
+                    const favHt = (underdog === hName) ? ht.ht_away : ht.ht_home;
+                    const b = (ugHt > favHt) ? 4 : (ugHt === favHt ? 2 : 0);
+                    if (underdog === hName) hBonus = b; else aBonus = b;
+                }
+            }
+
             return `
                 <div class="match-cols">
                     <div style="text-align:left;">${hName} vs ${aName}</div>
-                    <div class="score-box">${htMap[key] || '-'} / ${g.score1}-${g.score2}</div>
+                    <div class="score-box">${(htMap[`${normalize(hName)}-${normalize(aName)}`]?.ht_home ?? '-')}-${(htMap[`${normalize(hName)}-${normalize(aName)}`]?.ht_away ?? '-')} / ${g.score1}-${g.score2}</div>
                     <div class="owner-text">${owner(hName)}</div>
-                    <div>${homePoints.m}</div><div>${homePoints.b}</div>
+                    <div>${hMatch}</div><div>${hBonus}</div>
                     <div class="owner-text">${owner(aName)}</div>
-                    <div>${awayPoints.m}</div><div>${awayPoints.b}</div>
+                    <div>${aMatch}</div><div>${aBonus}</div>
                 </div>`;
         }).join('');
     } catch(e) { document.getElementById('matchLog').innerHTML = "Error loading data."; }
