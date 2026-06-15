@@ -3,38 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <title>Match Log - World Cup 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Oswald:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
-        :root {--capsule-bg: #170b04; --gold-trim: #ffd9a3; --header-text: #bca08d;}
-        body {font-family: 'Oswald', sans-serif; background: #0a0401; color: #fff; padding: 20px;}
-        .container {width: 100%; max-width: 1100px; margin: auto;}
-        
-        /* 8 Columns: Match, Scores, T1Owner, T1M, T1B, T2Owner, T2M, T2B */
+        :root {--metallic-chassis: linear-gradient(145deg, #a47657 0%, #613b23 25%, #361f11 50%, #7d4f32 75%, #221209 100%);--inner-wood-plate: #492817;--capsule-bg: linear-gradient(180deg, #241309 0%, #170b04 100%);--gold-trim: #ffd9a3;}
+        body {font-family: 'Oswald', sans-serif; background: #0a0401; color: #fff; padding: 20px; display: flex; justify-content: center;}
+        .container {width: 100%; max-width: 1000px;}
+        .luxury-panel {background: var(--metallic-chassis); border: 2px solid #1a0c05; border-radius: 12px; padding: 20px; box-shadow: 0 30px 60px rgba(0,0,0,0.9);}
+        .section-title {font-family: 'Cinzel', serif; text-align: center; color: var(--gold-trim); text-transform: uppercase; margin-bottom: 20px;}
+        .nav-button {background: linear-gradient(180deg, #8c5d43 0%, #462a1a 100%); border: 1px solid #1a0c05; color: #f7dfc1; font-family: 'Cinzel', serif; font-size: 0.75rem; padding: 6px 14px; border-radius: 4px; text-decoration: none; display: inline-block; margin-bottom: 15px;}
+
+        /* The 8-Column Grid */
         .match-cols {
             display: grid; 
             grid-template-columns: 2fr 1fr 1fr 0.5fr 0.5fr 1fr 0.5fr 0.5fr; 
-            align-items: center; 
-            text-align: center; 
-            gap: 8px;
-            background: var(--capsule-bg); 
-            padding: 12px; 
-            border-radius: 8px; 
-            margin-bottom: 6px;
-            border: 1px solid #333;
+            align-items: center; text-align: center; gap: 8px;
+            background: var(--capsule-bg); padding: 12px; border-radius: 8px; margin-bottom: 6px;
+            border: 1px solid #472615;
         }
-        .header-row { font-weight: bold; color: var(--header-text); font-size: 0.7rem; text-transform: uppercase; background: transparent !important; }
-        .score-box { font-weight: bold; color: var(--gold-trim); }
+        .header-row { font-family: 'Cinzel', serif; font-weight: bold; color: #bca08d; font-size: 0.65rem; text-transform: uppercase; background: transparent !important; border: none !important;}
+        .score-box { font-weight: bold; color: var(--gold-trim); font-family: monospace; }
+        .owner-text { font-family: 'Cinzel', serif; font-size: 0.75rem; color: #ebd1be; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <a href="index.html" style="color:#f7dfc1;">← Back</a>
-    <h2 style="text-align:center;">Full Match Log</h2>
-    
-    <div class="match-cols header-row">
-        <span>Match</span><span>HT / FT</span><span>HT Owner</span><span>MATCH</span><span>BONUS</span><span>AT Owner</span><span>MATCH</span><span>BONUS</span>
+    <div class="luxury-panel">
+        <a href="index.html" class="nav-button">← Back</a>
+        <div class="section-title">Full Match Log</div>
+        
+        <div class="match-cols header-row">
+            <span>Match</span><span>HT / FT</span><span>HT OWNER</span><span>M</span><span>B</span><span>AT OWNER</span><span>M</span><span>B</span>
+        </div>
+        <div id="matchLog">Loading data...</div>
     </div>
-    <div id="matchLog">Loading...</div>
 </div>
 
 <script>
@@ -42,25 +44,27 @@ const PLAYERS = { Gordon:['Brazil','Japan','Scotland'], David:['France','Norway'
 function owner(team) { for(const [p,t] of Object.entries(PLAYERS)) if(t.includes(team)) return p; return '—'; }
 
 async function fetchLog() {
-    const [mRes, hRes] = await Promise.all([fetch('matches.json?cb=' + Date.now()), fetch('halftime.json?cb=' + Date.now())]);
-    const games = await mRes.json();
-    const htScores = await hRes.json();
-    const htMap = {};
-    htScores.forEach(h => htMap[`${h.home}-${h.away}`.toLowerCase().replace(/\s/g, '')] = `${h.ht_home}-${h.ht_away}`);
+    try {
+        const [mRes, hRes] = await Promise.all([fetch('matches.json?cb=' + Date.now()), fetch('halftime.json?cb=' + Date.now())]);
+        const games = await mRes.json();
+        const htScores = await hRes.json();
+        const htMap = {};
+        htScores.forEach(h => htMap[`${h.home}-${h.away}`.toLowerCase().replace(/\s/g, '')] = `${h.ht_home}-${h.ht_away}`);
 
-    document.getElementById('matchLog').innerHTML = games.map(g => {
-        const hName = g.home || g.team1; const aName = g.away || g.team2;
-        const key = `${hName}-${aName}`.toLowerCase().replace(/\s/g, '');
-        return `
-            <div class="match-cols">
-                <div style="text-align:left; font-size:0.9rem;">${hName} vs ${aName}</div>
-                <div class="score-box">${htMap[key] || '-'} / ${g.score1}-${g.score2}</div>
-                <div style="font-size:0.8rem;">${owner(hName)}</div>
-                <div>8</div><div>0</div>
-                <div style="font-size:0.8rem;">${owner(aName)}</div>
-                <div>8</div><div>0</div>
-            </div>`;
-    }).join('');
+        document.getElementById('matchLog').innerHTML = games.map(g => {
+            const hName = g.home || g.team1; const aName = g.away || g.team2;
+            const key = `${hName}-${aName}`.toLowerCase().replace(/\s/g, '');
+            return `
+                <div class="match-cols">
+                    <div style="text-align:left; font-family:'Cinzel', serif;">${hName} vs ${aName}</div>
+                    <div class="score-box">${htMap[key] || '-'} / ${g.score1}-${g.score2}</div>
+                    <div class="owner-text">${owner(hName)}</div>
+                    <div>8</div><div>0</div>
+                    <div class="owner-text">${owner(aName)}</div>
+                    <div>8</div><div>0</div>
+                </div>`;
+        }).join('');
+    } catch(e) { document.getElementById('matchLog').innerHTML = "Error loading data."; }
 }
 fetchLog();
 </script>
