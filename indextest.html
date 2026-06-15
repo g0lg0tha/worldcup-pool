@@ -4,12 +4,11 @@
     <meta charset="UTF-8">
     <title>World Cup 2026 Pool</title>
     <style>
-        body { background: #1a0c05; color: #fff; font-family: 'Oswald', sans-serif; padding: 20px; }
+        body { background: #1a0c05; color: #fff; font-family: sans-serif; padding: 20px; }
         .luxury-panel { background: #361f11; border: 2px solid #54311c; border-radius: 12px; padding: 20px; margin-bottom: 20px; }
-        .match-cols { display: grid; grid-template-columns: 1.5fr 1fr 50px 50px 60px 60px; align-items: center; padding: 10px; background: #170b04; margin-bottom: 5px; border-radius: 8px; }
+        .match-cols { display: grid; grid-template-columns: 1.5fr 1fr 50px 50px 60px 60px; align-items: center; padding: 10px; background: #170b04; margin-bottom: 5px; }
         #matchLogPanel { display: none; }
-        .score-cell { color: #ffd9a3; font-weight: bold; text-align: center; }
-        button { padding: 10px 15px; cursor: pointer; background: #8c5d43; border: 1px solid #000; color: #fff; border-radius: 4px; }
+        button { padding: 10px; cursor: pointer; }
     </style>
 </head>
 <body>
@@ -18,65 +17,53 @@
     <h1>World Cup 2026 Pool</h1>
     <button onclick="refreshData()">Force Refresh</button>
     <button onclick="toggleMatchLog()">Toggle Match Log</button>
-    <p id="status">Ready</p>
-</div>
-
-<div class="luxury-panel">
-    <h2>Player Leaderboard</h2>
-    <div id="leaderboard">Loading...</div>
+    <p id="status">Ready - Click Refresh</p>
 </div>
 
 <div class="luxury-panel" id="matchLogPanel">
     <h2>Match Log</h2>
-    <div class="match-cols" style="color:#bca08d; font-size:0.8rem;">
-        <span>Match</span><span>Owners</span><span>HT</span><span>FT</span><span>M</span><span>B</span>
-    </div>
     <div id="matchLog"></div>
 </div>
 
 <script>
-const PLAYERS = { Gordon:['Brazil','Japan'], David:['France','Norway'] };
+async function refreshData() {
+    const status = document.getElementById('status');
+    status.innerText = 'Syncing...';
+    
+    try {
+        // Change the URL here if your files are in a different folder
+        const response = await fetch('matches.json?cb=' + Date.now());
+        
+        if (!response.ok) {
+            throw new Error(`HTTP Error: ${response.status} - ${response.statusText}`);
+        }
+        
+        const games = await response.json();
+        status.innerText = 'Data Loaded Successfully!';
+        renderLog(games);
+    } catch(e) {
+        status.innerText = 'Error: ' + e.message;
+        console.error("DEBUG:", e);
+    }
+}
 
 function toggleMatchLog() {
     const p = document.getElementById('matchLogPanel');
     p.style.display = (p.style.display === 'block') ? 'none' : 'block';
 }
 
-function owner(team) { 
-    for(const [p,t] of Object.entries(PLAYERS)) if(t.includes(team)) return p; 
-    return '—'; 
-}
-
-async function refreshData() {
-    document.getElementById('status').innerText = 'Syncing...';
-    try {
-        const response = await fetch('matches.json?cb=' + Date.now());
-        const games = await response.json();
-        renderLog(games);
-    } catch(e) {
-        document.getElementById('status').innerText = 'Data Error: Using Preview Data';
-        // Mock data to prove the Toggle and Columns work
-        renderLog([
-            {home:'Brazil', away:'Japan', score1:2, score2:1},
-            {home:'France', away:'Norway', score1:1, score2:1}
-        ]);
-    }
-}
-
 function renderLog(games) {
     document.getElementById('matchLog').innerHTML = games.map(g => `
         <div class="match-cols">
-            <div>${g.home} v ${g.away}</div>
-            <div style="font-size:0.7rem; color:#aaa;">${owner(g.home)} / ${owner(g.away)}</div>
-            <div class="score-cell">-</div>
-            <div class="score-cell">${g.score1}-${g.score2}</div>
-            <div class="score-cell">8</div>
-            <div class="score-cell">0</div>
+            <div>${g.home || 'Home'} v ${g.away || 'Away'}</div>
+            <div style="font-size:0.7rem;">Owner Data</div>
+            <div>-</div>
+            <div>${g.score1 || 0}-${g.score2 || 0}</div>
+            <div>8</div>
+            <div>0</div>
         </div>
     `).join('');
 }
-
-refreshData();
 </script>
 </body>
 </html>
