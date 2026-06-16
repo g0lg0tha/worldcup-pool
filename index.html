@@ -92,6 +92,10 @@ function normalizeName(str) { return str ? str.normalize("NFD").replace(/[\u0300
 function findInternalTeamKey(apiName) { 
     let normApi = normalizeName(apiName); 
     if (normApi === "united states" || normApi.includes("united states") || normApi === "usa") return "USA"; 
+    
+    // Explicit fix for Bosnia
+    if (normApi.includes("bosnia")) return "Bosnia & Herzegovina";
+    
     for (const teamKey in SEEDS) { if (normalizeName(teamKey) === normApi) return teamKey; }
     for (const teamKey in SEEDS) { if (normApi.includes(normalizeName(teamKey))) return teamKey; }
     return null; 
