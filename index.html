@@ -94,7 +94,7 @@ function findInternalTeamKey(apiName) {
     if (normApi === "united states" || normApi.includes("united states") || normApi === "usa") return "USA"; 
     
     // Explicit fix for Bosnia
-    if (normApi.includes("Bosnia")) return "Bosnia & Herzegovina";
+   if (normApi.toLowerCase().includes("bosnia")) return "Bosnia & Herzegovina";
     
     for (const teamKey in SEEDS) { if (normalizeName(teamKey) === normApi) return teamKey; }
     for (const teamKey in SEEDS) { if (normApi.includes(normalizeName(teamKey))) return teamKey; }
