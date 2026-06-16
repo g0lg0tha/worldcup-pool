@@ -81,6 +81,16 @@
     "home": "Belgium",
     "away": "Egypt",
     "ht_home": 0,
-    "ht_away":10
+    "ht_away": 1
+  },  
+  { "home": "Saudi Arabia",
+    "away": "Uruguay",
+    "ht_home": 1,
+    "ht_away": 0
+  },
+  { "home": "Iran",
+    "away": "New Zealand",
+    "ht_home": 1,
+    "ht_away": 1
   }
 ]
