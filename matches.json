@@ -72,6 +72,16 @@
     "away": "Egypt",
     "score1": 1,
     "score2": 1
+  },
+  { "home": "Saudi Arabia",
+    "away": "Uruguay",
+    "score1": 1,
+    "score2": 1
+  },
+  { "home": "Iran",
+    "away": "New Zealand",
+    "score1": 2,
+    "score2": 2
   }
 ]
 
