@@ -1,1 +1,122 @@
-
+[
+  {
+    "home": "Australia",
+    "away": "Turkey",
+    "score1": 2,
+    "score2": 0
+  },
+  {
+    "home": "Qatar",
+    "away": "Switzerland",
+    "score1": 1,
+    "score2": 1
+  },
+  {
+    "home": "Haiti",
+    "away": "Scotland",
+    "score1": 0,
+    "score2": 1
+  },
+  {
+    "home": "South Korea",
+    "away": "Czech Republic",
+    "score1": 2,
+    "score2": 1
+  },
+  {
+    "home": "United States",
+    "away": "Paraguay",
+    "score1": 4,
+    "score2": 1
+  },
+  {
+    "home": "France",
+    "away": "Senegal",
+    "score1": 3,
+    "score2": 1
+  },
+  {
+    "home": "Iraq",
+    "away": "Norway",
+    "score1": 1,
+    "score2": 4
+  },
+  {
+    "home": "Ivory Coast",
+    "away": "Ecuador",
+    "score1": 1,
+    "score2": 0
+  },
+  {
+    "home": "Germany",
+    "away": "Curaçao",
+    "score1": 7,
+    "score2": 1
+  },
+  {
+    "home": "Sweden",
+    "away": "Tunisia",
+    "score1": 5,
+    "score2": 1
+  },
+  {
+    "home": "Mexico",
+    "away": "South Africa",
+    "score1": 2,
+    "score2": 0
+  },
+  {
+    "home": "Brazil",
+    "away": "Morocco",
+    "score1": 1,
+    "score2": 1
+  },
+  {
+    "home": "Netherlands",
+    "away": "Japan",
+    "score1": 2,
+    "score2": 2
+  },
+  {
+    "home": "Spain",
+    "away": "Cape Verde",
+    "score1": 0,
+    "score2": 0
+  },
+  {
+    "home": "Saudi Arabia",
+    "away": "Uruguay",
+    "score1": 1,
+    "score2": 1
+  },
+  {
+    "home": "Austria",
+    "away": "Jordan",
+    "score1": 3,
+    "score2": 1
+  },
+  {
+    "home": "Canada",
+    "away": "Bosnia and Herzegovina",
+    "score1": 1,
+    "score2": 1
+  },
+  {
+    "home": "Iran",
+    "away": "New Zealand",
+    "score1": 2,
+    "score2": 2
+  },
+  {
+    "home": "Argentina",
+    "away": "Algeria",
+    "score1": 3,
+    "score2": 0
+  },
+  {
+    "home": "Belgium",
+    "away": "Egypt",
+    "score1": 1,
+    "score2": 1
+  }
+]
