@@ -18,7 +18,7 @@ jobs:
       - name: Install dependencies
         run: pip install requests
       - name: Run sync script
-        run: python your_script_name.py # Change this to your script's filename
+        run: python update_matches.py # Change this to your script's filename
       - name: Commit and push changes
         run: |
           git config user.name "GitHub Action"
