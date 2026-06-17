@@ -82,6 +82,26 @@
     "away": "New Zealand",
     "score1": 2,
     "score2": 2
+  },  
+  { "home": "France",
+    "away": "Senegal",
+    "score1": 3,
+    "score2": 1
+  },
+  { "home": "Iraq",
+    "away": "Norway",
+    "score1": 1,
+    "score2": 4
+  },
+  { "home": "Argentina",
+    "away": "Algeria",
+    "score1": 3,
+    "score2": 1
+  },
+  { "home": "Austria",
+    "away": "Jordon",
+    "score1": 3,
+    "score2": 0
   }
 ]
 
