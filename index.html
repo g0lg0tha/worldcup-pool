@@ -1,47 +1,316 @@
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width,initial-scale=1">
+
     <title>World Cup 2026 Pool Leaderboard</title>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
+
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Oswald:wght@400;500;600&display=swap" rel="stylesheet">
+
     <style>:root {--metallic-chassis: linear-gradient(145deg, #a47657 0%, #613b23 25%, #361f11 50%, #7d4f32 75%, #221209 100%);--inner-wood-plate: #492817;--capsule-bg: linear-gradient(180deg, #241309 0%, #170b04 100%);--gold-trim: #ffd294;--text-value: #ffd9a3;}
-    body {font-family: 'Oswald', sans-serif;background: radial-gradient(circle at 50% 30%, rgba(20, 10, 5, 0.3) 0%, rgba(10, 4, 1, 0.95) 85%),url('https://images.unsplash.com/photo-1507842217343-583bb7270b66?q=80&w=2136&auto=format&fit=crop') no-repeat center center fixed;background-size: cover;color: #fff;margin: 0;padding: clamp(10px, 4vw, 30px) clamp(4px, 2vw, 16px);display: flex;justify-content: center;min-height: 100vh;overflow-x: hidden;}
+
+    body {font-family: 'Oswald', sans-serif;background: radial-gradient(circle at 50% 30%, rgba(20, 10, 5, 0.3) 0%, rgba(10, 4, 1, 0.95) 85%),url('https://images.unsplash.com/photo-1507842217343-583bb7270b66?q=80&w=2136&auto=format&fit=crop') no-repeat center center fixed;background-size: cover;color: #fff;margin: 0;padding: clamp(10px, 4vw, 30px) clamp(4px, 2vw, 16px);display: flex;justify-content: center;}
+
     .nav-button {
+
     background: linear-gradient(180deg, #8c5d43 0%, #462a1a 100%);
+
     border: 1px solid #1a0c05;
+
     color: #f7dfc1;
+
     font-family: 'Cinzel', serif;
+
     font-size: 0.75rem;
+
     font-weight: bold;
+
     padding: 6px 14px;
+
     border-radius: 4px;
+
     text-decoration: none;
+
     display: inline-block;
+
     cursor: pointer;
+
     text-shadow: 0 1px 2px #000;
+
 }
+
 .nav-button:hover { filter: brightness(1.2); }
-    .container {width: 100%;max-width: 1050px;display: flex;flex-direction: column;gap: clamp(12px, 3vw, 24px);padding-bottom: 30px;}
+
+    .container {width: 100%;max-width: 1050px;display: flex;flex-direction: column;gap: clamp(12px, 3vw, 24px);}
+
     .luxury-panel {background: var(--metallic-chassis);border: 2px solid #1a0c05;border-radius: 12px;padding: clamp(4px, 1.5vw, 8px);box-shadow: 0 30px 60px rgba(0,0,0,0.9), inset 0 1px 3px rgba(255,255,255,0.25);box-sizing: border-box;width: 100%;}
+
     .inner-wood-board {background: var(--inner-wood-plate);border: 2px solid #28140a;border-radius: 6px;padding: clamp(10px, 3vw, 24px);box-shadow: inset 0 10px 30px rgba(0,0,0,0.85);box-sizing: border-box;}
+
     .header-widget {text-align: center;background: #140904;border: 2px solid #54311c;border-radius: 4px;padding: 14px clamp(15px, 5vw, 45px);box-shadow: inset 0 0 15px #000, 0 4px 15px rgba(0,0,0,0.6);margin: 0 auto;display: table;box-sizing: border-box;width: 100%;max-width: 500px;}
+
     .header-widget h1 {font-family: 'Cinzel', serif;margin: 0 0 6px 0;font-size: clamp(1.4rem, 4vw, 2.1rem);font-weight: 700;letter-spacing: 2px;color: var(--gold-trim);text-shadow: 0 2px 4px rgba(0,0,0,0.9);}
+
     .status-ribbon {font-family: 'Cinzel', serif;font-size: clamp(0.65rem, 2vw, 0.85rem);color: #bca08d;letter-spacing: 1.5px;text-transform: uppercase;border-top: 1px solid #331b0e;padding-top: 6px;margin-top: 6px;display: block;}
+
     button {background: linear-gradient(180deg, #8c5d43 0%, #462a1a 100%);border: 1px solid #1a0c05;color: #f7dfc1;font-family: 'Cinzel', serif;font-size: 0.75rem;font-weight: bold;letter-spacing: 1px;padding: 6px 14px;border-radius: 4px;cursor: pointer;margin-top: 10px;text-shadow: 0 1px 2px #000;box-shadow: 0 2px 4px rgba(0,0,0,0.5);transition: filter 0.2s;}button:hover { filter: brightness(1.2); }
+
     .section-title {font-family: 'Cinzel', serif;text-align: center;font-size: clamp(1.1rem, 3.5vw, 1.35rem);color: var(--gold-trim);letter-spacing: 2px;margin: 0 0 20px 0;text-transform: uppercase;text-shadow: 0 2px 4px #000;}
+
     .grid-headers, .capsule-row {display: grid;align-items: center;text-align: center;gap: 4px;}
+
     .leaderboard-cols { grid-template-columns: 35px 1.5fr 40px 45px 45px 50px; }.team-cols { grid-template-columns: 35px 1.4fr 0.8fr 35px 35px 35px 35px; }
+
     @media (min-width: 650px) {.leaderboard-cols { grid-template-columns: 80px 1fr 120px 120px 120px 120px; }.team-cols { grid-template-columns: 70px 1.5fr 1.2fr 100px 100px 100px 100px; }}
+
     .grid-headers span {font-family: 'Cinzel', serif;font-size: clamp(0.55rem, 1.8vw, 0.75rem);color: #bca08d;letter-spacing: 0.5px;text-transform: uppercase;font-weight: bold;}
+
     .left-align { text-align: left !important; }
+
     .capsule-row {background: var(--capsule-bg);border-top: 1px solid #472615;border-bottom: 1px solid #0d0502;border-left: 1px solid #28140a;border-right: 1px solid #28140a;border-radius: 20px;padding: 8px clamp(6px, 2vw, 14px);margin-bottom: 8px;box-shadow: inset 0 4px 10px rgba(0,0,0,0.9), 0 1px 1px rgba(255,255,255,0.05);}
+
     .medal-circle {width: clamp(24px, 4vw, 32px);height: clamp(24px, 4vw, 32px);border-radius: 50%;display: inline-flex;align-items: center;justify-content: center;font-family: 'Cinzel', serif;font-weight: 800;font-size: clamp(0.7rem, 2.5vw, 0.9rem);color: #110501;box-shadow: 0 3px 6px rgba(0,0,0,0.6), inset 0 -2px 4px rgba(0,0,0,0.6);border: 1px solid rgba(255,255,255,0.2);margin: 0 auto;}
+
     .rank-pill-value {font-family: 'Cinzel', serif;color: #bca08d;font-size: clamp(0.85rem, 3vw, 1.1rem);font-weight: 700;}
+
     .med-1 { background: linear-gradient(135deg, #ffe066 0%, #f5b041 50%, #9a6e1a 100%); }.med-2 { background: linear-gradient(135deg, #ffffff 0%, #b0bec5 50%, #546e7a 100%); }.med-3 { background: linear-gradient(135deg, #ffb74d 0%, #a1887f 50%, #4e342e 100%); }
+
     .contender-name {font-family: 'Cinzel', serif;font-size: clamp(0.85rem, 3.2vw, 1.25rem);font-weight: 700;letter-spacing: 0.5px;color: #fff;text-shadow: 0 2px 3px #000;padding-left: 4px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
+
     .player-contender-name { font-size: clamp(0.75rem, 3vw, 1.25rem) !important; }
+
     .team-contender-name {font-size: clamp(0.7rem, 2.2vw, 1.05rem) !important;white-space: normal;line-height: 1.2;display: flex;align-items: center;gap: 6px;}
-    .flag-icon {font-family: 'Twemoji Country Flags', '
+
+    .flag-icon {font-family: 'Twemoji Country Flags', 'Oswald', sans-serif;font-size: 1.2em;font-style: normal;display: inline-block;vertical-align: middle;}
+
+    .score-cell-digits {font-size: clamp(0.95rem, 3.5vw, 1.35rem);color: var(--text-value);font-weight: 500;}
+
+    .team-cols .score-cell-digits { font-size: clamp(0.8rem, 2.8vw, 1.15rem); }
+
+    .owner-capsule-badge {font-size: clamp(0.6rem, 1.8vw, 0.8rem);color: #ebd1be;background: rgba(0, 0, 0, 0.4);border: 1px solid #5a3c2a;padding: 2px clamp(4px, 1.2vw, 10px);border-radius: 10px;display: inline-block;max-width: 95%;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
+
+    .vacant-badge { color: #523423; font-style: italic; font-size: 0.8rem; }</style>
+
+    <script type="module" defer>import { polyfillCountryFlagEmojis } from "https://cdn.skypack.dev/country-flag-emoji-polyfill";polyfillCountryFlagEmojis();</script>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="luxury-panel" style="align-self: center; width: auto;">
+
+        <div class="inner-wood-board" style="padding: 10px;">
+
+            <div class="header-widget">
+
+                <h1>World Cup 2026 Pool</h1>
+
+                <span class="status-ribbon" id="status">Syncing Data...</span>
+
+                <button onclick="refreshData()">Force Live Refresh</button>
+
+                <a href="matchlog.html" class="nav-button">View Match Log</a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="luxury-panel">
+
+        <div class="inner-wood-board">
+
+            <div class="section-title">Player Leaderboard</div>
+
+            <div class="grid-headers leaderboard-cols">
+
+                <span>Rank</span><span class="left-align">Player</span><span>Seed</span><span>Match</span><span>Bonus</span><span>Total</span>
+
+            </div>
+
+            <div id="leaderboard"></div>
+
+        </div>
+
+    </div>
+
+    <div class="luxury-panel">
+
+        <div class="inner-wood-board">
+
+            <div class="section-title">All 48 Teams</div>
+
+            <div class="grid-headers team-cols">
+
+                <span>Seed</span><span class="left-align">Team</span><span>Owner</span><span>Seed</span><span>Match</span><span>Bonus</span><span>Total</span>
+
+            </div>
+
+            <div id="teams"></div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+const PLAYERS={Gordon:['Brazil','Japan','Scotland'],David:['France','Norway','Bosnia & Herzegovina'],Stephen:['Germany','Paraguay','Czechia'],Bren:['Spain','Türkiye','Saudi Arabia'],Patrick:['England','Switzerland','Ghana'],Mick:['Netherlands','Austria','Haiti']};
+
+const SEEDS={'France':1,'Spain':2,'Argentina':3,'England':4,'Portugal':5,'Brazil':6,'Netherlands':7,'Morocco':8,'Belgium':9,'Germany':10,'Croatia':11,'Colombia':12,'Senegal':13,'Mexico':14,'USA':15,'Uruguay':16,'Japan':17,'Switzerland':18,'Iran':19,'Türkiye':20,'Ecuador':21,'Austria':22,'South Korea':23,'Australia':24,'Algeria':25,'Egypt':26,'Canada':27,'Norway':28,'Panama':29,'Ivory Coast':30,'Sweden':31,'Paraguay':32,'Czechia':33,'Scotland':34,'Tunisia':35,'DR Congo':36,'Uzbekistan':37,'Qatar':38,'Iraq':39,'South Africa':40,'Saudi Arabia':41,'Jordan':42,'Bosnia & Herzegovina':43,'Cape Verde':44,'Ghana':45,'Curaçao':46,'Haiti':47,'New Zealand':48};
+
+const FLAGS={'France':'🇫🇷','Spain':'🇪🇸','Argentina':'🇦🇷','England':'🏴󠁧󠁢󠁥󠁮󠁧󠁿','Portugal':'🇵🇹','Brazil':'🇧🇷','Netherlands':'🇳🇱','Morocco':'🇲🇦','Belgium':'🇧🇪','Germany':'🇩🇪','Croatia':'🇭🇷','Colombia':'🇨🇴','Senegal':'🇸🇳','Mexico':'🇲🇽','USA':'🇺🇸','Uruguay':'🇺🇾','Japan':'🇯🇵','Switzerland':'🇨🇭','Iran':'🇮🇷','Türkiye':'🇹🇷','Ecuador':'🇪🇨','Austria':'🇦🇹','South Korea':'🇰🇷','Australia':'🇦🇺','Algeria':'🇩🇿','Egypt':'🇪🇬','Canada':'🇨🇦','Norway':'🇳🇴','Panama':'🇵🇦','Ivory Coast':'🇨🇮','Sweden':'🇸🇪','Paraguay':'🇵🇾','Czechia':'🇨🇿','Scotland':'🏴󠁧󠁢󠁳󠁣󠁴󠁿','Tunisia':'🇹🇳','DR Congo':'🇨🇩','Uzbekistan':'🇺🇿','Qatar':'🇶🇦','Iraq':'🇮🇶','South Africa':'🇿🇦','Saudi Arabia':'🇸🇦','Jordan':'🇯🇴','Bosnia & Herzegovina':'🇧🇦','Cape Verde':'🇨🇻','Ghana':'🇬🇭','Curaçao':'🇨🇼','Haiti':'🇭🇹','New Zealand':'🇳🇿'};
+
+let teamScores={}, halftimeData={};
+
+
+
+function normalizeName(str) { return str ? str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim() : ""; }
+
+function findInternalTeamKey(apiName) { 
+
+    let normApi = normalizeName(apiName); 
+
+    if (normApi === "united states" || normApi.includes("united states") || normApi === "usa") return "USA"; 
+
+    
+
+    // Explicit fix for Bosnia
+
+    if (normApi.toLowerCase().includes("bosnia")) return "Bosnia & Herzegovina";
+
+    
+
+    // Explicit fix for DR Congo
+
+    if (normApi.includes("democratic republic")) return "DR Congo";
+
+    
+
+    for (const teamKey in SEEDS) { if (normalizeName(teamKey) === normApi) return teamKey; }
+
+    for (const teamKey in SEEDS) { if (normApi.includes(normalizeName(teamKey))) return teamKey; }
+
+    return null; 
+
+}
+
+function owner(team){ for(const [p,t] of Object.entries(PLAYERS)) if(t.includes(team)) return p; return ''; }
+
+
+
+async function refreshData() { 
+
+    const statusBox = document.getElementById('status'); 
+
+    statusBox.innerText = 'Syncing...'; 
+
+    try { 
+
+        const [mRes, hRes] = await Promise.all([fetch('matches.json?cb=' + Date.now()), fetch('halftime.json?cb=' + Date.now())]);
+
+        const games = await mRes.json(); 
+
+        const htScores = await hRes.json();
+
+        halftimeData = {};
+
+        htScores.forEach(h => halftimeData[`${normalizeName(h.home)}-${normalizeName(h.away)}`] = { home: h.ht_home, away: h.ht_away });
+
+        teamScores = calculate(games); 
+
+        statusBox.innerText = 'Updated: ' + new Date().toLocaleTimeString(); 
+
+    } catch(e) { statusBox.innerText = 'Data Sync Error'; } 
+
+    render(); 
+
+}
+
+
+
+function calculate(games){ 
+
+    const scores = {}; Object.keys(SEEDS).forEach(t => scores[t] = { match: 0, bonus: 0 });
+
+    games.forEach(g => { 
+
+        const home = findInternalTeamKey(g.home || g.team1), away = findInternalTeamKey(g.away || g.team2);
+
+        if(!home || !away) return;
+
+        const hs = parseInt(g.score1), as = parseInt(g.score2);
+
+        if(!isNaN(hs) && !isNaN(as)) {
+
+            if(hs > as) scores[home].match += 8; else if(as > hs) scores[away].match += 8; else { scores[home].match += 4; scores[away].match += 4; }
+
+        }
+
+        const diff = Math.abs(SEEDS[home] - SEEDS[away]);
+
+        if(diff >= 5){
+
+            const ht = halftimeData[`${normalizeName(g.home || g.team1)}-${normalizeName(g.away || g.team2)}`];
+
+            if(ht !== undefined){
+
+                const underdog = SEEDS[home] > SEEDS[away] ? home : away;
+
+                const ugHt = (underdog === home) ? ht.home : ht.away, favHt = (underdog === home) ? ht.away : ht.home;
+
+                if(ugHt > favHt) scores[underdog].bonus += 4; else if(ugHt === favHt) scores[underdog].bonus += 2;
+
+            }
+
+        }
+
+    });
+
+    return scores;
+
+}
+
+
+
+function render(){ 
+
+    let teams = Object.keys(SEEDS).map(t => ({ team: t, seed: SEEDS[t], match: teamScores[t]?.match||0, bonus: teamScores[t]?.bonus||0, total: SEEDS[t] + (teamScores[t]?.match||0) + (teamScores[t]?.bonus||0) }));
+
+    teams.sort((a,b) => b.total - a.total || a.seed - b.seed);
+
+    document.getElementById('teams').innerHTML = teams.map(t => `<div class="capsule-row team-cols"><span class="rank-pill-value">${t.seed}</span><span class="contender-name team-contender-name left-align"><i class="flag-icon">${FLAGS[t.team]||''}</i> ${t.team.toUpperCase()}</span><span class="owner-capsule-badge">${owner(t.team) || '—'}</span><div class="score-cell-digits">${t.seed}</div><div class="score-cell-digits">${t.match}</div><div class="score-cell-digits">${t.bonus}</div><div class="score-cell-digits" style="font-weight:700; color:#ffcc80;">${t.total}</div></div>`).join('');
+
+    let players = Object.entries(PLAYERS).map(([name, list]) => {
+
+        let s=0,m=0,b=0; list.forEach(t => { s+=SEEDS[t]; m+=teamScores[t]?.match||0; b+=teamScores[t]?.bonus||0; });
+
+        return { name, seed:s, match:m, bonus:b, total:s+m+b };
+
+    }).sort((a,b) => b.total - a.total);
+
+    document.getElementById('leaderboard').innerHTML = players.map((p,i) => `<div class="capsule-row leaderboard-cols"><div>${i<3?`<div class="medal-circle med-${i+1}">${i+1}</div>`:`<span class="rank-pill-value">${i+1}</span>`}</div><span class="contender-name player-contender-name left-align">${p.name.toUpperCase()}</span><div class="score-cell-digits">${p.seed}</div><div class="score-cell-digits">${p.match}</div><div class="score-cell-digits">${p.bonus}</div><div class="score-cell-digits" style="font-weight:700; color:#ffcc80;">${p.total}</div></div>`).join('');
+
+}
+
+refreshData();
+
+</script>
+
+</body>
+
+</html> 
+
