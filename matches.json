@@ -166,5 +166,19 @@
     "away": "Colombia",
     "score1": 1,
     "score2": 3
+  },
+  {
+    "date": "06/18/2026 12:00",
+    "home": "Switzerland",
+    "away": "Bosnia and Herzegovina",
+    "score1": 4,
+    "score2": 1
+  },
+  {
+    "date": "06/18/2026 12:00",
+    "home": "Czech Republic",
+    "away": "South Africa",
+    "score1": 1,
+    "score2": 1
   }
 ]
