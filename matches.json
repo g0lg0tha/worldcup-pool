@@ -145,5 +145,19 @@
     "away": "Democratic Republic of the Congo",
     "score1": 1,
     "score2": 1
+  },
+  {
+    "date": "06/17/2026 15:00",
+    "home": "England",
+    "away": "Croatia",
+    "score1": 4,
+    "score2": 2
+  },
+  {
+    "date": "06/17/2026 19:00",
+    "home": "Ghana",
+    "away": "Panama",
+    "score1": 1,
+    "score2": 0
   }
 ]
