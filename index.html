@@ -243,45 +243,37 @@ async function refreshData() {
 
 
 function calculate(games){ 
-
     const scores = {}; Object.keys(SEEDS).forEach(t => scores[t] = { match: 0, bonus: 0 });
-
     games.forEach(g => { 
-
-        const home = findInternalTeamKey(g.home || g.team1), away = findInternalTeamKey(g.away || g.team2);
-
-        if(!home || !away) return;
+        const homeKey = findInternalTeamKey(g.home || g.team1);
+        const awayKey = findInternalTeamKey(g.away || g.team2);
+        if(!homeKey || !awayKey) return; // Stop if we can't map to a SEED key
 
         const hs = parseInt(g.score1), as = parseInt(g.score2);
-
         if(!isNaN(hs) && !isNaN(as)) {
-
-            if(hs > as) scores[home].match += 8; else if(as > hs) scores[away].match += 8; else { scores[home].match += 4; scores[away].match += 4; }
-
+            if(hs > as) scores[homeKey].match += 8; else if(as > hs) scores[awayKey].match += 8; else { scores[homeKey].match += 4; scores[awayKey].match += 4; }
         }
 
-        const diff = Math.abs(SEEDS[home] - SEEDS[away]);
-
+        const diff = Math.abs(SEEDS[homeKey] - SEEDS[awayKey]);
         if(diff >= 5){
-
-            const ht = halftimeData[`${normalizeName(g.home || g.team1)}-${normalizeName(g.away || g.team2)}`];
+            // FIX: Use the standardized keys (homeKey/awayKey) to create the lookup key
+            // This ensures it matches the normalized keys created in refreshData()
+            const lookupKey = `${normalizeName(homeKey)}-${normalizeName(awayKey)}`;
+            const ht = halftimeData[lookupKey];
 
             if(ht !== undefined){
-
-                const underdog = SEEDS[home] > SEEDS[away] ? home : away;
-
-                const ugHt = (underdog === home) ? ht.home : ht.away, favHt = (underdog === home) ? ht.away : ht.home;
-
-                if(ugHt > favHt) scores[underdog].bonus += 4; else if(ugHt === favHt) scores[underdog].bonus += 2;
-
+                const underdog = SEEDS[homeKey] > SEEDS[awayKey] ? homeKey : awayKey;
+                const ugHt = (underdog === homeKey) ? ht.home : ht.away;
+                const favHt = (underdog === homeKey) ? ht.away : ht.home;
+                
+                if(ugHt > favHt) scores[underdog].bonus += 4; 
+                else if(ugHt === favHt) scores[underdog].bonus += 2;
+            } else {
+                console.warn(`Bonus lookup failed for: ${lookupKey}`);
             }
-
         }
-
     });
-
     return scores;
-
 }
 
 
