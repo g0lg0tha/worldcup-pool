@@ -194,5 +194,12 @@
     "away": "South Korea",
     "score1": 1,
     "score2": 0
+  },
+  {
+    "date": "06/19/2026 12:00",
+    "home": "United States",
+    "away": "Australia",
+    "score1": 2,
+    "score2": 0
   }
 ]
