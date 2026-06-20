@@ -5,7 +5,8 @@ output_path = os.path.join(workspace, 'halftime.json')
 
 def update_halftime():
     try:
-        data = requests.get("https://worldcup26.ir/get/games", headers={'User-Agent': 'Mozilla/5.0'}, timeout=15).json()
+        # 120 seconds gives the server plenty of time to respond
+        data = requests.get("https://worldcup26.ir/get/games", headers={'User-Agent': 'Mozilla/5.0'}, timeout=120).json()
         raw_games = data.get('games', [])
         
         halftime_data = []
