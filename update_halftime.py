@@ -4,22 +4,29 @@ workspace = os.getenv('GITHUB_WORKSPACE', os.getcwd())
 output_path = os.path.join(workspace, 'halftime.json')
 
 def count_ht(scorers):
-    if not scorers or scorers == "null" or scorers == "{}": return 0
-    # Clean the string to isolate the goal minutes
-    # It removes the braces and quotes, leaving: Lionel Messi 17',Lionel Messi 60',...
-    clean = str(scorers).replace('{', '').replace('}', '').replace('"', '')
+    if not scorers or scorers == "null" or scorers == "{}" or scorers == "[]": 
+        return 0
     
-    # Regex finds digits followed by optional '+ digits', ending in a quote
-    # This captures '17', '45', '45+3' etc.
+    # Clean the string: remove braces, quotes, and whitespace
+    clean = str(scorers).replace('{', '').replace('}', '').replace('"', '').replace("'", "").strip()
+    
+    # Regex finds digits followed by optional '+ digits'
+    # Example: '17', '45', '45+3'
     minutes = re.findall(r'(\d+(?:\+\d+)?)', clean)
     
     count = 0
     for m in minutes:
-        # Check if the goal was scored in the first half
-        # We split by '+' just in case (e.g., 45+3 -> 45)
-        base_minute = int(m.split('+'))
-        if base_minute <= 45:
-            count += 1
+        try:
+            # Handle '45+3' by splitting on '+' and taking the first part
+            parts = m.split('+')
+            base_minute = int(parts)
+            
+            # Goals in the 45th minute or earlier (including 45+ injury time)
+            # Standard rule: 45+ injury time counts as first half
+            if base_minute <= 45:
+                count += 1
+        except (ValueError, IndexError):
+            continue
     return count
 
 def update_halftime():
