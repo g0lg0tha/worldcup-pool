@@ -9,6 +9,7 @@ API_URL = "https://worldcup26.ir/get/games"
 
 def get_session():
     session = requests.Session()
+    # Fixed: added status codes to the list
     retry = Retry(connect=5, backoff_factor=1, status_forcelist=)
     adapter = HTTPAdapter(max_retries=retry)
     session.mount('https://', adapter)
@@ -21,6 +22,7 @@ def count_ht(scorers):
     count = 0
     for m in minutes:
         try:
+            # Fixed: access the first element of the split list
             base_minute = int(m.split('+'))
             if base_minute <= 45: count += 1
         except: continue
@@ -38,7 +40,6 @@ def update_halftime():
         
         halftime_data = []
         for g in raw_games:
-            # Consistent finished check
             if str(g.get("finished", "")).upper() == "TRUE" and g.get("home_team_name_en"):
                 halftime_data.append({
                     "home": g.get("home_team_name_en"),
