@@ -3,6 +3,33 @@ import requests, json, os, re
 workspace = os.getenv('GITHUB_WORKSPACE', os.getcwd())
 output_path = os.path.join(workspace, 'halftime.json')
 
+def update_halftime():
+    try:
+        data = requests.get("https://worldcup26.ir/get/games", headers={'User-Agent': 'Mozilla/5.0'}, timeout=15).json()
+        raw_games = data.get('games', [])
+        
+        halftime_data = []
+        for g in raw_games:
+            # DIAGNOSTIC: Print these to your GitHub Action logs
+            print(f"DEBUG: Checking {g.get('home_team_name_en')}. Finished status: {g.get('finished')}")
+            
+            # Using str().upper() makes it case-insensitive
+            finished_status = str(g.get("finished", "")).upper()
+            
+            if finished_status == "TRUE" and g.get("home_team_name_en"):
+                halftime_data.append({
+                    "home": g.get("home_team_name_en"),
+                    "away": g.get("away_team_name_en"),
+                    "ht_home": count_ht(g.get("home_scorers")),
+                    "ht_away": count_ht(g.get("away_scorers"))
+                })
+        
+        with open(output_path, "w", encoding='utf-8') as f:
+            json.dump(halftime_data, f, indent=2, ensure_ascii=False)
+        print(f"DEBUG: Processed {len(halftime_data)} finished games. JSON updated.")
+    except Exception as e:
+        print(f"DEBUG: CRITICAL ERROR: {e}")
+        
 def count_ht(scorers):
     if not scorers or scorers == "null" or scorers == "{}" or scorers == "[]": 
         return 0
