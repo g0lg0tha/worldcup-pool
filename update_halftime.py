@@ -4,7 +4,6 @@ workspace = os.getenv('GITHUB_WORKSPACE', os.getcwd())
 output_path = os.path.join(workspace, 'halftime.json')
 
 def count_ht(scorers):
-def count_ht(scorers):
     if not scorers or scorers == "null" or scorers == "{}" or scorers == "[]": 
         return 0
     
