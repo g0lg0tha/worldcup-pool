@@ -2,6 +2,7 @@ import requests
 import json
 import os
 import re
+from datetime import datetime
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
 
@@ -10,6 +11,7 @@ workspace = os.getenv('GITHUB_WORKSPACE', os.getcwd())
 output_path = os.path.join(workspace, 'halftime.json')
 
 API_URL = "https://worldcup26.ir/get/games"
+
 
 def get_session():
     session = requests.Session()
@@ -26,6 +28,7 @@ def get_session():
     session.mount("https://", adapter)
 
     return session
+
 
 def count_ht(scorers):
     if not scorers or scorers in ["null", "{}", "[]"]:
@@ -56,6 +59,7 @@ def count_ht(scorers):
 
     return count
 
+
 def update_halftime():
     try:
         session = get_session()
@@ -74,6 +78,14 @@ def update_halftime():
 
         data = response.json()
         raw_games = data.get("games", [])
+
+        # Sort matches oldest first
+        raw_games.sort(
+            key=lambda g: datetime.strptime(
+                g.get("local_date", "01/01/1900 00:00"),
+                "%m/%d/%Y %H:%M"
+            )
+        )
 
         halftime_data = []
 
@@ -102,6 +114,7 @@ def update_halftime():
     except Exception as e:
         print(f"DEBUG: Error: {e}")
         raise
+
 
 if __name__ == "__main__":
     update_halftime()
