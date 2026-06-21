@@ -24,6 +24,18 @@
     "ht_away": 0
   },
   {
+    "home": "Qatar",
+    "away": "Switzerland",
+    "ht_home": 0,
+    "ht_away": 1
+  },
+  {
+    "home": "Brazil",
+    "away": "Morocco",
+    "ht_home": 1,
+    "ht_away": 1
+  },
+  {
     "home": "Haiti",
     "away": "Scotland",
     "ht_home": 0,
@@ -33,24 +45,6 @@
     "home": "Australia",
     "away": "Turkey",
     "ht_home": 1,
-    "ht_away": 0
-  },
-  {
-    "home": "Brazil",
-    "away": "Morocco",
-    "ht_home": 1,
-    "ht_away": 1
-  },
-  {
-    "home": "Qatar",
-    "away": "Switzerland",
-    "ht_home": 0,
-    "ht_away": 1
-  },
-  {
-    "home": "Ivory Coast",
-    "away": "Ecuador",
-    "ht_home": 0,
     "ht_away": 0
   },
   {
@@ -66,15 +60,15 @@
     "ht_away": 0
   },
   {
+    "home": "Ivory Coast",
+    "away": "Ecuador",
+    "ht_home": 0,
+    "ht_away": 0
+  },
+  {
     "home": "Sweden",
     "away": "Tunisia",
     "ht_home": 2,
-    "ht_away": 1
-  },
-  {
-    "home": "Iran",
-    "away": "New Zealand",
-    "ht_home": 1,
     "ht_away": 1
   },
   {
@@ -87,6 +81,12 @@
     "home": "Belgium",
     "away": "Egypt",
     "ht_home": 0,
+    "ht_away": 1
+  },
+  {
+    "home": "Iran",
+    "away": "New Zealand",
+    "ht_home": 1,
     "ht_away": 1
   },
   {
@@ -132,33 +132,21 @@
     "ht_away": 2
   },
   {
-    "home": "Uzbekistan",
-    "away": "Colombia",
-    "ht_home": 0,
-    "ht_away": 1
-  },
-  {
     "home": "Ghana",
     "away": "Panama",
     "ht_home": 0,
     "ht_away": 0
   },
   {
-    "home": "Mexico",
-    "away": "South Korea",
+    "home": "Uzbekistan",
+    "away": "Colombia",
     "ht_home": 0,
-    "ht_away": 0
+    "ht_away": 1
   },
   {
     "home": "Switzerland",
     "away": "Bosnia and Herzegovina",
     "ht_home": 0,
-    "ht_away": 0
-  },
-  {
-    "home": "Canada",
-    "away": "Qatar",
-    "ht_home": 3,
     "ht_away": 0
   },
   {
@@ -168,9 +156,21 @@
     "ht_away": 0
   },
   {
-    "home": "Brazil",
-    "away": "Haiti",
+    "home": "Canada",
+    "away": "Qatar",
     "ht_home": 3,
+    "ht_away": 0
+  },
+  {
+    "home": "Mexico",
+    "away": "South Korea",
+    "ht_home": 0,
+    "ht_away": 0
+  },
+  {
+    "home": "United States",
+    "away": "Australia",
+    "ht_home": 2,
     "ht_away": 0
   },
   {
@@ -180,16 +180,22 @@
     "ht_away": 1
   },
   {
-    "home": "United States",
-    "away": "Australia",
-    "ht_home": 2,
-    "ht_away": 0
-  },
-  {
     "home": "Turkey",
     "away": "Paraguay",
     "ht_home": 0,
     "ht_away": 1
+  },
+  {
+    "home": "Brazil",
+    "away": "Haiti",
+    "ht_home": 3,
+    "ht_away": 0
+  },
+  {
+    "home": "Netherlands",
+    "away": "Sweden",
+    "ht_home": 2,
+    "ht_away": 0
   },
   {
     "home": "Germany",
@@ -201,12 +207,6 @@
     "home": "Ecuador",
     "away": "Curaçao",
     "ht_home": 0,
-    "ht_away": 0
-  },
-  {
-    "home": "Netherlands",
-    "away": "Sweden",
-    "ht_home": 2,
     "ht_away": 0
   },
   {

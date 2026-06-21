@@ -222,5 +222,33 @@
     "away": "Haiti",
     "score1": 3,
     "score2": 0
+  },
+  {
+    "date": "06/20/2026 12:00",
+    "home": "Netherlands",
+    "away": "Sweden",
+    "score1": 5,
+    "score2": 1
+  },
+  {
+    "date": "06/20/2026 16:00",
+    "home": "Germany",
+    "away": "Ivory Coast",
+    "score1": 2,
+    "score2": 1
+  },
+  {
+    "date": "06/20/2026 19:00",
+    "home": "Ecuador",
+    "away": "Curaçao",
+    "score1": 0,
+    "score2": 0
+  },
+  {
+    "date": "06/20/2026 22:00",
+    "home": "Tunisia",
+    "away": "Japan",
+    "score1": 0,
+    "score2": 4
   }
 ]
