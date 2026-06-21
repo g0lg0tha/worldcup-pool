@@ -250,5 +250,19 @@
     "away": "Japan",
     "score1": 0,
     "score2": 4
+  },
+  {
+    "date": "06/21/2026 12:00",
+    "home": "Belgium",
+    "away": "Iran",
+    "score1": 0,
+    "score2": 0
+  },
+  {
+    "date": "06/21/2026 12:00",
+    "home": "Spain",
+    "away": "Saudi Arabia",
+    "score1": 4,
+    "score2": 0
   }
 ]
