@@ -264,5 +264,26 @@
     "away": "Saudi Arabia",
     "score1": 4,
     "score2": 0
+  },
+  {
+    "date": "06/21/2026 18:00",
+    "home": "New Zealand",
+    "away": "Egypt",
+    "score1": 1,
+    "score2": 3
+  },
+  {
+    "date": "06/21/2026 18:00",
+    "home": "Uruguay",
+    "away": "Cape Verde",
+    "score1": 2,
+    "score2": 2
+  },
+  {
+    "date": "06/22/2026 12:00",
+    "home": "Argentina",
+    "away": "Austria",
+    "score1": 2,
+    "score2": 0
   }
 ]
