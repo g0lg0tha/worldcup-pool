@@ -3,6 +3,7 @@ import json
 import os
 import re
 import time
+import socket
 from datetime import datetime
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
@@ -16,7 +17,7 @@ API_URL = "https://worldcup26.ir/get/games"
 
 
 # -----------------------------
-# Retry-safe session
+# Session with retry support
 # -----------------------------
 def get_session():
     session = requests.Session()
@@ -37,7 +38,7 @@ def get_session():
 
 
 # -----------------------------
-# Goal counting logic
+# Halftime goal counter
 # -----------------------------
 def count_ht(scorers):
     if not scorers or scorers in ["null", "{}", "[]"]:
@@ -66,7 +67,7 @@ def count_ht(scorers):
 
 
 # -----------------------------
-# Robust API fetch (VERY important)
+# FIXED FETCH (your requested version)
 # -----------------------------
 def fetch_games():
     session = get_session()
@@ -74,9 +75,10 @@ def fetch_games():
 
     last_error = None
 
-    for attempt in range(10):
+    for attempt in range(15):
+
         try:
-            print(f"API attempt {attempt + 1}/10")
+            print(f"API attempt {attempt + 1}/15")
 
             response = session.get(
                 API_URL,
@@ -85,20 +87,14 @@ def fetch_games():
             )
 
             response.raise_for_status()
-            data = response.json()
-
-            games = data.get("games", [])
-
-            print(f"Retrieved {len(games)} games")
-
-            return games
+            return response.json().get("games", [])
 
         except Exception as e:
             last_error = e
-            print(f"Attempt failed: {e}")
+            print(f"Attempt {attempt + 1} failed: {e}")
 
-            if attempt < 9:
-                time.sleep(10)
+            # IMPORTANT: backoff for DNS + SSL + 500 issues
+            time.sleep(20)
 
     raise last_error
 
