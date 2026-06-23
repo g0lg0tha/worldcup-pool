@@ -256,5 +256,11 @@
     "away": "Senegal",
     "ht_home": 1,
     "ht_away": 0
+  },
+  {
+    "home": "Jordan",
+    "away": "Algeria",
+    "ht_home": 1,
+    "ht_away": 0
   }
 ]
