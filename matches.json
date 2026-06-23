@@ -306,5 +306,12 @@
     "away": "Algeria",
     "score1": 1,
     "score2": 2
+  },
+  {
+    "date": "06/23/2026 12:00",
+    "home": "Portugal",
+    "away": "Uzbekistan",
+    "score1": 5,
+    "score2": 0
   }
 ]
