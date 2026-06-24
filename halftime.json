@@ -286,5 +286,17 @@
     "away": "Democratic Republic of the Congo",
     "ht_home": 0,
     "ht_away": 0
+  },
+  {
+    "home": "Bosnia and Herzegovina",
+    "away": "Qatar",
+    "ht_home": 2,
+    "ht_away": 1
+  },
+  {
+    "home": "Switzerland",
+    "away": "Canada",
+    "ht_home": 0,
+    "ht_away": 0
   }
 ]

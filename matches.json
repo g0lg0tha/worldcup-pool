@@ -334,5 +334,19 @@
     "away": "Democratic Republic of the Congo",
     "score1": 1,
     "score2": 0
+  },
+  {
+    "date": "06/24/2026 12:00",
+    "home": "Bosnia and Herzegovina",
+    "away": "Qatar",
+    "score1": 3,
+    "score2": 1
+  },
+  {
+    "date": "06/24/2026 12:00",
+    "home": "Switzerland",
+    "away": "Canada",
+    "score1": 2,
+    "score2": 1
   }
 ]
