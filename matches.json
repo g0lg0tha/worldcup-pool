@@ -348,5 +348,33 @@
     "away": "Canada",
     "score1": 2,
     "score2": 1
+  },
+  {
+    "date": "06/24/2026 18:00",
+    "home": "Morocco",
+    "away": "Haiti",
+    "score1": 4,
+    "score2": 2
+  },
+  {
+    "date": "06/24/2026 18:00",
+    "home": "Scotland",
+    "away": "Brazil",
+    "score1": 0,
+    "score2": 3
+  },
+  {
+    "date": "06/24/2026 19:00",
+    "home": "Czech Republic",
+    "away": "Mexico",
+    "score1": 0,
+    "score2": 3
+  },
+  {
+    "date": "06/24/2026 19:00",
+    "home": "South Africa",
+    "away": "South Korea",
+    "score1": 1,
+    "score2": 0
   }
 ]

@@ -298,5 +298,29 @@
     "away": "Canada",
     "ht_home": 0,
     "ht_away": 0
+  },
+  {
+    "home": "Morocco",
+    "away": "Haiti",
+    "ht_home": 2,
+    "ht_away": 2
+  },
+  {
+    "home": "Scotland",
+    "away": "Brazil",
+    "ht_home": 0,
+    "ht_away": 2
+  },
+  {
+    "home": "Czech Republic",
+    "away": "Mexico",
+    "ht_home": 0,
+    "ht_away": 0
+  },
+  {
+    "home": "South Africa",
+    "away": "South Korea",
+    "ht_home": 0,
+    "ht_away": 0
   }
 ]
