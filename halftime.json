@@ -322,5 +322,17 @@
     "away": "South Korea",
     "ht_home": 0,
     "ht_away": 0
+  },
+  {
+    "home": "Curaçao",
+    "away": "Ivory Coast",
+    "ht_home": 0,
+    "ht_away": 1
+  },
+  {
+    "home": "Ecuador",
+    "away": "Germany",
+    "ht_home": 1,
+    "ht_away": 1
   }
 ]
