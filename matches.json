@@ -390,5 +390,19 @@
     "away": "Germany",
     "score1": 2,
     "score2": 1
+  },
+  {
+    "date": "06/25/2026 18:00",
+    "home": "Japan",
+    "away": "Sweden",
+    "score1": 1,
+    "score2": 1
+  },
+  {
+    "date": "06/25/2026 18:00",
+    "home": "Tunisia",
+    "away": "Netherlands",
+    "score1": 1,
+    "score2": 3
   }
 ]

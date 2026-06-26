@@ -334,5 +334,17 @@
     "away": "Germany",
     "ht_home": 1,
     "ht_away": 1
+  },
+  {
+    "home": "Japan",
+    "away": "Sweden",
+    "ht_home": 0,
+    "ht_away": 0
+  },
+  {
+    "home": "Tunisia",
+    "away": "Netherlands",
+    "ht_home": 0,
+    "ht_away": 2
   }
 ]
