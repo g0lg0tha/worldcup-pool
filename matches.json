@@ -418,5 +418,19 @@
     "away": "Australia",
     "score1": 0,
     "score2": 0
+  },
+  {
+    "date": "06/26/2026 15:00",
+    "home": "Senegal",
+    "away": "Iraq",
+    "score1": 5,
+    "score2": 0
+  },
+  {
+    "date": "06/26/2026 15:00",
+    "home": "Norway",
+    "away": "France",
+    "score1": 1,
+    "score2": 4
   }
 ]
