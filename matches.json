@@ -404,5 +404,19 @@
     "away": "Netherlands",
     "score1": 1,
     "score2": 3
+  },
+  {
+    "date": "06/25/2026 19:00",
+    "home": "Turkey",
+    "away": "United States",
+    "score1": 3,
+    "score2": 2
+  },
+  {
+    "date": "06/25/2026 19:00",
+    "home": "Paraguay",
+    "away": "Australia",
+    "score1": 0,
+    "score2": 0
   }
 ]
