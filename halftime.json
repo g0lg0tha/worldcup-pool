@@ -370,5 +370,17 @@
     "away": "France",
     "ht_home": 1,
     "ht_away": 3
+  },
+  {
+    "home": "Uruguay",
+    "away": "Spain",
+    "ht_home": 0,
+    "ht_away": 1
+  },
+  {
+    "home": "Cape Verde",
+    "away": "Saudi Arabia",
+    "ht_home": 0,
+    "ht_away": 0
   }
 ]
