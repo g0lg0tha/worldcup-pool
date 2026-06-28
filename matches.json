@@ -488,5 +488,19 @@
     "away": "Portugal",
     "score1": 0,
     "score2": 0
+  },
+  {
+    "date": "06/27/2026 21:00",
+    "home": "Jordan",
+    "away": "Argentina",
+    "score1": 1,
+    "score2": 3
+  },
+  {
+    "date": "06/27/2026 21:00",
+    "home": "Algeria",
+    "away": "Austria",
+    "score1": 3,
+    "score2": 3
   }
 ]
