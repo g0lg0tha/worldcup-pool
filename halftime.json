@@ -442,5 +442,11 @@
     "away": "Japan",
     "ht_home": 0,
     "ht_away": 1
+  },
+  {
+    "home": "Germany",
+    "away": "Paraguay",
+    "ht_home": 0,
+    "ht_away": 1
   }
 ]
