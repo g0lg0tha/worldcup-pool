@@ -238,13 +238,36 @@ function calculate(games){
 
         if(!home || !away) return;
 
-        const hs = parseInt(g.score1), as = parseInt(g.score2);
+const hs = parseInt(g.score1);
+const as = parseInt(g.score2);
+const hp = g.pen1 !== null && g.pen1 !== undefined ? parseInt(g.pen1) : null;
+const ap = g.pen2 !== null && g.pen2 !== undefined ? parseInt(g.pen2) : null;
 
-        if(!isNaN(hs) && !isNaN(as)) {
+if (!isNaN(hs) && !isNaN(as)) {
 
-            if(hs > as) scores[home].match += 8; else if(as > hs) scores[away].match += 8; else { scores[home].match += 4; scores[away].match += 4; }
+    if (hs > as) {
+        scores[home].match += 8;
 
+    } else if (as > hs) {
+        scores[away].match += 8;
+
+    } else if (hp !== null && ap !== null) {
+
+        if (hp > ap) {
+            scores[home].match += 8;
+        } else if (ap > hp) {
+            scores[away].match += 8;
         }
+
+    } else {
+
+        // Group-stage draw
+        scores[home].match += 4;
+        scores[away].match += 4;
+
+    }
+
+}
 
         const diff = Math.abs(SEEDS[home] - SEEDS[away]);
 
