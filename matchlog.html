@@ -154,7 +154,27 @@ function owner(team) { for(const [p,t] of Object.entries(PLAYERS)) if(t.includes
 
 function normalize(str) { return str ? str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/&/g, "and").toLowerCase().trim() : ""; }
 
-function calculateMatchPoints(s1, s2) { if (s1 > s2) return 8; if (s1 === s2) return 4; return 0; }
+function calculateMatchPoints(s1, s2, p1 = null, p2 = null) {
+
+    s1 = parseInt(s1);
+    s2 = parseInt(s2);
+
+    if (s1 > s2) return 8;
+    if (s2 > s1) return 0;
+
+    // Match drawn - check penalties
+    if (p1 !== null && p1 !== undefined && p2 !== null && p2 !== undefined) {
+
+        p1 = parseInt(p1);
+        p2 = parseInt(p2);
+
+        if (p1 > p2) return 8;
+        if (p2 > p1) return 0;
+    }
+
+    // Genuine draw
+    return 4;
+}
 
 
 
@@ -180,9 +200,19 @@ async function fetchLog() {
 
             const hSeed = SEEDS[hName], aSeed = SEEDS[aName];
 
-            const hMatch = calculateMatchPoints(g.score1, g.score2);
+const hMatch = calculateMatchPoints(
+    g.score1,
+    g.score2,
+    g.pen1,
+    g.pen2
+);
 
-            const aMatch = calculateMatchPoints(g.score2, g.score1);
+const aMatch = calculateMatchPoints(
+    g.score2,
+    g.score1,
+    g.pen2,
+    g.pen1
+);
 
             let hBonus = 0, aBonus = 0;
 
