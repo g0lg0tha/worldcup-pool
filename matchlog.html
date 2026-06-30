@@ -203,15 +203,15 @@ async function fetchLog() {
 const hMatch = calculateMatchPoints(
     g.score1,
     g.score2,
-    g.pen1,
-    g.pen2
+    g.home_penalty_score,
+    g.away_penalty_score
 );
 
 const aMatch = calculateMatchPoints(
     g.score2,
     g.score1,
-    g.pen2,
-    g.pen1
+    g.away_penalty_score,
+    g.home_penalty_score
 );
 
             let hBonus = 0, aBonus = 0;
