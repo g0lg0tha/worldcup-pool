@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Match Log - World Cup 2026</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Oswald:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+
+        :root {
+
+            --metallic-chassis: linear-gradient(145deg, #a47657 0%, #613b23 25%, #361f11 50%, #7d4f32 75%, #221209 100%);
+
+            --inner-wood-plate: #492817;
+
+            --capsule-bg: linear-gradient(180deg, #241309 0%, #170b04 100%);
+
+            --gold-trim: #ffd294;
+
+            --text-value: #ffd9a3;
+
+        }
+
+
+
+        body {
+
+            font-family: 'Oswald', sans-serif;
+
+            background: radial-gradient(circle at 50% 30%, rgba(20, 10, 5, 0.3) 0%, rgba(10, 4, 1, 0.95) 85%),
+
+                        url('https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?q=80&w=2000&auto=format&fit=crop') no-repeat center center fixed;
+
+            background-size: cover;
+
+            color: #fff;
+
+            margin: 0;
+
+            padding: 30px 16px;
+
+            display: flex;
+
+            justify-content: center;
+
+            overflow-x: hidden;
+
+        }
+
+
+
+        .container { width: 100%; max-width: padding-bottom: 20px;  }
+
+        .luxury-panel { background: var(--metallic-chassis); border: 2px solid #1a0c05; border-radius: 12px; padding: 8px; box-shadow: 0 30px 60px rgba(0,0,0,0.9); }
+
+        .inner-wood-board { background: var(--inner-wood-plate); border: 2px solid #28140a; border-radius: 6px; padding: 24px; box-shadow: inset 0 10px 30px rgba(0,0,0,0.85); }
+
+        .section-title { font-family: 'Cinzel', serif; text-align: center; font-size: 1.35rem; color: var(--gold-trim); letter-spacing: 2px; margin-bottom: 20px; text-transform: uppercase; }
+
+
+
+        .match-cols {
+
+            display: grid;
+
+            grid-template-columns: 2fr 1fr 0.8fr 0.4fr 0.4fr 0.8fr 0.4fr 0.4fr;
+
+            align-items: center;
+
+            text-align: center;
+
+            gap: 6px;
+
+            background: var(--capsule-bg);
+
+            border: 1px solid #28140a;
+
+            border-radius: 20px;
+
+            padding: 10px;
+
+            margin-bottom: 8px;
+
+            box-shadow: inset 0 4px 10px rgba(0,0,0,0.9);
+
+        }
+
+
+
+        .header-row { font-family: 'Cinzel', serif; font-weight: bold; color: #bca08d; font-size: 0.65rem; text-transform: uppercase; background: none !important; border: none !important; }
+
+        .nav-button { background: linear-gradient(180deg, #8c5d43 0%, #462a1a 100%); border: 1px solid #1a0c05; color: #f7dfc1; font-family: 'Cinzel', serif; padding: 6px 14px; border-radius: 4px; text-decoration: none; display: inline-block; margin-bottom: 20px; }
+
+        .score-box { font-family: monospace; color: var(--gold-trim); font-weight: bold; font-size: 0.9rem; }
+
+        .owner-text { font-family: 'Cinzel', serif; font-size: 0.75rem; color: #ebd1be; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+        .pts-text { color: var(--text-value); font-weight: bold; }
+
+    </style>
+
+</head>
+
+<body>
+
+
+
+<div class="container">
+
+    <div class="luxury-panel">
+
+        <div class="inner-wood-board">
+
+            <a href="index.html" class="nav-button">← Back</a>
+
+            <div class="section-title">Full Match Log</div>
+
+            
+
+            <div class="match-cols header-row">
+
+                <span>Match</span><span>HT / FT</span><span>HT OWNER</span><span>Pts</span><span>B</span><span>AT OWNER</span><span>Pts</span><span>B</span>
+
+            </div>
+
+            
+
+            <div id="matchLog">Loading data...</div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<script>
+
+const PLAYERS = { Gordon:['Brazil','Japan','Scotland'], David:['France','Norway','Bosnia and Herzegovina'], Stephen:['Germany','Paraguay','Czech Republic'], Bren:['Spain','Turkey','Saudi Arabia'], Patrick:['England','Switzerland','Ghana'], Mick:['Netherlands','Austria','Haiti'] };
+
+const SEEDS = {'France':1,'Spain':2,'Argentina':3,'England':4,'Portugal':5,'Brazil':6,'Netherlands':7,'Morocco':8,'Belgium':9,'Germany':10,'Croatia':11,'Colombia':12,'Senegal':13,'Mexico':14,'USA':15,'Uruguay':16,'Japan':17,'Switzerland':18,'Iran':19,'Turkey':20,'Ecuador':21,'Austria':22,'South Korea':23,'Australia':24,'Algeria':25,'Egypt':26,'Canada':27,'Norway':28,'Panama':29,'Ivory Coast':30,'Sweden':31,'Paraguay':32,'Czechia':33,'Scotland':34,'Tunisia':35,'Democratic Republic of the Congo':36,'Uzbekistan':37,'Qatar':38,'Iraq':39,'South Africa':40,'Saudi Arabia':41,'Jordan':42,'Bosnia and Herzegovina':43,'Cape Verde':44,'Ghana':45,'Curaçao':46,'Haiti':47,'New Zealand':48};
+
+
+
+function owner(team) { for(const [p,t] of Object.entries(PLAYERS)) if(t.includes(team)) return p; return '—'; }
+
+function normalize(str) { return str ? str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/&/g, "and").toLowerCase().trim() : ""; }
+
+function calculateMatchPoints(s1, s2) { if (s1 > s2) return 8; if (s1 === s2) return 4; return 0; }
+
+
+
+async function fetchLog() {
+
+    try {
+
+        const [mRes, hRes] = await Promise.all([fetch('matches.json?cb=' + Date.now()), fetch('halftime.json?cb=' + Date.now())]);
+
+        const games = await mRes.json();
+
+        const htScores = await hRes.json();
+
+        const htMap = {};
+
+        htScores.forEach(h => htMap[`${normalize(h.home)}-${normalize(h.away)}`] = {ht_home: h.ht_home, ht_away: h.ht_away});
+
+
+
+        document.getElementById('matchLog').innerHTML = games.map(g => {
+
+            const hName = g.home, aName = g.away;
+
+            const hSeed = SEEDS[hName], aSeed = SEEDS[aName];
+
+            const hMatch = calculateMatchPoints(g.score1, g.score2);
+
+            const aMatch = calculateMatchPoints(g.score2, g.score1);
+
+            let hBonus = 0, aBonus = 0;
+
+            const diff = Math.abs(hSeed - aSeed);
+
+            if (diff >= 5) {
+
+                const ht = htMap[`${normalize(hName)}-${normalize(aName)}`];
+
+                if (ht) {
+
+                    const underdog = (hSeed > aSeed) ? hName : aName;
+
+                    const ugHt = (underdog === hName) ? ht.ht_home : ht.ht_away;
+
+                    const favHt = (underdog === hName) ? ht.ht_away : ht.ht_home;
+
+                    const b = (ugHt > favHt) ? 4 : (ugHt === favHt ? 2 : 0);
+
+                    if (underdog === hName) hBonus = b; else aBonus = b;
+
+                }
+
+            }
+
+            return `
+
+                <div class="match-cols">
+
+                    <div style="text-align:left; font-size: 0.85rem;">${hName} vs ${aName}</div>
+
+                    <div class="score-box">${(htMap[`${normalize(hName)}-${normalize(aName)}`]?.ht_home ?? '-')}-${(htMap[`${normalize(hName)}-${normalize(aName)}`]?.ht_away ?? '-')} / ${g.score1}-${g.score2}</div>
+
+                    <div class="owner-text">${owner(hName)}</div>
+
+                    <div class="pts-text">${hMatch}</div><div class="pts-text">${hBonus}</div>
+
+                    <div class="owner-text">${owner(aName)}</div>
+
+                    <div class="pts-text">${aMatch}</div><div class="pts-text">${aBonus}</div>
+
+                </div>`;
+
+        }).join('');
+
+    } catch(e) { document.getElementById('matchLog').innerHTML = "<div style='text-align:center;'>Error loading data.</div>"; }
+
+}
+
+fetchLog();
+
+</script>
+
+</body>
+
+</html> 
+
