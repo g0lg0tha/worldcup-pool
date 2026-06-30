@@ -4,531 +4,683 @@
     "home": "Mexico",
     "away": "South Africa",
     "score1": 2,
-    "score2": 0
+    "score2": 0,
+    "pen1": null,
+    "pen2": null
   },
   {
     "date": "06/11/2026 20:00",
     "home": "South Korea",
     "away": "Czech Republic",
     "score1": 2,
-    "score2": 1
+    "score2": 1,
+    "pen1": null,
+    "pen2": null
   },
   {
     "date": "06/12/2026 15:00",
     "home": "Canada",
     "away": "Bosnia and Herzegovina",
     "score1": 1,
-    "score2": 1
+    "score2": 1,
+    "pen1": null,
+    "pen2": null
   },
   {
     "date": "06/12/2026 18:00",
     "home": "United States",
     "away": "Paraguay",
     "score1": 4,
-    "score2": 1
+    "score2": 1,
+    "pen1": null,
+    "pen2": null
   },
   {
     "date": "06/13/2026 12:00",
     "home": "Qatar",
     "away": "Switzerland",
     "score1": 1,
-    "score2": 1
+    "score2": 1,
+    "pen1": null,
+    "pen2": null
   },
   {
     "date": "06/13/2026 18:00",
     "home": "Brazil",
     "away": "Morocco",
     "score1": 1,
-    "score2": 1
+    "score2": 1,
+    "pen1": null,
+    "pen2": null
   },
   {
     "date": "06/13/2026 21:00",
     "home": "Australia",
     "away": "Turkey",
     "score1": 2,
-    "score2": 0
+    "score2": 0,
+    "pen1": null,
+    "pen2": null
   },
   {
     "date": "06/13/2026 21:00",
     "home": "Haiti",
     "away": "Scotland",
     "score1": 0,
-    "score2": 1
+    "score2": 1,
+    "pen1": null,
+    "pen2": null
   },
   {
     "date": "06/14/2026 12:00",
     "home": "Germany",
     "away": "Curaçao",
     "score1": 7,
-    "score2": 1
+    "score2": 1,
+    "pen1": null,
+    "pen2": null
   },
   {
     "date": "06/14/2026 15:00",
     "home": "Netherlands",
     "away": "Japan",
     "score1": 2,
-    "score2": 2
+    "score2": 2,
+    "pen1": null,
+    "pen2": null
   },
   {
     "date": "06/14/2026 19:00",
     "home": "Ivory Coast",
     "away": "Ecuador",
     "score1": 1,
-    "score2": 0
+    "score2": 0,
+    "pen1": null,
+    "pen2": null
   },
   {
     "date": "06/14/2026 20:00",
     "home": "Sweden",
     "away": "Tunisia",
     "score1": 5,
-    "score2": 1
+    "score2": 1,
+    "pen1": null,
+    "pen2": null
   },
   {
     "date": "06/15/2026 12:00",
     "home": "Spain",
     "away": "Cape Verde",
     "score1": 0,
-    "score2": 0
+    "score2": 0,
+    "pen1": null,
+    "pen2": null
   },
   {
     "date": "06/15/2026 12:00",
     "home": "Belgium",
     "away": "Egypt",
     "score1": 1,
-    "score2": 1
+    "score2": 1,
+    "pen1": null,
+    "pen2": null
   },
   {
     "date": "06/15/2026 18:00",
     "home": "Saudi Arabia",
     "away": "Uruguay",
     "score1": 1,
-    "score2": 1
+    "score2": 1,
+    "pen1": null,
+    "pen2": null
   },
   {
     "date": "06/15/2026 18:00",
     "home": "Iran",
     "away": "New Zealand",
     "score1": 2,
-    "score2": 2
+    "score2": 2,
+    "pen1": null,
+    "pen2": null
   },
   {
     "date": "06/16/2026 15:00",
     "home": "France",
     "away": "Senegal",
     "score1": 3,
-    "score2": 1
+    "score2": 1,
+    "pen1": null,
+    "pen2": null
   },
   {
     "date": "06/16/2026 18:00",
     "home": "Iraq",
     "away": "Norway",
     "score1": 1,
-    "score2": 4
+    "score2": 4,
+    "pen1": null,
+    "pen2": null
   },
   {
     "date": "06/16/2026 20:00",
     "home": "Argentina",
     "away": "Algeria",
     "score1": 3,
-    "score2": 0
+    "score2": 0,
+    "pen1": null,
+    "pen2": null
   },
   {
     "date": "06/16/2026 21:00",
     "home": "Austria",
     "away": "Jordan",
     "score1": 3,
-    "score2": 1
+    "score2": 1,
+    "pen1": null,
+    "pen2": null
   },
   {
     "date": "06/17/2026 12:00",
     "home": "Portugal",
     "away": "Democratic Republic of the Congo",
     "score1": 1,
-    "score2": 1
+    "score2": 1,
+    "pen1": null,
+    "pen2": null
   },
   {
     "date": "06/17/2026 15:00",
     "home": "England",
     "away": "Croatia",
     "score1": 4,
-    "score2": 2
+    "score2": 2,
+    "pen1": null,
+    "pen2": null
   },
   {
     "date": "06/17/2026 19:00",
     "home": "Ghana",
     "away": "Panama",
     "score1": 1,
-    "score2": 0
+    "score2": 0,
+    "pen1": null,
+    "pen2": null
   },
   {
     "date": "06/17/2026 20:00",
     "home": "Uzbekistan",
     "away": "Colombia",
     "score1": 1,
-    "score2": 3
+    "score2": 3,
+    "pen1": null,
+    "pen2": null
   },
   {
     "date": "06/18/2026 12:00",
     "home": "Switzerland",
     "away": "Bosnia and Herzegovina",
     "score1": 4,
-    "score2": 1
+    "score2": 1,
+    "pen1": null,
+    "pen2": null
   },
   {
     "date": "06/18/2026 12:00",
     "home": "Czech Republic",
     "away": "South Africa",
     "score1": 1,
-    "score2": 1
+    "score2": 1,
+    "pen1": null,
+    "pen2": null
   },
   {
     "date": "06/18/2026 15:00",
     "home": "Canada",
     "away": "Qatar",
     "score1": 6,
-    "score2": 0
+    "score2": 0,
+    "pen1": null,
+    "pen2": null
   },
   {
     "date": "06/18/2026 19:00",
     "home": "Mexico",
     "away": "South Korea",
     "score1": 1,
-    "score2": 0
+    "score2": 0,
+    "pen1": null,
+    "pen2": null
   },
   {
     "date": "06/19/2026 12:00",
     "home": "United States",
     "away": "Australia",
     "score1": 2,
-    "score2": 0
+    "score2": 0,
+    "pen1": null,
+    "pen2": null
   },
   {
     "date": "06/19/2026 18:00",
     "home": "Scotland",
     "away": "Morocco",
     "score1": 0,
-    "score2": 1
+    "score2": 1,
+    "pen1": null,
+    "pen2": null
   },
   {
     "date": "06/19/2026 20:00",
     "home": "Turkey",
     "away": "Paraguay",
     "score1": 0,
-    "score2": 1
+    "score2": 1,
+    "pen1": null,
+    "pen2": null
   },
   {
     "date": "06/19/2026 21:00",
     "home": "Brazil",
     "away": "Haiti",
     "score1": 3,
-    "score2": 0
+    "score2": 0,
+    "pen1": null,
+    "pen2": null
   },
   {
     "date": "06/20/2026 12:00",
     "home": "Netherlands",
     "away": "Sweden",
     "score1": 5,
-    "score2": 1
+    "score2": 1,
+    "pen1": null,
+    "pen2": null
   },
   {
     "date": "06/20/2026 16:00",
     "home": "Germany",
     "away": "Ivory Coast",
     "score1": 2,
-    "score2": 1
+    "score2": 1,
+    "pen1": null,
+    "pen2": null
   },
   {
     "date": "06/20/2026 19:00",
     "home": "Ecuador",
     "away": "Curaçao",
     "score1": 0,
-    "score2": 0
+    "score2": 0,
+    "pen1": null,
+    "pen2": null
   },
   {
     "date": "06/20/2026 22:00",
     "home": "Tunisia",
     "away": "Japan",
     "score1": 0,
-    "score2": 4
+    "score2": 4,
+    "pen1": null,
+    "pen2": null
   },
   {
     "date": "06/21/2026 12:00",
     "home": "Spain",
     "away": "Saudi Arabia",
     "score1": 4,
-    "score2": 0
+    "score2": 0,
+    "pen1": null,
+    "pen2": null
   },
   {
     "date": "06/21/2026 12:00",
     "home": "Belgium",
     "away": "Iran",
     "score1": 0,
-    "score2": 0
+    "score2": 0,
+    "pen1": null,
+    "pen2": null
   },
   {
     "date": "06/21/2026 18:00",
     "home": "New Zealand",
     "away": "Egypt",
     "score1": 1,
-    "score2": 3
+    "score2": 3,
+    "pen1": null,
+    "pen2": null
   },
   {
     "date": "06/21/2026 18:00",
     "home": "Uruguay",
     "away": "Cape Verde",
     "score1": 2,
-    "score2": 2
+    "score2": 2,
+    "pen1": null,
+    "pen2": null
   },
   {
     "date": "06/22/2026 12:00",
     "home": "Argentina",
     "away": "Austria",
     "score1": 2,
-    "score2": 0
+    "score2": 0,
+    "pen1": null,
+    "pen2": null
   },
   {
     "date": "06/22/2026 17:00",
     "home": "France",
     "away": "Iraq",
     "score1": 3,
-    "score2": 0
+    "score2": 0,
+    "pen1": null,
+    "pen2": null
   },
   {
     "date": "06/22/2026 20:00",
     "home": "Norway",
     "away": "Senegal",
     "score1": 3,
-    "score2": 2
+    "score2": 2,
+    "pen1": null,
+    "pen2": null
   },
   {
     "date": "06/22/2026 20:00",
     "home": "Jordan",
     "away": "Algeria",
     "score1": 1,
-    "score2": 2
+    "score2": 2,
+    "pen1": null,
+    "pen2": null
   },
   {
     "date": "06/23/2026 12:00",
     "home": "Portugal",
     "away": "Uzbekistan",
     "score1": 5,
-    "score2": 0
+    "score2": 0,
+    "pen1": null,
+    "pen2": null
   },
   {
     "date": "06/23/2026 16:00",
     "home": "England",
     "away": "Ghana",
     "score1": 0,
-    "score2": 0
+    "score2": 0,
+    "pen1": null,
+    "pen2": null
   },
   {
     "date": "06/23/2026 19:00",
     "home": "Panama",
     "away": "Croatia",
     "score1": 0,
-    "score2": 1
+    "score2": 1,
+    "pen1": null,
+    "pen2": null
   },
   {
     "date": "06/23/2026 20:00",
     "home": "Colombia",
     "away": "Democratic Republic of the Congo",
     "score1": 1,
-    "score2": 0
+    "score2": 0,
+    "pen1": null,
+    "pen2": null
   },
   {
     "date": "06/24/2026 12:00",
     "home": "Bosnia and Herzegovina",
     "away": "Qatar",
     "score1": 3,
-    "score2": 1
+    "score2": 1,
+    "pen1": null,
+    "pen2": null
   },
   {
     "date": "06/24/2026 12:00",
     "home": "Switzerland",
     "away": "Canada",
     "score1": 2,
-    "score2": 1
+    "score2": 1,
+    "pen1": null,
+    "pen2": null
   },
   {
     "date": "06/24/2026 18:00",
     "home": "Morocco",
     "away": "Haiti",
     "score1": 4,
-    "score2": 2
+    "score2": 2,
+    "pen1": null,
+    "pen2": null
   },
   {
     "date": "06/24/2026 18:00",
     "home": "Scotland",
     "away": "Brazil",
     "score1": 0,
-    "score2": 3
+    "score2": 3,
+    "pen1": null,
+    "pen2": null
   },
   {
     "date": "06/24/2026 19:00",
     "home": "Czech Republic",
     "away": "Mexico",
     "score1": 0,
-    "score2": 3
+    "score2": 3,
+    "pen1": null,
+    "pen2": null
   },
   {
     "date": "06/24/2026 19:00",
     "home": "South Africa",
     "away": "South Korea",
     "score1": 1,
-    "score2": 0
+    "score2": 0,
+    "pen1": null,
+    "pen2": null
   },
   {
     "date": "06/25/2026 16:00",
     "home": "Curaçao",
     "away": "Ivory Coast",
     "score1": 0,
-    "score2": 2
+    "score2": 2,
+    "pen1": null,
+    "pen2": null
   },
   {
     "date": "06/25/2026 16:00",
     "home": "Ecuador",
     "away": "Germany",
     "score1": 2,
-    "score2": 1
+    "score2": 1,
+    "pen1": null,
+    "pen2": null
   },
   {
     "date": "06/25/2026 18:00",
     "home": "Japan",
     "away": "Sweden",
     "score1": 1,
-    "score2": 1
+    "score2": 1,
+    "pen1": null,
+    "pen2": null
   },
   {
     "date": "06/25/2026 18:00",
     "home": "Tunisia",
     "away": "Netherlands",
     "score1": 1,
-    "score2": 3
+    "score2": 3,
+    "pen1": null,
+    "pen2": null
   },
   {
     "date": "06/25/2026 19:00",
     "home": "Turkey",
     "away": "United States",
     "score1": 3,
-    "score2": 2
+    "score2": 2,
+    "pen1": null,
+    "pen2": null
   },
   {
     "date": "06/25/2026 19:00",
     "home": "Paraguay",
     "away": "Australia",
     "score1": 0,
-    "score2": 0
+    "score2": 0,
+    "pen1": null,
+    "pen2": null
   },
   {
     "date": "06/26/2026 15:00",
     "home": "Senegal",
     "away": "Iraq",
     "score1": 5,
-    "score2": 0
+    "score2": 0,
+    "pen1": null,
+    "pen2": null
   },
   {
     "date": "06/26/2026 15:00",
     "home": "Norway",
     "away": "France",
     "score1": 1,
-    "score2": 4
+    "score2": 4,
+    "pen1": null,
+    "pen2": null
   },
   {
     "date": "06/26/2026 18:00",
     "home": "Uruguay",
     "away": "Spain",
     "score1": 0,
-    "score2": 1
+    "score2": 1,
+    "pen1": null,
+    "pen2": null
   },
   {
     "date": "06/26/2026 19:00",
     "home": "Cape Verde",
     "away": "Saudi Arabia",
     "score1": 0,
-    "score2": 0
+    "score2": 0,
+    "pen1": null,
+    "pen2": null
   },
   {
     "date": "06/26/2026 20:00",
     "home": "Egypt",
     "away": "Iran",
     "score1": 1,
-    "score2": 1
+    "score2": 1,
+    "pen1": null,
+    "pen2": null
   },
   {
     "date": "06/26/2026 20:00",
     "home": "New Zealand",
     "away": "Belgium",
     "score1": 1,
-    "score2": 5
+    "score2": 5,
+    "pen1": null,
+    "pen2": null
   },
   {
     "date": "06/27/2026 17:00",
     "home": "Panama",
     "away": "England",
     "score1": 0,
-    "score2": 2
+    "score2": 2,
+    "pen1": null,
+    "pen2": null
   },
   {
     "date": "06/27/2026 17:00",
     "home": "Croatia",
     "away": "Ghana",
     "score1": 2,
-    "score2": 1
+    "score2": 1,
+    "pen1": null,
+    "pen2": null
   },
   {
     "date": "06/27/2026 19:30",
     "home": "Democratic Republic of the Congo",
     "away": "Uzbekistan",
     "score1": 3,
-    "score2": 1
+    "score2": 1,
+    "pen1": null,
+    "pen2": null
   },
   {
     "date": "06/27/2026 19:30",
     "home": "Colombia",
     "away": "Portugal",
     "score1": 0,
-    "score2": 0
+    "score2": 0,
+    "pen1": null,
+    "pen2": null
   },
   {
     "date": "06/27/2026 21:00",
     "home": "Jordan",
     "away": "Argentina",
     "score1": 1,
-    "score2": 3
+    "score2": 3,
+    "pen1": null,
+    "pen2": null
   },
   {
     "date": "06/27/2026 21:00",
     "home": "Algeria",
     "away": "Austria",
     "score1": 3,
-    "score2": 3
+    "score2": 3,
+    "pen1": null,
+    "pen2": null
   },
   {
     "date": "06/28/2026 12:00",
     "home": "South Africa",
     "away": "Canada",
     "score1": 0,
-    "score2": 1
+    "score2": 1,
+    "pen1": null,
+    "pen2": null
   },
   {
     "date": "06/29/2026 12:00",
     "home": "Brazil",
     "away": "Japan",
     "score1": 2,
-    "score2": 1
+    "score2": 1,
+    "pen1": null,
+    "pen2": null
   },
   {
     "date": "06/29/2026 16:30",
     "home": "Germany",
     "away": "Paraguay",
     "score1": 1,
-    "score2": 1
+    "score2": 1,
+    "pen1": 3,
+    "pen2": 4
   },
   {
     "date": "06/29/2026 19:00",
     "home": "Netherlands",
     "away": "Morocco",
     "score1": 1,
-    "score2": 1
+    "score2": 1,
+    "pen1": 2,
+    "pen2": 3
   }
 ]
