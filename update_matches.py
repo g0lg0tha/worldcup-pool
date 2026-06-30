@@ -28,13 +28,15 @@ def update_matches():
                 # Convert string to datetime object for sorting
                 game_date = datetime.strptime(date_str, "%m/%d/%Y %H:%M")
                 
-                formatted_matches.append({
-                    "date": game_date, # Temporary field for sorting
-                    "home": home,
-                    "away": away,
-                    "score1": int(g.get("home_score", 0)),
-                    "score2": int(g.get("away_score", 0))
-                })
+        formatted_matches.append({
+            "date": game_date,
+            "home": home,
+            "away": away,
+            "score1": int(g.get("home_score", 0)),
+            "score2": int(g.get("away_score", 0)),
+            "pen1": int(g["home_penalty_score"]) if g.get("home_penalty_score") else None,
+            "pen2": int(g["away_penalty_score"]) if g.get("away_penalty_score") else None
+        })
         
         # Sort by the datetime object (oldest first)
         formatted_matches.sort(key=lambda x: x["date"])
@@ -48,7 +50,9 @@ def update_matches():
                 "home": m["home"],
                 "away": m["away"],
                 "score1": m["score1"],
-                "score2": m["score2"]
+                "score2": m["score2"],
+                "pen1": m["pen1"],
+                "pen2": m["pen2"]
             })
         
         with open(output_path, "w", encoding='utf-8') as f:
