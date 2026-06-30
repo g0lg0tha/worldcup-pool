@@ -244,7 +244,11 @@ const aMatch = calculateMatchPoints(
 
                     <div style="text-align:left; font-size: 0.85rem;">${hName} vs ${aName}</div>
 
-                    <div class="score-box">${(htMap[`${normalize(hName)}-${normalize(aName)}`]?.ht_home ?? '-')}-${(htMap[`${normalize(hName)}-${normalize(aName)}`]?.ht_away ?? '-')} / ${g.score1}-${g.score2}</div>
+                    <div class="score-box">
+    ${(htMap[`${normalize(hName)}-${normalize(aName)}`]?.ht_home ?? '-')}-${(htMap[`${normalize(hName)}-${normalize(aName)}`]?.ht_away ?? '-')}
+    /
+    ${g.score1}-${g.score2}${g.pen1 != null ? ` (${g.pen1}-${g.pen2} pens)` : ""}
+</div>
 
                     <div class="owner-text">${owner(hName)}</div>
 
