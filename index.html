@@ -238,10 +238,20 @@ function calculate(games){
 
         if(!home || !away) return;
 
-const hs = parseInt(g.score1);
-const as = parseInt(g.score2);
-const hp = g.pen1 !== null && g.pen1 !== undefined ? parseInt(g.pen1) : null;
-const ap = g.pen2 !== null && g.pen2 !== undefined ? parseInt(g.pen2) : null;
+const hs = parseInt(g.score1 ?? g.home_score);
+const as = parseInt(g.score2 ?? g.away_score);
+
+const hp = g.pen1 !== undefined && g.pen1 !== null
+    ? parseInt(g.pen1)
+    : (g.home_penalty_score !== undefined && g.home_penalty_score !== null
+        ? parseInt(g.home_penalty_score)
+        : null);
+
+const ap = g.pen2 !== undefined && g.pen2 !== null
+    ? parseInt(g.pen2)
+    : (g.away_penalty_score !== undefined && g.away_penalty_score !== null
+        ? parseInt(g.away_penalty_score)
+        : null);
 
 if (!isNaN(hs) && !isNaN(as)) {
 
