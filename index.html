@@ -245,9 +245,11 @@ function calculate(games) {
             scores[away].match += 4;
         }
 
-        // Track knockout eliminations: if both teams were in KNOCKOUT_TEAMS,
-        // the loser is now eliminated
-        if (KNOCKOUT_TEAMS.size > 0 && KNOCKOUT_TEAMS.has(home) && KNOCKOUT_TEAMS.has(away)) {
+        // Track knockout eliminations: only for matches on/after June 28
+        // (group stage ends June 27, knockout starts June 28)
+        const matchDate = g.date ? new Date(g.date.replace(/(\d{2})\/(\d{2})\/(\d{4})/, '$3-$1-$2')) : null;
+        const isKnockout = matchDate && matchDate >= new Date('2026-06-28');
+        if (isKnockout && KNOCKOUT_TEAMS.size > 0 && KNOCKOUT_TEAMS.has(home) && KNOCKOUT_TEAMS.has(away)) {
             if (awayWon) knockoutLosers.add(home);
             if (homeWon) knockoutLosers.add(away);
         }
