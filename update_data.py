@@ -125,8 +125,8 @@ def build_matches(games):
                     "away": g["away_team_name_en"],
                     "score1": int(g.get("home_score", 0)),
                     "score2": int(g.get("away_score", 0)),
-                    "pen1": int(g["home_penalty_score"]) if g.get("home_penalty_score") else None,
-                    "pen2": int(g["away_penalty_score"]) if g.get("away_penalty_score") else None
+                    "pen1": int(g["home_penalty_score"]) if g.get("home_penalty_score") not in (None, "", "null") else None,
+                    "pen2": int(g["away_penalty_score"]) if g.get("away_penalty_score") not in (None, "", "null") else None
                 })
 
         except Exception as e:
