@@ -309,7 +309,7 @@ function render() {
 
         const teamPills = p.teams.map(t => {
             const elim = isEliminated(t);
-            const total = SEEDS[t] + (teamScores[t]?.match || 0);
+            const total = SEEDS[t] + (teamScores[t]?.match || 0) + (teamScores[t]?.bonus || 0);
             return `
                 <div class="team-pill${elim ? ' eliminated' : ''}">
                     <span class="team-pill-flag">${FLAGS[t] || ''}</span>
