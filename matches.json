@@ -682,5 +682,32 @@
     "score2": 1,
     "pen1": 2,
     "pen2": 3
+  },
+  {
+    "date": "06/30/2026 12:00",
+    "home": "Ivory Coast",
+    "away": "Norway",
+    "score1": 1,
+    "score2": 2,
+    "pen1": null,
+    "pen2": null
+  },
+  {
+    "date": "06/30/2026 17:00",
+    "home": "France",
+    "away": "Sweden",
+    "score1": 3,
+    "score2": 0,
+    "pen1": null,
+    "pen2": null
+  },
+  {
+    "date": "06/30/2026 19:00",
+    "home": "Mexico",
+    "away": "Ecuador",
+    "score1": 2,
+    "score2": 0,
+    "pen1": null,
+    "pen2": null
   }
 ]
