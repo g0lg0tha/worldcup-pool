@@ -466,5 +466,11 @@
     "away": "Sweden",
     "ht_home": 1,
     "ht_away": 0
+  },
+  {
+    "home": "Mexico",
+    "away": "Ecuador",
+    "ht_home": 2,
+    "ht_away": 0
   }
 ]
