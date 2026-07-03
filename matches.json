@@ -763,5 +763,14 @@
     "score2": 0,
     "pen1": null,
     "pen2": null
+  },
+  {
+    "date": "07/03/2026 13:00",
+    "home": "Australia",
+    "away": "Egypt",
+    "score1": 1,
+    "score2": 1,
+    "pen1": 2,
+    "pen2": 4
   }
 ]
