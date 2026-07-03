@@ -754,5 +754,14 @@
     "score2": 1,
     "pen1": null,
     "pen2": null
+  },
+  {
+    "date": "07/02/2026 20:00",
+    "home": "Switzerland",
+    "away": "Algeria",
+    "score1": 2,
+    "score2": 0,
+    "pen1": null,
+    "pen2": null
   }
 ]
