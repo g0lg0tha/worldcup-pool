@@ -790,5 +790,14 @@
     "score2": 0,
     "pen1": null,
     "pen2": null
+  },
+  {
+    "date": "07/04/2026 12:00",
+    "home": "Canada",
+    "away": "Morocco",
+    "score1": 0,
+    "score2": 3,
+    "pen1": null,
+    "pen2": null
   }
 ]
