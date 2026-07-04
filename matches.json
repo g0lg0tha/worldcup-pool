@@ -772,5 +772,14 @@
     "score2": 1,
     "pen1": 2,
     "pen2": 4
+  },
+  {
+    "date": "07/03/2026 18:00",
+    "home": "Argentina",
+    "away": "Cape Verde",
+    "score1": 3,
+    "score2": 2,
+    "pen1": null,
+    "pen2": null
   }
 ]
