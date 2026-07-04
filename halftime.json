@@ -520,5 +520,11 @@
     "away": "Cape Verde",
     "ht_home": 1,
     "ht_away": 0
+  },
+  {
+    "home": "Colombia",
+    "away": "Ghana",
+    "ht_home": 1,
+    "ht_away": 0
   }
 ]
