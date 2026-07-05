@@ -36,16 +36,16 @@
     "ht_away": 1
   },
   {
-    "home": "Haiti",
-    "away": "Scotland",
-    "ht_home": 0,
-    "ht_away": 1
-  },
-  {
     "home": "Australia",
     "away": "Turkey",
     "ht_home": 1,
     "ht_away": 0
+  },
+  {
+    "home": "Haiti",
+    "away": "Scotland",
+    "ht_home": 0,
+    "ht_away": 1
   },
   {
     "home": "Germany",
@@ -84,16 +84,16 @@
     "ht_away": 1
   },
   {
-    "home": "Iran",
-    "away": "New Zealand",
-    "ht_home": 1,
-    "ht_away": 1
-  },
-  {
     "home": "Saudi Arabia",
     "away": "Uruguay",
     "ht_home": 1,
     "ht_away": 0
+  },
+  {
+    "home": "Iran",
+    "away": "New Zealand",
+    "ht_home": 1,
+    "ht_away": 1
   },
   {
     "home": "France",
@@ -216,15 +216,15 @@
     "ht_away": 2
   },
   {
-    "home": "Belgium",
-    "away": "Iran",
-    "ht_home": 0,
-    "ht_away": 0
-  },
-  {
     "home": "Spain",
     "away": "Saudi Arabia",
     "ht_home": 3,
+    "ht_away": 0
+  },
+  {
+    "home": "Belgium",
+    "away": "Iran",
+    "ht_home": 0,
     "ht_away": 0
   },
   {
@@ -300,26 +300,26 @@
     "ht_away": 0
   },
   {
-    "home": "Scotland",
-    "away": "Brazil",
-    "ht_home": 0,
-    "ht_away": 2
-  },
-  {
     "home": "Morocco",
     "away": "Haiti",
     "ht_home": 2,
     "ht_away": 2
   },
   {
-    "home": "South Africa",
-    "away": "South Korea",
+    "home": "Scotland",
+    "away": "Brazil",
     "ht_home": 0,
-    "ht_away": 0
+    "ht_away": 2
   },
   {
     "home": "Czech Republic",
     "away": "Mexico",
+    "ht_home": 0,
+    "ht_away": 0
+  },
+  {
+    "home": "South Africa",
+    "away": "South Korea",
     "ht_home": 0,
     "ht_away": 0
   },
@@ -348,16 +348,16 @@
     "ht_away": 2
   },
   {
-    "home": "Paraguay",
-    "away": "Australia",
-    "ht_home": 0,
-    "ht_away": 0
-  },
-  {
     "home": "Turkey",
     "away": "United States",
     "ht_home": 2,
     "ht_away": 1
+  },
+  {
+    "home": "Paraguay",
+    "away": "Australia",
+    "ht_home": 0,
+    "ht_away": 0
   },
   {
     "home": "Senegal",
@@ -408,28 +408,28 @@
     "ht_away": 0
   },
   {
-    "home": "Colombia",
-    "away": "Portugal",
-    "ht_home": 0,
-    "ht_away": 0
-  },
-  {
     "home": "Democratic Republic of the Congo",
     "away": "Uzbekistan",
     "ht_home": 0,
     "ht_away": 1
   },
   {
-    "home": "Algeria",
-    "away": "Austria",
-    "ht_home": 1,
-    "ht_away": 1
+    "home": "Colombia",
+    "away": "Portugal",
+    "ht_home": 0,
+    "ht_away": 0
   },
   {
     "home": "Jordan",
     "away": "Argentina",
     "ht_home": 0,
     "ht_away": 2
+  },
+  {
+    "home": "Algeria",
+    "away": "Austria",
+    "ht_home": 1,
+    "ht_away": 1
   },
   {
     "home": "South Africa",
