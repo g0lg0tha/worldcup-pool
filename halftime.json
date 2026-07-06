@@ -550,5 +550,11 @@
     "away": "England",
     "ht_home": 1,
     "ht_away": 2
+  },
+  {
+    "home": "Portugal",
+    "away": "Spain",
+    "ht_home": 0,
+    "ht_away": 0
   }
 ]
