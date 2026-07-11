@@ -586,5 +586,11 @@
     "away": "Belgium",
     "ht_home": 1,
     "ht_away": 1
+  },
+  {
+    "home": "Norway",
+    "away": "England",
+    "ht_home": 1,
+    "ht_away": 1
   }
 ]
