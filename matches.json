@@ -925,5 +925,14 @@
     "score2": 6,
     "pen1": null,
     "pen2": null
+  },
+  {
+    "date": "07/19/2026 15:00",
+    "home": "Spain",
+    "away": "Argentina",
+    "score1": 1,
+    "score2": 0,
+    "pen1": null,
+    "pen2": null
   }
 ]
